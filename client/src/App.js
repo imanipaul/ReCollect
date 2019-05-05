@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 
 import Login from './components/Login'
 import Register from './components/Register'
+import LandingPage from './components/LandingPage'
 import {
   registerUser,
   loginUser
@@ -77,7 +78,6 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        Hello
         <div>
           {this.state.currentUser
             ?
@@ -100,6 +100,11 @@ class App extends React.Component {
             handleRegister={this.handleRegister}
             handleChange={this.authHandleChange}
             formData={this.state.authFormData} />)} />
+
+        <Route exact path='/' render={() => (
+          <LandingPage />
+        )}
+        />
       </div>
     );
   }
