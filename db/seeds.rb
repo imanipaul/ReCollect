@@ -5,3 +5,52 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+
+household1 = Household.create!(name: 'The Smiths')
+household2 = Household.create!(name: 'The Carters')
+
+perishables = Category.create!(name: 'Perishables')
+kitchen = Category.create!(name: 'Kitchen')
+bathroom = Category.create!(name: 'Bathroom')
+medicine = Category.create!(name: 'Medicine')
+misc = Category.create!(name: 'Miscellaneous')
+
+date1 = Date.new(2011, 11, 11)
+date2 = Date.new(2015, 2, 10)
+date3 = Date.new(2019, 1, 13)
+date4 = Date.new(2018, 8, 20)
+date5 = Date.new(2018, 3, 14)
+
+will = User.create!(name: 'Will', password_digest: '1234', household: household1)
+jada = User.create!(name: 'Jada', password_digest: '1234', household: household1)
+willow = User.create!(name: 'Willow', password_digest: '1234', household: household1)
+jaden = User.create!(name: 'Jaden', password_digest: '1234', household: household1)
+beyonce = User.create!(name: 'Beyonce', password_digest: '1234', household: household2)
+jayz = User.create!(name: 'JayZ', password_digest: '1234', household: household2)
+blue = User.create!(name: 'Blue', password_digest: '1234', household: household2)
+sir = User.create!(name: 'Sir', password_digest: '1234', household: household2)
+rumi = User.create!(name: 'Rumi', password_digest: '1234', household: household2)
+
+tp = Item.create!(name: 'Toilet Paper', quantity: 10, frequency: 2, purchase_date: date1, user: will, category: bathroom)
+staples = Item.create!(name: 'Staples', quantity: 100, frequency: 10, purchase_date: date2, user: jada, category: misc)
+paper = Item.create!(name: 'Paper', quantity: 500, frequency: 5, purchase_date: date3, user: willow, category: misc)
+sponges = Item.create!(name: 'Sponges', quantity: 500, frequency: 5, purchase_date: date2, user: jaden, category: bathroom)
+tea = Item.create!(name: 'Tea', quantity: 20, frequency: 1, purchase_date: date4, user: blue, category: kitchen)
+advil = Item.create!(name: 'Advil', quantity: 100, frequency: 2, purchase_date: date5, user: beyonce, category: medicine)
+pencils = Item.create!(name: 'Pencils', quantity: 100, frequency: 2, purchase_date: date4, user: jayz, category: misc)
+tylenol = Item.create!(name: 'Tylenol', quantity: 100, frequency: 2, purchase_date: date3, user: rumi, category: medicine)
+soap = Item.create!(name: 'Soap', quantity: 100, frequency: 2, purchase_date: date1, user: sir, category: kitchen)
+
+
+
+
+
+
+
+
+
+
+
+	
