@@ -1,5 +1,7 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
+
 import Login from './components/Login'
 import Register from './components/Register'
 import {
@@ -26,6 +28,8 @@ class App extends React.Component {
     this.handleLogin = this.handleLogin.bind(this)
     this.handleRegister = this.handleRegister.bind(this)
     this.authHandleChange = this.authHandleChange.bind(this)
+    this.handleLoginButton = this.handleLoginButton.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
   }
 
 
@@ -58,11 +62,33 @@ class App extends React.Component {
     ))
   }
 
+  handleLogout() {
+    localStorage.removeItem("jwt");
+    this.setState({
+      currentUser: null
+    })
+  }
+
+  handleLoginButton() {
+    this.props.history.push("/login")
+  }
+
 
   render() {
     return (
       <div className="App">
         Hello
+        <div>
+          {this.state.currentUser
+            ?
+            <>
+              <p>Hello {this.state.currentUser.name}</p>
+              <button onClick={this.handleLogout}>logout</button>
+            </>
+            :
+            <button onClick={this.handleLoginButton}>Login/register</button>
+          }
+        </div>
         <Route exact path="/login" render={() => (
           <Login
             handleLogin={this.handleLogin}
@@ -79,4 +105,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);
