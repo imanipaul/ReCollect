@@ -1,5 +1,7 @@
 class HouseholdsController < ApplicationController
   before_action :set_household, only: [:show, :update, :destroy]
+  before_action :authorize_request, except: %i[index show]
+
 
   # GET /households
   def index
