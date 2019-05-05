@@ -30,7 +30,6 @@ export const registerUser = (registerData) => {
 }
 
 
-
 // create household
 // update household
 // destroy household
