@@ -16,6 +16,9 @@ gem 'puma', '~> 3.11'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+# Use JSON Web Token (JWT) for token based authentication
+gem 'jwt'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
