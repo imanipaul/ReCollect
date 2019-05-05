@@ -25,8 +25,13 @@ export const registerUser = (registerData) => {
         }
     };
 
-    return fetch(`${baseUrl}/users/`, opts)
-        .then(resp => resp.json())
+    console.log(opts)
+
+    return fetch(`${url}/users/`, opts)
+        .then(resp => {
+            console.log(opts.headers)
+            resp.json()
+        })
 }
 
 
