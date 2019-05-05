@@ -1,5 +1,7 @@
 class HouseholdsController < ApplicationController
   before_action :set_household, only: [:show, :update, :destroy]
+  before_action :authorize_request, except: %i[index show]
+
 
   # GET /households
   def index
@@ -10,7 +12,7 @@ class HouseholdsController < ApplicationController
 
   # GET /households/1
   def show
-    render json: @household
+    render json: @household, include: :users
   end
 
   # POST /households
