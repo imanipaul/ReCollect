@@ -44,13 +44,13 @@ export const createHousehold = (data) => {
             'Content-Type': 'application/json'
         }
     }
-    return fetch(`${baseUrl}/households`, opts)
+    return fetch(`${url}/households`, opts)
         .then(resp => resp.json())
 }
 
 
 // update household
-export const updateHousehold = (data) => {
+export const updateHousehold = (id, data) => {
     const opts = {
         method: 'PUT',
         body: JSON.stringify({ household: data }),
@@ -58,7 +58,7 @@ export const updateHousehold = (data) => {
             'Content-Type': 'application/json'
         }
     }
-    return fetch(`${baseUrl}/households/${id}`, opts)
+    return fetch(`${url}/households/${id}`, opts)
         .then(resp => resp.json())
 }
 
@@ -67,24 +67,71 @@ export const destroyHousehold = (id) => {
     const opts = {
         method: 'DELETE'
     }
-    return fetch(`${baseUrl}/households/${id}`, opts)
+    return fetch(`${url}/households/${id}`, opts)
 }
 
 
-
-
-
-
-
-
 //create item
+export const createItem = (data) => {
+    const opts = {
+        method: 'POST',
+        body: JSON.stringify({ Item: data }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    return fetch(`${url}/items`, opts)
+        .then(resp => resp.json())
+}
+
 //update item
+export const updateItem = (id, data) => {
+    const opts = {
+        method: 'PUT',
+        body: JSON.stringify({ Item: data }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    return fetch(`${url}/items/${id}`, opts)
+        .then(resp => resp.json())
+}
+
+
 //destroy item
+export const destroyItem = (id) => {
+    const opts = {
+        method: 'DELETE'
+    }
+    return fetch(`${url}/items/${id}`, opts)
+}
+
 //read all items
+export const showHouseholdItems = (household_id) => {
+    return fetch(`${url}/${household_id}/items`)
+        .then(response => response.json())
+        .catch(e => e.message)
+}
 
 
 //create category
-//real all categories?
+export const createCategory = (data) => {
+    const opts = {
+        method: 'POST',
+        body: JSON.stringify({ Category: data }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    return fetch(`${url}/categories`, opts)
+        .then(resp => resp.json())
+}
+//read category items
+export const showCategoryItems = (category_id) => {
+    return fetch(`${url}/${category_id}/items`)
+        .then(response => response.json())
+        .catch(e => e.message)
+}
 
 //
 
