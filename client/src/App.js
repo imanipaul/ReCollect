@@ -7,7 +7,8 @@ import Register from './components/Register'
 import LandingPage from './components/LandingPage'
 import {
   registerUser,
-  loginUser
+  loginUser,
+  getHouseholds
 } from './services/api-helper'
 
 import decode from 'jwt-decode'
@@ -22,8 +23,9 @@ class App extends React.Component {
       authFormData: {
         name: '',
         password: '',
-        household_id: 1
-      }
+        household_id: 0
+      },
+      households: []
     }
 
     this.handleLogin = this.handleLogin.bind(this)
@@ -31,6 +33,19 @@ class App extends React.Component {
     this.authHandleChange = this.authHandleChange.bind(this)
     this.handleLoginButton = this.handleLoginButton.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
+    // this.handleSelectChange = this.handleSelectChange.bind(this)
+  }
+
+  componentDidMount() {
+    this.getHouseholds()
+
+  }
+
+
+  // ----------------------Data Calls-------------------------
+  async getHouseholds() {
+    const households = await getHouseholds();
+    this.setState({ households })
   }
 
 
@@ -42,6 +57,20 @@ class App extends React.Component {
     })
     localStorage.setItem("jwt", userData.token)
   }
+
+  // handleSelectChange(e) {
+  //   const { name, value } = e.target
+  //   this.setState(prevState => (
+  //     {
+  //       authFormData: {
+  //         ...prevState.authFormData,
+  //         [name]: parseInt(value)
+  //       }
+  //     }
+  //   ))
+  //   console.log('value: ', e.target.value)
+  //   console.log('type: ', typeof (this.state.authFormData.household_id))
+  // }
 
   async handleRegister(e) {
     e.preventDefault();
@@ -93,13 +122,17 @@ class App extends React.Component {
           <Login
             handleLogin={this.handleLogin}
             handleChange={this.authHandleChange}
-            formData={this.state.authFormData} />)} />
+            formData={this.state.authFormData}
+            handleSelectChange={this.handleSelectChange}
+          />)} />
 
         <Route exact path="/register" render={() => (
           <Register
             handleRegister={this.handleRegister}
             handleChange={this.authHandleChange}
-            formData={this.state.authFormData} />)} />
+            formData={this.state.authFormData}
+            allHouseholds={this.state.households}
+          />)} />
 
         <Route exact path='/' render={() => (
           <LandingPage />

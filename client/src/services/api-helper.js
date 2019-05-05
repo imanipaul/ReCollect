@@ -48,6 +48,14 @@ export const createHousehold = (data) => {
         .then(resp => resp.json())
 }
 
+// get all households
+export const getHouseholds = () => {
+    return fetch(`${url}/households`)
+        .then(response => response.json())
+        .catch(e => e.message)
+}
+
+
 
 // update household
 export const updateHousehold = (id, data) => {
