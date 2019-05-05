@@ -36,8 +36,45 @@ export const registerUser = (registerData) => {
 
 
 // create household
+export const createHousehold = (data) => {
+    const opts = {
+        method: 'POST',
+        body: JSON.stringify({ household: data }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    return fetch(`${baseUrl}/households`, opts)
+        .then(resp => resp.json())
+}
+
+
 // update household
+export const updateHousehold = (data) => {
+    const opts = {
+        method: 'PUT',
+        body: JSON.stringify({ household: data }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    return fetch(`${baseUrl}/households/${id}`, opts)
+        .then(resp => resp.json())
+}
+
 // destroy household
+export const destroyHousehold = (id) => {
+    const opts = {
+        method: 'DELETE'
+    }
+    return fetch(`${baseUrl}/households/${id}`, opts)
+}
+
+
+
+
+
+
 
 
 //create item
