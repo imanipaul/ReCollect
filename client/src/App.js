@@ -13,6 +13,7 @@ import {
   loginUser,
   getHouseholds,
   createHousehold,
+  updateUser
 } from './services/api-helper'
 
 import decode from 'jwt-decode'
@@ -29,7 +30,8 @@ class App extends React.Component {
         password: '',
       },
       households: [],
-      householdData: ''
+      householdData: '',
+      selectedHouseholdId: ''
     }
 
     this.handleLogin = this.handleLogin.bind(this)
@@ -38,13 +40,20 @@ class App extends React.Component {
     this.handleLoginButton = this.handleLoginButton.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
     this.householdHandleChange = this.householdHandleChange.bind(this)
-    this.addHousehold = this.addHousehold.bind(this)
     this.getHouseholds = this.getHouseholds.bind(this)
+    this.updateUserData = this.updateUserData.bind(this)
     // this.handleSelectChange = this.handleSelectChange.bind(this)
   }
 
   componentDidMount() {
     this.getHouseholds()
+    const token = localStorage.getItem("jwt")
+    if (token) {
+      const userData = decode(token);
+      this.setState({
+        currentUser: userData
+      })
+    }
 
   }
 
@@ -55,21 +64,25 @@ class App extends React.Component {
     this.setState({ households })
   }
 
-  async addHousehold() {
-    const newHousehold = await createHousehold(this.state.householdData)
-    this.setState(prevState => ({
-      authFormData: {
-        ...prevState.authFormData,
-        household_id: newHousehold.id
-      }
-    }))
-  }
+  // async addHouseholdToUser() {
+
+
+  // }
 
   householdHandleChange(e) {
     const { name, value } = e.target
     this.setState({
       [name]: value
     })
+  }
+
+  async updateUserData() {
+    const userData = {
+      household_id: this.state.selectedHouseholdId
+    }
+    await updateUser(this.state.currentUser.user_id, userData)
+
+    this.setState({ selectedHouseholdId: '' })
   }
 
 
@@ -152,9 +165,11 @@ class App extends React.Component {
 
         <Route exact path='/add-household' render={() => (
           <NewHousehold
-            handleSubmit={this.addHousehold}
-            householdData={this.state.householdData}
+            handleSubmit={this.updateUserData}
+            households={this.state.households}
             handleChange={this.householdHandleChange}
+            selectedHouseholdId={this.state.selectedHouseholdId}
+            currentUser={this.state.currentUser}
           />
         )}
 

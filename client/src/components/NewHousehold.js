@@ -42,12 +42,20 @@ export default class NewHousehold extends React.Component {
                         ?
                         <>
                             <p>Select the household you would like to join</p>
-
+                            <select name='selectedHouseholdId' onChange={this.props.handleChange}>
+                                {this.props.households.map(household => (
+                                    <option key={household.id} value={household.id}>{household.name}</option>
+                                ))}
+                            </select>
+                            <button onClick={() => {
+                                console.log('user: ', this.props.currentUser)
+                                console.log('selected hhid: ', this.props.selectedHouseholdId)
+                                this.props.handleSubmit()
+                            }}>Join!</button>
                         </>
                         :
                         <>
                             <p>Create a new household</p>
-
                         </>
                 }
 
