@@ -6,6 +6,7 @@ import Login from './components/Login'
 import Register from './components/Register'
 import LandingPage from './components/LandingPage'
 import NewHousehold from './components/NewHousehold';
+import HouseholdView from './components/HouseholdView';
 
 
 import {
@@ -149,7 +150,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <div>
+        <div className='logout'>
           {this.state.currentUser
             ?
             <>
@@ -192,8 +193,19 @@ class App extends React.Component {
             handleNewSubmit={this.handleNewSubmit}
           />
         )}
+        />
+
+        <Route exact path='/household/:id' render={
+          (props) => (
+            <HouseholdView
+              {...props}
+              households={this.state.households}
+            />
+          )}
 
         />
+
+
       </div>
     );
   }

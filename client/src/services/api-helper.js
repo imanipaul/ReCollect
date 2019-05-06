@@ -58,7 +58,6 @@ export const createHousehold = (data) => {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-
         }
     }
     return fetch(`${url}/households`, opts)
@@ -72,7 +71,20 @@ export const getHouseholds = () => {
         .catch(e => e.message)
 }
 
-
+//get Household
+export const getHousehold = (id) => {
+    const opts = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        }
+    }
+    console.log('opts: ', opts)
+    return fetch(`${url}/households/${id}`, opts)
+        .then(resp => resp.json())
+        .catch(e => e.message)
+}
 
 // update household
 export const updateHousehold = (id, data) => {
@@ -85,6 +97,7 @@ export const updateHousehold = (id, data) => {
     }
     return fetch(`${url}/households/${id}`, opts)
         .then(resp => resp.json())
+        .catch(e => e.message)
 }
 
 // destroy household

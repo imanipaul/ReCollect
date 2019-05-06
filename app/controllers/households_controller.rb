@@ -12,7 +12,7 @@ class HouseholdsController < ApplicationController
 
   # GET /households/1
   def show
-    render json: @household, include: :users
+    render json: @household, include: [:users, :items]
   end
 
   # POST /households
