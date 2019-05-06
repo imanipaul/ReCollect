@@ -42,7 +42,6 @@ class App extends React.Component {
     this.householdHandleChange = this.householdHandleChange.bind(this)
     this.getHouseholds = this.getHouseholds.bind(this)
     this.updateUserData = this.updateUserData.bind(this)
-    // this.handleSelectChange = this.handleSelectChange.bind(this)
   }
 
   componentDidMount() {
@@ -64,10 +63,6 @@ class App extends React.Component {
     this.setState({ households })
   }
 
-  // async addHouseholdToUser() {
-
-
-  // }
 
   householdHandleChange(e) {
     const { name, value } = e.target

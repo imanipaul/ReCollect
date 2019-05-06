@@ -34,22 +34,6 @@ export const registerUser = (registerData) => {
         })
 }
 
-//update user
-// export const updateUser = (user_id, household_id, currentUser) => {
-//     const opts = {
-//         method: 'PUT',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-//         },
-//         body: JSON.stringify({ user: currentUser })
-//     }
-
-//     return fetch(`${url}/households/${household_id}/users/${user_id}/`, opts)
-//         .then(response => response.json())
-//         .catch(e => e.message)
-// }
-//update user
 export const updateUser = (id, userData) => {
     const opts = {
         method: 'PUT',
