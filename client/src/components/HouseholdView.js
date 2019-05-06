@@ -12,14 +12,10 @@ class HouseholdView extends React.Component {
         }
 
         this.setHousehold = this.setHousehold.bind(this)
-        // this.setHousehold = this.setHousehold.bind(this)
     }
 
     componentDidMount() {
         this.setHousehold()
-
-        // const household = setTimeout(() => this.setHousehold(), 1000)
-        // console.log('CDM ', household)
     }
 
     async setHousehold() {
@@ -34,15 +30,6 @@ class HouseholdView extends React.Component {
         })
     }
 
-    // setHousehold() {
-    //     const { id } = this.props.match.params
-    //     const currentHousehold = this.props.households.find(function (elem) {
-    //         return elem.id === parseInt(id)
-    //     })
-    //     this.setState({
-    //         household: currentHousehold
-    //     })
-    // }
 
     render() {
 
@@ -61,7 +48,6 @@ class HouseholdView extends React.Component {
                         <div key={item.id}>{item.name}</div>
                     ))}
                 </div>
-
             </>
         )
     }

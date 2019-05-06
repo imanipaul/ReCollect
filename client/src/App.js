@@ -7,14 +7,15 @@ import Register from './components/Register'
 import LandingPage from './components/LandingPage'
 import NewHousehold from './components/NewHousehold';
 import HouseholdView from './components/HouseholdView';
-
+import ItemView from './components/ItemView';
 
 import {
   registerUser,
   loginUser,
   getHouseholds,
   createHousehold,
-  updateUser
+  updateUser,
+  getHousehold
 } from './services/api-helper'
 
 import decode from 'jwt-decode'
@@ -32,7 +33,7 @@ class App extends React.Component {
       },
       households: [],
       householdData: '',
-      selectedHouseholdId: ''
+      selectedHouseholdId: '',
     }
 
     this.handleLogin = this.handleLogin.bind(this)
@@ -45,6 +46,7 @@ class App extends React.Component {
     this.updateUserData = this.updateUserData.bind(this)
     this.handleNewSubmit = this.handleNewSubmit.bind(this)
     this.newHousehold = this.newHousehold.bind(this)
+
   }
 
   componentDidMount() {
@@ -58,7 +60,6 @@ class App extends React.Component {
     }
 
   }
-
 
   // ----------------------Data Calls-------------------------
   async getHouseholds() {
@@ -103,7 +104,6 @@ class App extends React.Component {
 
     this.setState({ selectedHouseholdId: '' })
   }
-
 
 
   // ----------------------Auth-------------------------
@@ -200,9 +200,18 @@ class App extends React.Component {
             <HouseholdView
               {...props}
               households={this.state.households}
+
             />
           )}
+        />
 
+        <Route exact path='household/:household_id/item/:id' render={
+          (props) => (
+            <ItemView
+              {...props}
+            // households={this.state.households}
+            />
+          )}
         />
 
 
