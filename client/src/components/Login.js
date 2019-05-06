@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-
-// This component handles our login form and has a link to the register form
 const Login = (props) => {
 
     return (
@@ -15,7 +13,7 @@ const Login = (props) => {
             }} >
                 <p>Name:</p>
                 <input name="name" type="text" value={props.formData.name} onChange={props.handleChange} />
-                <p>Password:</p>
+                <p>Password  :</p>
                 <input name="password" type="password" value={props.formData.password} onChange={props.handleChange} />
                 <hr />
                 <button>Login</button>

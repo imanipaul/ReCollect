@@ -34,6 +34,21 @@ export const registerUser = (registerData) => {
         })
 }
 
+export const updateUser = (id, userData) => {
+    const opts = {
+        method: 'PUT',
+        body: JSON.stringify(userData),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        }
+    }
+
+    return fetch(`${url}/users/${id}`, opts)
+        .then(response => response.json())
+        .catch(e => e.message)
+}
+
 
 // create household
 export const createHousehold = (data) => {
@@ -41,12 +56,22 @@ export const createHousehold = (data) => {
         method: 'POST',
         body: JSON.stringify({ household: data }),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+
         }
     }
     return fetch(`${url}/households`, opts)
         .then(resp => resp.json())
 }
+
+// get all households
+export const getHouseholds = () => {
+    return fetch(`${url}/households`)
+        .then(response => response.json())
+        .catch(e => e.message)
+}
+
 
 
 // update household
