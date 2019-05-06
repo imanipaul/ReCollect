@@ -40,8 +40,6 @@ export default class NewHousehold extends React.Component {
                                 ))}
                             </select>
                             <button onClick={() => {
-                                console.log('user: ', this.props.currentUser)
-                                console.log('selected hhid: ', this.props.selectedHouseholdId)
                                 this.props.handleSubmit()
                             }}>Join!</button>
                         </>

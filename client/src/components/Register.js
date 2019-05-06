@@ -25,37 +25,6 @@ class Register extends React.Component {
                     <p>Password:</p>
                     <input name="password" type="password" value={this.props.formData.password} onChange={this.props.handleChange} />
 
-
-                    {/* {
-                        this.state.hasHousehold
-                            ?
-                            <>
-
-                                <button onClick={() => {
-                                    this.setState({
-                                        hasHousehold: false
-                                    })
-                                }}>Existing Household</button>
-                            </>
-
-                            :
-                            <>
-                                <p>Household</p>
-                                <select name='household_id' value={this.props.formData.household_id} onChange={this.props.handleChange}>
-                                    {this.props.allHouseholds.map(household => (
-                                        <option key={household.id} value={household.id}>{household.name}</option>
-                                    ))}
-                                </select>
-                                <p>Or click here to Create a new household:</p>
-                                <button onClick={() => {
-                                    this.setState({
-                                        hasHousehold: true
-                                    })
-                                    this.props.history.push(`/new-household`)
-                                }}>New Household</button>
-                            </>
-                    } */}
-
                     <hr />
                     <button>Register</button>
                 </form>
