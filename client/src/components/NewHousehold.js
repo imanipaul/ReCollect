@@ -14,15 +14,7 @@ export default class NewHousehold extends React.Component {
     render() {
         return (
             <div>
-                {/* <p>New Household</p>
-            <form onSubmit={(e) => {
-                e.preventDefault();
-                props.handleSubmit()
-            }}>
-                <p>Name</p>
-                <input name='householdData' type='text' value={props.householdData} onChange={props.handleChange} />
-                <button>Submit</button>
-            </form> */}
+
                 <>
                     <p>Are you joining a household, or creating a new one?</p>
                     <button onClick={() => {
@@ -56,6 +48,14 @@ export default class NewHousehold extends React.Component {
                         :
                         <>
                             <p>Create a new household</p>
+                            <form onSubmit={(e) => {
+                                e.preventDefault();
+                                this.props.handleNewSubmit()
+                            }}>
+                                <p>Household Name</p>
+                                <input name='householdData' type='text' value={this.props.householdData} onChange={this.props.handleChange} />
+                                <button>Submit</button>
+                            </form>
                         </>
                 }
 

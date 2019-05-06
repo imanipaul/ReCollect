@@ -42,6 +42,8 @@ class App extends React.Component {
     this.householdHandleChange = this.householdHandleChange.bind(this)
     this.getHouseholds = this.getHouseholds.bind(this)
     this.updateUserData = this.updateUserData.bind(this)
+    this.handleNewSubmit = this.handleNewSubmit.bind(this)
+    this.newHousehold = this.newHousehold.bind(this)
   }
 
   componentDidMount() {
@@ -63,11 +65,32 @@ class App extends React.Component {
     this.setState({ households })
   }
 
+  async newHousehold() {
+    const data = {
+      name: this.state.householdData
+    }
+    const newHouseholdObj = await createHousehold(data)
+    console.log('newHousehold: ', newHouseholdObj)
+    this.setState({
+      selectedHouseholdId: newHouseholdObj.id
+    })
+  }
+
 
   householdHandleChange(e) {
     const { name, value } = e.target
     this.setState({
       [name]: value
+    })
+  }
+
+  async handleNewSubmit() {
+    console.log('creating new household')
+    await this.newHousehold()
+    console.log('updating user')
+    await this.updateUserData()
+    this.setState({
+      selectedHouseholdId: ''
     })
   }
 
@@ -165,6 +188,8 @@ class App extends React.Component {
             handleChange={this.householdHandleChange}
             selectedHouseholdId={this.state.selectedHouseholdId}
             currentUser={this.state.currentUser}
+            householdData={this.state.householdData}
+            handleNewSubmit={this.handleNewSubmit}
           />
         )}
 

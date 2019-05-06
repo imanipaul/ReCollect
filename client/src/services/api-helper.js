@@ -56,7 +56,9 @@ export const createHousehold = (data) => {
         method: 'POST',
         body: JSON.stringify({ household: data }),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+
         }
     }
     return fetch(`${url}/households`, opts)
