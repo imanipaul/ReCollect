@@ -5,10 +5,14 @@ import { withRouter } from 'react-router';
 import Login from './components/Login'
 import Register from './components/Register'
 import LandingPage from './components/LandingPage'
+import NewHousehold from './components/NewHousehold';
+
+
 import {
   registerUser,
   loginUser,
-  getHouseholds
+  getHouseholds,
+  createHousehold,
 } from './services/api-helper'
 
 import decode from 'jwt-decode'
@@ -23,9 +27,9 @@ class App extends React.Component {
       authFormData: {
         name: '',
         password: '',
-        household_id: 0
       },
-      households: []
+      households: [],
+      householdData: ''
     }
 
     this.handleLogin = this.handleLogin.bind(this)
@@ -33,6 +37,9 @@ class App extends React.Component {
     this.authHandleChange = this.authHandleChange.bind(this)
     this.handleLoginButton = this.handleLoginButton.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
+    this.householdHandleChange = this.householdHandleChange.bind(this)
+    this.addHousehold = this.addHousehold.bind(this)
+    this.getHouseholds = this.getHouseholds.bind(this)
     // this.handleSelectChange = this.handleSelectChange.bind(this)
   }
 
@@ -48,6 +55,24 @@ class App extends React.Component {
     this.setState({ households })
   }
 
+  async addHousehold() {
+    const newHousehold = await createHousehold(this.state.householdData)
+    this.setState(prevState => ({
+      authFormData: {
+        ...prevState.authFormData,
+        household_id: newHousehold.id
+      }
+    }))
+  }
+
+  householdHandleChange(e) {
+    const { name, value } = e.target
+    this.setState({
+      [name]: value
+    })
+  }
+
+
 
   // ----------------------Auth-------------------------
   async handleLogin() {
@@ -56,21 +81,9 @@ class App extends React.Component {
       currentUser: decode(userData.token)
     })
     localStorage.setItem("jwt", userData.token)
+    this.props.history.push('/add-household')
   }
 
-  // handleSelectChange(e) {
-  //   const { name, value } = e.target
-  //   this.setState(prevState => (
-  //     {
-  //       authFormData: {
-  //         ...prevState.authFormData,
-  //         [name]: parseInt(value)
-  //       }
-  //     }
-  //   ))
-  //   console.log('value: ', e.target.value)
-  //   console.log('type: ', typeof (this.state.authFormData.household_id))
-  // }
 
   async handleRegister(e) {
     e.preventDefault();
@@ -80,8 +93,6 @@ class App extends React.Component {
 
   authHandleChange(e) {
     const { name, value } = e.target
-    console.log('name ', name)
-    console.log('value', value)
     this.setState(prevState => (
       {
         authFormData: {
@@ -137,6 +148,16 @@ class App extends React.Component {
         <Route exact path='/' render={() => (
           <LandingPage />
         )}
+        />
+
+        <Route exact path='/add-household' render={() => (
+          <NewHousehold
+            handleSubmit={this.addHousehold}
+            householdData={this.state.householdData}
+            handleChange={this.householdHandleChange}
+          />
+        )}
+
         />
       </div>
     );

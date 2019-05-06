@@ -1,4 +1,7 @@
 import React from 'react';
+import { Route, Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
+
 
 // This component handles our register form
 class Register extends React.Component {
@@ -23,12 +26,11 @@ class Register extends React.Component {
                     <input name="password" type="password" value={this.props.formData.password} onChange={this.props.handleChange} />
 
 
-                    {
+                    {/* {
                         this.state.hasHousehold
                             ?
                             <>
-                                <p>Household</p>
-                                <input name='household_id' value={this.props.formData.household_id} onChange={this.props.handleChange} />
+
                                 <button onClick={() => {
                                     this.setState({
                                         hasHousehold: false
@@ -49,10 +51,10 @@ class Register extends React.Component {
                                     this.setState({
                                         hasHousehold: true
                                     })
+                                    this.props.history.push(`/new-household`)
                                 }}>New Household</button>
                             </>
-
-                    }
+                    } */}
 
                     <hr />
                     <button>Register</button>
@@ -62,4 +64,4 @@ class Register extends React.Component {
     }
 }
 
-export default Register;
+export default withRouter(Register);

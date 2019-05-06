@@ -34,6 +34,20 @@ export const registerUser = (registerData) => {
         })
 }
 
+//update user
+export const updateUser = (userData, id) => {
+    const opts = {
+        method: 'PUT',
+        body: JSON.stringify({ user: userData }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    return fetch(`${url}/users/${id}`, opts)
+        .then(resp => resp.json())
+}
+
 
 // create household
 export const createHousehold = (data) => {
