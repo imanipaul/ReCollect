@@ -6,7 +6,8 @@ class ItemView extends React.Component {
         this.state = {
             item: null,
             user: null,
-            category: null
+            category: null,
+            isEdit: false
 
         }
 
@@ -26,11 +27,7 @@ class ItemView extends React.Component {
         const selectedItem = this.props.items.find(function (item) {
             return item.id === parseInt(id)
         })
-
-        console.log('selected item', selectedItem)
-
         this.setState({ item: selectedItem })
-        console.log('current state', this.state.item)
         this.getUser(selectedItem)
         this.getItemCategory(selectedItem)
     }
@@ -39,7 +36,6 @@ class ItemView extends React.Component {
         const user = this.props.users.find(function (user) {
             return user.id == item.user_id
         })
-        console.log(user)
         this.setState({ user })
     }
 
@@ -47,28 +43,61 @@ class ItemView extends React.Component {
         const category = this.props.categories.find(function (category) {
             return category.id == item.category_id
         })
-
-        console.log('category', category)
         this.setState({ category })
     }
 
     render() {
-
         return (
-
             <div>
-
-                {this.state.item &&
+                {this.state.isEdit
+                    ?
                     <>
-                        <h1>{this.state.item.name}</h1>
-                        <h2>Category: {this.state.category.name} items</h2>
-                        <h4>Frequency of use: {this.state.item.frequency} times a week</h4>
-                        <h4>Purchased on: {this.state.item.purchase_date}</h4>
-                        <h4>Amount: {this.state.item.quantity}</h4>
-                        <h4>Added by: {this.state.user.name}</h4>
+                        {this.state.item &&
+
+                            <>
+                                <form onSubmit={(e) => {
+                                    e.preventDefault()
+                                }}>
+                                    <input value={this.state.item.name} />
+                                    <input value={this.state.category.name} placeholder="Category" />
+                                    <input value={this.state.item.frequency} placeholder="Frequency of use" />
+                                    <input value={this.state.item.purchase_date} placeholder="Purchased on: " />
+                                    <input value={this.state.item.quantity} placeholder="Amount: " />
+                                    <input value={this.state.user.name} placeholder="User: " />
+                                </form>
+                            </>
+                        }
+                    </>
+
+                    :
+                    <>
+                        {this.state.item &&
+
+                            <>
+                                <h1 onClick={() => {
+                                    this.setState({ isEdit: true })
+                                }}>{this.state.item.name}</h1>
+                                <h2 onClick={() => {
+                                    this.setState({ isEdit: true })
+                                }}>Category: {this.state.category.name} </h2>
+                                <h4 onClick={() => {
+                                    this.setState({ isEdit: true })
+                                }}>Frequency of use: {this.state.item.frequency} times a week</h4>
+                                <h4 onClick={() => {
+                                    this.setState({ isEdit: true })
+                                }}>Purchased on: {this.state.item.purchase_date}</h4>
+                                <h4 onClick={() => {
+                                    this.setState({ isEdit: true })
+                                }}>Amount: {this.state.item.quantity}</h4>
+                                <h4 onClick={() => {
+                                    this.setState({ isEdit: true })
+                                }}>Added by: {this.state.user.name}</h4>
+                            </>
+                        }
                     </>
                 }
-                item view
+
+
             </div>
 
         )
