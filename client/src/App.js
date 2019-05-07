@@ -176,6 +176,7 @@ class App extends React.Component {
             <>
               <p>Hello {this.state.currentUser.name}</p>
               <button onClick={this.handleLogout}>logout</button>
+              <button onClick={() => (this.props.history.goBack())}>Back</button>
             </>
             :
             <button onClick={this.handleLoginButton}>Login/register</button>
@@ -229,9 +230,12 @@ class App extends React.Component {
           )}
         />
 
-
-
-
+        <Route path='/item/:id' render={
+          (props) => (
+            <ItemView />
+          )
+        }
+        />
 
 
 

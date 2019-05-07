@@ -6,34 +6,12 @@ import '../stylesheets/HouseholdView.css'
 import ItemView from './ItemView';
 
 class HouseholdView extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            // household: null,
-            // users: [],
-            // items: []
-        }
 
-        // this.setHousehold = this.setHousehold.bind(this)
-    }
 
     componentDidMount() {
         const { id } = this.props.match.params
         this.props.setHousehold(id)
     }
-
-    // async setHousehold() {
-    //     const { id } = this.props.match.params
-    //     const household = await getHousehold(id)
-    //     console.log('household', household)
-
-    //     this.setState({
-    //         household: household,
-    //         users: household.users,
-    //         items: household.items
-    //     })
-    //     console.log(this.props.history)
-    // }
 
 
     render() {
@@ -50,20 +28,14 @@ class HouseholdView extends React.Component {
                 <p>Items in this household</p>
                 <div className='items'>
                     {this.props.items.map(item => (
-                        // <button key={item.id} onClick={() => (
-                        //     this.props.history.push(`/item/${item.id}`)
-                        // )}>{item.name}</button>
+                        <button key={item.id} onClick={() => (
+                            this.props.history.push(`/item/${item.id}`)
+                        )}>{item.name}</button>
 
-                        <Link to={`/household/${this.props.match.params.id}`} key={item.id}>{item.name}</Link>
+                        // <Link to={`/household/${this.props.match.params.id}`} key={item.id}>{item.name}</Link>
                     ))}
                 </div>
 
-                <Route path={`/test`} render={() => (
-                    <ItemView
-                        items={this.state.items}
-                    />
-                )}
-                />
             </>
         )
     }
