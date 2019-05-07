@@ -232,7 +232,11 @@ class App extends React.Component {
 
         <Route path='/item/:id' render={
           (props) => (
-            <ItemView />
+            <ItemView
+              {...props}
+              items={this.state.items}
+              users={this.state.users}
+            />
           )
         }
         />
