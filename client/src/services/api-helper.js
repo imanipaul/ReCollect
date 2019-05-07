@@ -173,5 +173,12 @@ export const showCategoryItems = (category_id) => {
         .catch(e => e.message)
 }
 
+// get all categories
+export const getCategories = () => {
+    return fetch(`${url}/categories`)
+        .then(response => response.json())
+        .catch(e => e.message)
+}
+
 //
 

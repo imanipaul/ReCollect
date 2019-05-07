@@ -5,7 +5,8 @@ class ItemView extends React.Component {
         super(props)
         this.state = {
             item: null,
-            user: null
+            user: null,
+            category: null
 
         }
 
@@ -31,6 +32,7 @@ class ItemView extends React.Component {
         this.setState({ item: selectedItem })
         console.log('current state', this.state.item)
         this.getUser(selectedItem)
+        this.getItemCategory(selectedItem)
     }
 
     getUser(item) {
@@ -41,6 +43,15 @@ class ItemView extends React.Component {
         this.setState({ user })
     }
 
+    getItemCategory(item) {
+        const category = this.props.categories.find(function (category) {
+            return category.id == item.category_id
+        })
+
+        console.log('category', category)
+        this.setState({ category })
+    }
+
     render() {
 
         return (
@@ -48,9 +59,9 @@ class ItemView extends React.Component {
             <div>
 
                 {this.state.item &&
-
                     <>
                         <h1>{this.state.item.name}</h1>
+                        <h2>Category: {this.state.category.name} items</h2>
                         <h4>Frequency of use: {this.state.item.frequency} times a week</h4>
                         <h4>Purchased on: {this.state.item.purchase_date}</h4>
                         <h4>Amount: {this.state.item.quantity}</h4>

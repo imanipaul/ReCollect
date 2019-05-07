@@ -15,7 +15,8 @@ import {
   getHouseholds,
   createHousehold,
   updateUser,
-  getHousehold
+  getHousehold,
+  getCategories
 } from './services/api-helper'
 
 import decode from 'jwt-decode'
@@ -37,7 +38,8 @@ class App extends React.Component {
       //Household View Variables
       household: null,
       users: [],
-      items: []
+      items: [],
+      categories: []
     }
 
     this.handleLogin = this.handleLogin.bind(this)
@@ -51,11 +53,13 @@ class App extends React.Component {
     this.handleNewSubmit = this.handleNewSubmit.bind(this)
     this.newHousehold = this.newHousehold.bind(this)
     this.setHousehold = this.setHousehold.bind(this)
+    this.getCategories = this.getCategories.bind(this)
 
   }
 
   componentDidMount() {
     this.getHouseholds()
+    this.getCategories()
     const token = localStorage.getItem("jwt")
     if (token) {
       const userData = decode(token);
@@ -63,7 +67,6 @@ class App extends React.Component {
         currentUser: userData
       })
     }
-
   }
 
   // ----------------------Data Calls-------------------------
@@ -78,9 +81,6 @@ class App extends React.Component {
       items: household.items
     })
   }
-
-
-
 
   async getHouseholds() {
     const households = await getHouseholds();
@@ -97,7 +97,6 @@ class App extends React.Component {
       selectedHouseholdId: newHouseholdObj.id
     })
   }
-
 
   householdHandleChange(e) {
     const { name, value } = e.target
@@ -125,6 +124,10 @@ class App extends React.Component {
     this.setState({ selectedHouseholdId: '' })
   }
 
+  async getCategories() {
+    const categories = await getCategories();
+    this.setState({ categories })
+  }
 
   // ----------------------Auth-------------------------
   async handleLogin() {
@@ -236,6 +239,7 @@ class App extends React.Component {
               {...props}
               items={this.state.items}
               users={this.state.users}
+              categories={this.state.categories}
             />
           )
         }

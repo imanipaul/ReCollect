@@ -31,8 +31,6 @@ class HouseholdView extends React.Component {
                         <button key={item.id} onClick={() => (
                             this.props.history.push(`/item/${item.id}`)
                         )}>{item.name}</button>
-
-                        // <Link to={`/household/${this.props.match.params.id}`} key={item.id}>{item.name}</Link>
                     ))}
                 </div>
 
