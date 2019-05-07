@@ -140,15 +140,17 @@ export const createItem = (data) => {
 
 
 //update item
-export const updateItem = (id, data) => {
+export const updateItem = (itemId, data) => {
     const opts = {
         method: 'PUT',
         body: JSON.stringify({ Item: data }),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+
         }
     }
-    return fetch(`${url}/items/${id}`, opts)
+    return fetch(`${url}/items/${itemId}`, opts)
         .then(resp => resp.json())
 }
 

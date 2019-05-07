@@ -7,97 +7,121 @@ class ItemView extends React.Component {
             item: null,
             user: null,
             category: null,
-            isEdit: false
+            //conditionals for editing
+            isEditName: false,
+            isEditCategory: false,
+            isEditFrequency: false,
+            isEditQuantity: false,
+            // isEditPurchased: false,
 
         }
 
-        this.setItem = this.setItem.bind(this)
-        this.getUser = this.getUser.bind(this)
+        // this.setItem = this.setItem.bind(this)
+        // this.getUser = this.getUser.bind(this)
     }
 
     componentDidMount() {
-        this.setItem()
+        this.props.setItem(this.props.match.params.id)
     }
 
-    setItem() {
-        const { id } = this.props.match.params
-        console.log('id:', id)
-        console.log('id type: ', typeof (id))
-        console.log('items prop: ', this.props.items)
+    // setItem() {
+    //     const { id } = this.props.match.params
 
-        const selectedItem = this.props.items.find(function (item) {
-            return item.id === parseInt(id)
-        })
-        this.setState({ item: selectedItem })
-        this.getUser(selectedItem)
-        this.getItemCategory(selectedItem)
-    }
+    //     const selectedItem = this.props.items.find(function (item) {
+    //         return item.id === parseInt(id)
+    //     })
+    //     this.setState({ item: selectedItem })
+    //     this.props.setSelectedItem(selectedItem)
+    //     this.getUser(selectedItem)
+    //     this.getItemCategory(selectedItem)
+    //     this.props.setItemFormData(selectedItem)
+    // } 
 
-    getUser(item) {
-        const user = this.props.users.find(function (user) {
-            return user.id == item.user_id
-        })
-        this.setState({ user })
-    }
+    // getUser(item) {
+    //     const user = this.props.users.find(function (user) {
+    //         return user.id == item.user_id
+    //     })
+    //     this.setState({ user })
+    // }
 
-    getItemCategory(item) {
-        const category = this.props.categories.find(function (category) {
-            return category.id == item.category_id
-        })
-        this.setState({ category })
-    }
+    // getItemCategory(item) {
+    //     const category = this.props.categories.find(function (category) {
+    //         return category.id == item.category_id
+    //     })
+    //     this.setState({ category })
+    // }
+
+
 
     render() {
         return (
             <div>
-                {this.state.isEdit
-                    ?
+
+                {this.props.item &&
                     <>
-                        {this.state.item &&
+                        {this.state.isEditName
+                            ?
+                            <form>
+                                <input name='name' value={this.props.item.name} onChange={this.props.handleItemFormChange} />
+                                <button>Submit</button>
+                            </form>
+                            :
+                            <h1 onClick={() => {
+                                this.props.setItemFormData()
+                                this.setState({
+                                    isEditName: true,
+                                    isEditCategory: false,
+                                    isEditFrequency: false,
+                                    isEditQuantity: false,
 
-                            <>
-                                <form onSubmit={(e) => {
-                                    e.preventDefault()
-                                }}>
-                                    <input value={this.state.item.name} />
-                                    <input value={this.state.category.name} placeholder="Category" />
-                                    <input value={this.state.item.frequency} placeholder="Frequency of use" />
-                                    <input value={this.state.item.purchase_date} placeholder="Purchased on: " />
-                                    <input value={this.state.item.quantity} placeholder="Amount: " />
-                                    <input value={this.state.user.name} placeholder="User: " />
-                                </form>
-                            </>
+                                })
+                            }}>{this.props.item.name}</h1>
                         }
-                    </>
 
-                    :
-                    <>
-                        {this.state.item &&
+                        <h4>{this.props.category.name}</h4>
 
-                            <>
-                                <h1 onClick={() => {
-                                    this.setState({ isEdit: true })
-                                }}>{this.state.item.name}</h1>
-                                <h2 onClick={() => {
-                                    this.setState({ isEdit: true })
-                                }}>Category: {this.state.category.name} </h2>
-                                <h4 onClick={() => {
-                                    this.setState({ isEdit: true })
-                                }}>Frequency of use: {this.state.item.frequency} times a week</h4>
-                                <h4 onClick={() => {
-                                    this.setState({ isEdit: true })
-                                }}>Purchased on: {this.state.item.purchase_date}</h4>
-                                <h4 onClick={() => {
-                                    this.setState({ isEdit: true })
-                                }}>Amount: {this.state.item.quantity}</h4>
-                                <h4 onClick={() => {
-                                    this.setState({ isEdit: true })
-                                }}>Added by: {this.state.user.name}</h4>
-                            </>
+
+                        {this.state.isEditFrequency
+                            ?
+                            <form>
+                                <input name='frequency' value={this.props.item.frequency} onChange={this.props.handleItemFormChange} />
+                                <button>Submit</button>
+                            </form>
+                            :
+                            <h4 onClick={() => {
+                                this.setState({
+                                    isEditName: false,
+                                    isEditCategory: false,
+                                    isEditFrequency: true,
+                                    isEditQuantity: false,
+                                })
+                            }}>Frequency of use: {this.props.item.frequency}</h4>
                         }
+
+
+                        <h4>Purchased on: {this.props.item.purchase_date}</h4>
+
+                        {this.state.isEditQuantity
+                            ?
+                            <form>
+                                <input name='quantity' value={this.props.item.quantity} onChange={this.props.handleItemFormChange} />
+                                <button>Submit</button>
+                            </form>
+                            :
+                            <h4 onClick={() => {
+                                this.setState({
+                                    isEditName: false,
+                                    isEditCategory: false,
+                                    isEditFrequency: false,
+                                    isEditQuantity: true
+
+                                })
+                            }}>Quantity: {this.props.item.quantity}</h4>
+                        }
+
+                        <h4>Added by: {this.props.user.name}</h4>
                     </>
                 }
-
 
             </div>
 

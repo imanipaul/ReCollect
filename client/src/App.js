@@ -8,6 +8,7 @@ import LandingPage from './components/LandingPage'
 import NewHousehold from './components/NewHousehold';
 import HouseholdView from './components/HouseholdView';
 import ItemView from './components/ItemView';
+import EditItem from './components/EditItem';
 import UserProfile from './components/UserProfile';
 
 import {
@@ -17,7 +18,8 @@ import {
   createHousehold,
   updateUser,
   getHousehold,
-  getCategories
+  getCategories,
+  updateItem
 } from './services/api-helper'
 
 import decode from 'jwt-decode'
@@ -40,7 +42,17 @@ class App extends React.Component {
       household: null,
       householdUsers: [],
       householdItems: [],
-      categories: []
+      categories: [],
+      //itemView Selected Item
+      selectedItem: null,
+      selectedUser: null,
+      selectedCategory: null,
+      //Edit item form
+      itemData: {
+        name: '',
+        frequency: '',
+        quantity: ''
+      }
     }
 
     this.handleLogin = this.handleLogin.bind(this)
@@ -55,6 +67,12 @@ class App extends React.Component {
     this.newHousehold = this.newHousehold.bind(this)
     this.setHousehold = this.setHousehold.bind(this)
     this.getCategories = this.getCategories.bind(this)
+    this.setItemFormData = this.setItemFormData.bind(this)
+    this.handleItemFormChange = this.handleItemFormChange.bind(this)
+    // this.setSelectedItem = this.setSelectedItem.bind(this)
+    this.setItem = this.setItem.bind(this)
+    this.getUser = this.getUser.bind(this)
+    this.getItemCategory = this.getItemCategory.bind(this)
 
   }
 
@@ -71,6 +89,79 @@ class App extends React.Component {
   }
 
   // ----------------------Data Calls-------------------------
+  setItem(id) {
+    // const { id } = this.props.match.params
+
+    const selectedItem = this.state.householdItems.find(function (item) {
+      return item.id === parseInt(id)
+    })
+    console.log('selectedItem', selectedItem)
+    this.setState({ selectedItem })
+    // this.props.setSelectedItem(selectedItem)
+    this.getUser(selectedItem)
+    this.getItemCategory(selectedItem)
+    // this.props.setItemFormData(selectedItem)
+  }
+
+  getUser(item) {
+    const selectedUser = this.state.householdUsers.find(function (user) {
+      return user.id == item.user_id
+    })
+    this.setState({ selectedUser })
+  }
+
+  getItemCategory(item) {
+    const selectedCategory = this.state.categories.find(function (category) {
+      return category.id == item.category_id
+    })
+    this.setState({ selectedCategory })
+  }
+
+
+  async editItem(itemId, data) {
+    const updatedItem = await updateItem(itemId, data)
+    console.log('updatedItem', updatedItem)
+  }
+
+  setItemFormData(item) {
+    this.setState({
+      itemData: {
+        name: item.name,
+        frequency: item.frequency,
+        quantity: item.quantity
+      }
+    })
+  }
+
+  handleItemFormChange(e) {
+    const { name, value } = e.target
+    this.setState(prevState => (
+      {
+        itemData: {
+          ...prevState.itemData,
+          [name]: value
+        }
+      }
+    ))
+
+  }
+
+  // setSelectedItem(item) {
+  //   this.setState({ item })
+  // }
+
+  // handleAuthChange(e) {
+  //   const { name, value } = e.target
+  //   this.setState(prevState => (
+  //     {
+  //       authForm: {
+  //         ...prevState.authForm,
+  //         [name]: value
+  //       }
+  //     }
+  //   ))
+  // }
+
   async setHousehold(id) {
 
     const household = await getHousehold(id)
@@ -244,7 +335,16 @@ class App extends React.Component {
               items={this.state.householdItems}
               users={this.state.householdUsers}
               categories={this.state.categories}
+              setItemFormData={this.setItemFormData}
+              handleItemFormChange={this.handleItemFormChange}
+              setSelectedItem={this.setSelectedItem}
+              setItem={this.setItem}
+              item={this.state.selectedItem}
+              user={this.state.selectedUser}
+              category={this.state.selectedCategory}
             />
+
+
           )
         }
         />
