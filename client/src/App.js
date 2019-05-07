@@ -38,16 +38,16 @@ class App extends React.Component {
       households: [],
       householdData: '',
       selectedHouseholdId: '',
-      //Household View Variables and Item View
+      //-----Household View Variables and Item View
       household: null,
       householdUsers: [],
       householdItems: [],
       categories: [],
-      //itemView Selected Item
+      //----itemView Selected Item
       selectedItem: null,
       selectedUser: null,
       selectedCategory: null,
-      //Edit item form
+      //-----Edit item form
       itemData: {
         name: '',
         frequency: '',
@@ -124,6 +124,7 @@ class App extends React.Component {
   }
 
   setItemFormData(item) {
+    console.log('set form item: ', item)
     this.setState({
       itemData: {
         name: item.name,
@@ -323,6 +324,7 @@ class App extends React.Component {
               household={this.state.household}
               users={this.state.householdUsers}
               items={this.state.householdItems}
+              setItemFormData={this.setItemFormData}
 
             />
           )}

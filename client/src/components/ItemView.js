@@ -4,54 +4,18 @@ class ItemView extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            item: null,
-            user: null,
-            category: null,
             //conditionals for editing
             isEditName: false,
             isEditCategory: false,
             isEditFrequency: false,
             isEditQuantity: false,
-            // isEditPurchased: false,
 
         }
-
-        // this.setItem = this.setItem.bind(this)
-        // this.getUser = this.getUser.bind(this)
     }
 
     componentDidMount() {
         this.props.setItem(this.props.match.params.id)
     }
-
-    // setItem() {
-    //     const { id } = this.props.match.params
-
-    //     const selectedItem = this.props.items.find(function (item) {
-    //         return item.id === parseInt(id)
-    //     })
-    //     this.setState({ item: selectedItem })
-    //     this.props.setSelectedItem(selectedItem)
-    //     this.getUser(selectedItem)
-    //     this.getItemCategory(selectedItem)
-    //     this.props.setItemFormData(selectedItem)
-    // } 
-
-    // getUser(item) {
-    //     const user = this.props.users.find(function (user) {
-    //         return user.id == item.user_id
-    //     })
-    //     this.setState({ user })
-    // }
-
-    // getItemCategory(item) {
-    //     const category = this.props.categories.find(function (category) {
-    //         return category.id == item.category_id
-    //     })
-    //     this.setState({ category })
-    // }
-
-
 
     render() {
         return (
@@ -116,17 +80,14 @@ class ItemView extends React.Component {
                                     isEditQuantity: true
 
                                 })
+
                             }}>Quantity: {this.props.item.quantity}</h4>
                         }
-
                         <h4>Added by: {this.props.user.name}</h4>
                     </>
                 }
-
             </div>
-
         )
-
     }
 }
 

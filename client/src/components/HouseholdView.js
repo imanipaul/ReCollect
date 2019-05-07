@@ -28,9 +28,10 @@ class HouseholdView extends React.Component {
                 <p>Items in this household</p>
                 <div className='items'>
                     {this.props.items.map(item => (
-                        <button key={item.id} onClick={() => (
+                        <button key={item.id} onClick={() => {
+                            this.props.setItemFormData(item)
                             this.props.history.push(`/item/${item.id}`)
-                        )}>{item.name}</button>
+                        }}>{item.name}</button>
                     ))}
                 </div>
 
@@ -38,5 +39,7 @@ class HouseholdView extends React.Component {
         )
     }
 }
+
+
 
 export default withRouter(HouseholdView)
