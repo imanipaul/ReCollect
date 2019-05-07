@@ -49,6 +49,21 @@ export const updateUser = (id, userData) => {
         .catch(e => e.message)
 }
 
+export const getUser = (id) => {
+    const opts = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        }
+    }
+
+    return fetch(`${url}/users/${id}`, opts)
+        .then(response => response.json())
+        .catch(e => e.message)
+}
+
+
 
 // create household
 export const createHousehold = (data) => {
@@ -58,7 +73,6 @@ export const createHousehold = (data) => {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-
         }
     }
     return fetch(`${url}/households`, opts)
@@ -72,7 +86,20 @@ export const getHouseholds = () => {
         .catch(e => e.message)
 }
 
-
+//get Household
+export const getHousehold = (id) => {
+    const opts = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        }
+    }
+    console.log('opts: ', opts)
+    return fetch(`${url}/households/${id}`, opts)
+        .then(resp => resp.json())
+        .catch(e => e.message)
+}
 
 // update household
 export const updateHousehold = (id, data) => {
@@ -85,6 +112,7 @@ export const updateHousehold = (id, data) => {
     }
     return fetch(`${url}/households/${id}`, opts)
         .then(resp => resp.json())
+        .catch(e => e.message)
 }
 
 // destroy household
@@ -108,6 +136,8 @@ export const createItem = (data) => {
     return fetch(`${url}/items`, opts)
         .then(resp => resp.json())
 }
+
+
 
 //update item
 export const updateItem = (id, data) => {
@@ -154,6 +184,13 @@ export const createCategory = (data) => {
 //read category items
 export const showCategoryItems = (category_id) => {
     return fetch(`${url}/${category_id}/items`)
+        .then(response => response.json())
+        .catch(e => e.message)
+}
+
+// get all categories
+export const getCategories = () => {
+    return fetch(`${url}/categories`)
         .then(response => response.json())
         .catch(e => e.message)
 }

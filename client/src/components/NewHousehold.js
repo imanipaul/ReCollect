@@ -8,9 +8,6 @@ export default class NewHousehold extends React.Component {
             isJoin: null
         }
     }
-
-
-
     render() {
         return (
             <div>
