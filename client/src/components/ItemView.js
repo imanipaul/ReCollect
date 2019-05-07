@@ -1,11 +1,18 @@
 import React from 'react'
 
-const ItemView = () => {
+const ItemView = (props) => {
+
     return (
-        <>
-            Item View
-        </>
+
+        <div>
+            {/* {props.items.map(item => (
+                <div>{item.name}</div>
+            ))} */}
+            Item View Component
+        </div>
+
     )
+
 }
 
 export default ItemView

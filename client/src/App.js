@@ -34,6 +34,10 @@ class App extends React.Component {
       households: [],
       householdData: '',
       selectedHouseholdId: '',
+      //Household View Variables
+      household: null,
+      users: [],
+      items: []
     }
 
     this.handleLogin = this.handleLogin.bind(this)
@@ -46,6 +50,7 @@ class App extends React.Component {
     this.updateUserData = this.updateUserData.bind(this)
     this.handleNewSubmit = this.handleNewSubmit.bind(this)
     this.newHousehold = this.newHousehold.bind(this)
+    this.setHousehold = this.setHousehold.bind(this)
 
   }
 
@@ -62,6 +67,21 @@ class App extends React.Component {
   }
 
   // ----------------------Data Calls-------------------------
+  async setHousehold(id) {
+
+    const household = await getHousehold(id)
+    console.log('household', household)
+
+    this.setState({
+      household: household,
+      users: household.users,
+      items: household.items
+    })
+  }
+
+
+
+
   async getHouseholds() {
     const households = await getHouseholds();
     this.setState({ households })
@@ -161,7 +181,7 @@ class App extends React.Component {
             <button onClick={this.handleLoginButton}>Login/register</button>
           }
         </div>
-        <Route exact path="/login" render={() => (
+        <Route path="/login" render={() => (
           <Login
             handleLogin={this.handleLogin}
             handleChange={this.authHandleChange}
@@ -169,7 +189,7 @@ class App extends React.Component {
             handleSelectChange={this.handleSelectChange}
           />)} />
 
-        <Route exact path="/register" render={() => (
+        <Route path="/register" render={() => (
           <Register
             handleRegister={this.handleRegister}
             handleChange={this.authHandleChange}
@@ -182,7 +202,7 @@ class App extends React.Component {
         )}
         />
 
-        <Route exact path='/add-household' render={() => (
+        <Route path='/add-household' render={() => (
           <NewHousehold
             handleSubmit={this.updateUserData}
             households={this.state.households}
@@ -200,19 +220,19 @@ class App extends React.Component {
             <HouseholdView
               {...props}
               households={this.state.households}
+              setHousehold={this.setHousehold}
+              household={this.state.household}
+              users={this.state.users}
+              items={this.state.items}
 
             />
           )}
         />
 
-        <Route exact path='household/:household_id/item/:id' render={
-          (props) => (
-            <ItemView
-              {...props}
-            // households={this.state.households}
-            />
-          )}
-        />
+
+
+
+
 
 
       </div>

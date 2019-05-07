@@ -1,34 +1,39 @@
 import React from 'react'
+import { Route, Link } from 'react-router-dom'
 import { getHousehold } from '../services/api-helper'
+import { withRouter } from 'react-router'
 import '../stylesheets/HouseholdView.css'
+import ItemView from './ItemView';
 
 class HouseholdView extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            household: null,
-            users: [],
-            items: []
+            // household: null,
+            // users: [],
+            // items: []
         }
 
-        this.setHousehold = this.setHousehold.bind(this)
+        // this.setHousehold = this.setHousehold.bind(this)
     }
 
     componentDidMount() {
-        this.setHousehold()
-    }
-
-    async setHousehold() {
         const { id } = this.props.match.params
-        const household = await getHousehold(id)
-        console.log('household', household)
-
-        this.setState({
-            household: household,
-            users: household.users,
-            items: household.items
-        })
+        this.props.setHousehold(id)
     }
+
+    // async setHousehold() {
+    //     const { id } = this.props.match.params
+    //     const household = await getHousehold(id)
+    //     console.log('household', household)
+
+    //     this.setState({
+    //         household: household,
+    //         users: household.users,
+    //         items: household.items
+    //     })
+    //     console.log(this.props.history)
+    // }
 
 
     render() {
@@ -37,20 +42,31 @@ class HouseholdView extends React.Component {
             <>
                 <p>Users in this household</p>
                 <div className='users'>
-                    {this.state.users.map(user => (
+                    {this.props.users.map(user => (
                         <div key={user.id}>{user.name}</div>
                     ))}
                 </div>
 
                 <p>Items in this household</p>
                 <div className='items'>
-                    {this.state.items.map(item => (
-                        <div key={item.id}>{item.name}</div>
+                    {this.props.items.map(item => (
+                        // <button key={item.id} onClick={() => (
+                        //     this.props.history.push(`/item/${item.id}`)
+                        // )}>{item.name}</button>
+
+                        <Link to={`/household/${this.props.match.params.id}`} key={item.id}>{item.name}</Link>
                     ))}
                 </div>
+
+                <Route path={`/test`} render={() => (
+                    <ItemView
+                        items={this.state.items}
+                    />
+                )}
+                />
             </>
         )
     }
 }
 
-export default HouseholdView
+export default withRouter(HouseholdView)
