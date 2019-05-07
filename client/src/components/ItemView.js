@@ -25,13 +25,15 @@ class ItemView extends React.Component {
                     <>
                         {this.state.isEditName
                             ?
-                            <form>
-                                <input name='name' value={this.props.item.name} onChange={this.props.handleItemFormChange} />
+                            <form onSubmit={(e) => {
+                                e.preventDefault()
+                                this.props.editItem(this.props.match.params.id)
+                            }}>
+                                <input name='name' type='text' value={this.props.itemData.name} onChange={this.props.handleItemFormChange} />
                                 <button>Submit</button>
                             </form>
                             :
                             <h1 onClick={() => {
-                                this.props.setItemFormData()
                                 this.setState({
                                     isEditName: true,
                                     isEditCategory: false,
@@ -47,8 +49,10 @@ class ItemView extends React.Component {
 
                         {this.state.isEditFrequency
                             ?
-                            <form>
-                                <input name='frequency' value={this.props.item.frequency} onChange={this.props.handleItemFormChange} />
+                            <form onSubmit={(e) => {
+                                e.preventDefault()
+                            }}>
+                                <input name='frequency' type='text' value={this.props.itemData.frequency} onChange={this.props.handleItemFormChange} />
                                 <button>Submit</button>
                             </form>
                             :
@@ -67,8 +71,10 @@ class ItemView extends React.Component {
 
                         {this.state.isEditQuantity
                             ?
-                            <form>
-                                <input name='quantity' value={this.props.item.quantity} onChange={this.props.handleItemFormChange} />
+                            <form onSubmit={(e) => {
+                                e.preventDefault()
+                            }}>
+                                <input name='quantity' type='text' value={this.props.itemData.quantity} onChange={this.props.handleItemFormChange} />
                                 <button>Submit</button>
                             </form>
                             :

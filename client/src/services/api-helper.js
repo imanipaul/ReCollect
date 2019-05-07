@@ -143,7 +143,7 @@ export const createItem = (data) => {
 export const updateItem = (itemId, data) => {
     const opts = {
         method: 'PUT',
-        body: JSON.stringify({ Item: data }),
+        body: JSON.stringify({ item: data }),
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('jwt')}`

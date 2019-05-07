@@ -73,6 +73,7 @@ class App extends React.Component {
     this.setItem = this.setItem.bind(this)
     this.getUser = this.getUser.bind(this)
     this.getItemCategory = this.getItemCategory.bind(this)
+    this.editItem = this.editItem.bind(this)
 
   }
 
@@ -118,13 +119,22 @@ class App extends React.Component {
   }
 
 
-  async editItem(itemId, data) {
-    const updatedItem = await updateItem(itemId, data)
+  async editItem(itemId) {
+    const updatedItem = await updateItem(itemId, this.state.itemData)
     console.log('updatedItem', updatedItem)
   }
 
+
+
+  // async updateFood(foodItem) {
+  //   const updatedFoodItem = await putFood(foodItem.id, this.state.formData);
+  //   this.setState(prevState => ({
+  //     food: prevState.food.map(element => element.id === foodItem.id ? updatedFoodItem : element)
+  //   }))
+  // }
+
+
   setItemFormData(item) {
-    console.log('set form item: ', item)
     this.setState({
       itemData: {
         name: item.name,
@@ -146,22 +156,6 @@ class App extends React.Component {
     ))
 
   }
-
-  // setSelectedItem(item) {
-  //   this.setState({ item })
-  // }
-
-  // handleAuthChange(e) {
-  //   const { name, value } = e.target
-  //   this.setState(prevState => (
-  //     {
-  //       authForm: {
-  //         ...prevState.authForm,
-  //         [name]: value
-  //       }
-  //     }
-  //   ))
-  // }
 
   async setHousehold(id) {
 
@@ -344,6 +338,8 @@ class App extends React.Component {
               item={this.state.selectedItem}
               user={this.state.selectedUser}
               category={this.state.selectedCategory}
+              itemData={this.state.itemData}
+              editItem={this.editItem}
             />
 
 
