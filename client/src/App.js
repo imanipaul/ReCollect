@@ -8,6 +8,7 @@ import LandingPage from './components/LandingPage'
 import NewHousehold from './components/NewHousehold';
 import HouseholdView from './components/HouseholdView';
 import ItemView from './components/ItemView';
+import UserProfile from './components/UserProfile';
 
 import {
   registerUser,
@@ -37,8 +38,8 @@ class App extends React.Component {
       selectedHouseholdId: '',
       //Household View Variables
       household: null,
-      users: [],
-      items: [],
+      householdUsers: [],
+      householdItems: [],
       categories: []
     }
 
@@ -77,8 +78,8 @@ class App extends React.Component {
 
     this.setState({
       household: household,
-      users: household.users,
-      items: household.items
+      householdUsers: household.users,
+      householdItems: household.items
     })
   }
 
@@ -177,7 +178,10 @@ class App extends React.Component {
           {this.state.currentUser
             ?
             <>
-              <p>Hello {this.state.currentUser.name}</p>
+
+              <p onClick={() => (
+                this.props.history.push(`/profile`)
+              )}>Hello {this.state.currentUser.name}</p>
               <button onClick={this.handleLogout}>logout</button>
               <button onClick={() => (this.props.history.goBack())}>Back</button>
             </>
@@ -226,8 +230,8 @@ class App extends React.Component {
               households={this.state.households}
               setHousehold={this.setHousehold}
               household={this.state.household}
-              users={this.state.users}
-              items={this.state.items}
+              users={this.state.householdUsers}
+              items={this.state.householdItems}
 
             />
           )}
@@ -245,8 +249,13 @@ class App extends React.Component {
         }
         />
 
-
-
+        <Route path='/profile' render={() => (
+          <UserProfile
+            currentUser={this.state.currentUser}
+            user={this.state.currentUser}
+            households={this.state.households} />
+        )}
+        />
       </div>
     );
   }

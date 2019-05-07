@@ -49,6 +49,21 @@ export const updateUser = (id, userData) => {
         .catch(e => e.message)
 }
 
+export const getUser = (id) => {
+    const opts = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+        }
+    }
+
+    return fetch(`${url}/users/${id}`, opts)
+        .then(response => response.json())
+        .catch(e => e.message)
+}
+
+
 
 // create household
 export const createHousehold = (data) => {
