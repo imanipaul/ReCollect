@@ -1,6 +1,7 @@
 import React from 'react'
 import { getUser } from '../services/api-helper'
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 
 
 class UserProfile extends React.Component {
@@ -10,7 +11,6 @@ class UserProfile extends React.Component {
             user: null,
             household: null
         }
-
 
         this.getCurrentUser = this.getCurrentUser.bind(this)
     }
@@ -35,13 +35,6 @@ class UserProfile extends React.Component {
         }
     }
 
-    getUserHousehold() {
-
-    }
-
-
-
-
     render() {
         return (
             <>
@@ -49,18 +42,16 @@ class UserProfile extends React.Component {
                     <>
                         <h1>Hello {this.state.user.name}!</h1>
                         {this.state.household &&
-                            <h3>Household: {this.state.household.name}</h3>
+                            <h3 onClick={() => ([
+                                this.props.history.push(`/household/${this.state.household.id}`)
+                            ])}>Household: {this.state.household.name}</h3>
                         }
 
                         <h4>User Items:</h4>
                         {this.state.user.items.map(item => (
-                            <div key={item.id}>{item.name}</div>
+                            <p key={item.id}> {item.name}</p>
                         ))}
-
-
                     </>
-
-
                 }
             </>
 

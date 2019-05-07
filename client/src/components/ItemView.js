@@ -23,6 +23,7 @@ class ItemView extends React.Component {
         const { id } = this.props.match.params
         console.log('id:', id)
         console.log('id type: ', typeof (id))
+        console.log('items prop: ', this.props.items)
 
         const selectedItem = this.props.items.find(function (item) {
             return item.id === parseInt(id)

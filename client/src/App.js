@@ -36,7 +36,7 @@ class App extends React.Component {
       households: [],
       householdData: '',
       selectedHouseholdId: '',
-      //Household View Variables
+      //Household View Variables and Item View
       household: null,
       householdUsers: [],
       householdItems: [],
@@ -241,8 +241,8 @@ class App extends React.Component {
           (props) => (
             <ItemView
               {...props}
-              items={this.state.items}
-              users={this.state.users}
+              items={this.state.householdItems}
+              users={this.state.householdUsers}
               categories={this.state.categories}
             />
           )
