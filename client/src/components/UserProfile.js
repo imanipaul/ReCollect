@@ -27,7 +27,7 @@ class UserProfile extends React.Component {
             const household = this.props.households.find(household => (
                 household.id == user.id
             ))
-            this.setState({ household })
+            // this.setState({ household })
         }
         else {
             console.log('user not found')
@@ -38,17 +38,17 @@ class UserProfile extends React.Component {
     render() {
         return (
             <>
-                {this.state.user &&
+                {this.props.user &&
                     <>
-                        <h1>Hello {this.state.user.name}!</h1>
-                        {this.state.household &&
+                        <h1>Hello {this.props.user.name}!</h1>
+                        {this.props.household &&
                             <h3 onClick={() => ([
-                                this.props.history.push(`/household/${this.state.household.id}`)
-                            ])}>Household: {this.state.household.name}</h3>
+                                this.props.history.push(`/household/${this.props.household.id}`)
+                            ])}>Household: {this.props.household.name}</h3>
                         }
 
                         <h4>User Items:</h4>
-                        {this.state.user.items.map(item => (
+                        {this.props.user.items.map(item => (
                             <p key={item.id}> {item.name}</p>
                         ))}
                     </>

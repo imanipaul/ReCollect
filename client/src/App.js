@@ -20,7 +20,8 @@ import {
   getCategories,
   updateItem,
   destroyItem,
-  createItem
+  createItem,
+  getUser
 } from './services/api-helper'
 
 import decode from 'jwt-decode'
@@ -236,11 +237,18 @@ class App extends React.Component {
   // ----------------------Auth-------------------------
   async handleLogin() {
     const userData = await loginUser(this.state.authFormData);
+    const decodedData = decode(userData.token)
     this.setState({
       currentUser: decode(userData.token)
     })
     localStorage.setItem("jwt", userData.token)
-    this.props.history.push('/add-household')
+    const user = await getUser(decodedData.user_id)
+    this.setState({
+      householdUser: user
+    })
+
+    this.setHousehold(user.household_id)
+    // this.props.history.push('/add-household')
   }
 
 
@@ -285,9 +293,12 @@ class App extends React.Component {
                 <p onClick={() => (
                   this.props.history.push(`/profile`)
                 )}>Hello {this.state.currentUser.name}</p>
-                <button onClick={this.handleLogout}>logout</button>
+                <button onClick={() => {
+                  this.handleLogout()
+                  this.props.history.push('/')
+                }}>logout</button>
                 <button onClick={() => (this.props.history.goBack())}>Back</button>
-                <button onClick={() => (this.props.history.push(`/household/${this.state.currentUser.user_id}`))}>{this.state.household.name}</button>
+                {/* <button onClick={() => (this.props.history.push(`/household/${this.state.currentUser.user_id}`))}>{this.state.household.name}</button> */}
               </>
               :
               <button onClick={this.handleLoginButton}>Login/register</button>
@@ -374,7 +385,8 @@ class App extends React.Component {
         <Route path='/profile' render={() => (
           <UserProfile
             currentUser={this.state.currentUser}
-            user={this.state.currentUser}
+            user={this.state.householdUser}
+            household={this.state.household}
             households={this.state.households} />
         )}
         />
