@@ -24,14 +24,10 @@ export const registerUser = (registerData) => {
             'Content-Type': 'application/json'
         }
     };
-
-    console.log(opts)
-
     return fetch(`${url}/users/`, opts)
-        .then(resp => {
-            console.log(opts.headers)
-            resp.json()
-        })
+        .then(resp =>
+            resp.json())
+
 }
 
 export const updateUser = (id, userData) => {

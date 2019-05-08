@@ -92,11 +92,8 @@ class App extends React.Component {
     const token = localStorage.getItem("jwt")
     if (token) {
       const userData = decode(token);
-      console.log('userdata', userData)
-      const userHousehold = this.setHousehold(userData.user_id)
       this.setState({
-        currentUser: userData,
-        household: userHousehold
+        currentUser: userData
       })
     }
   }
@@ -201,6 +198,7 @@ class App extends React.Component {
     this.setState({
       selectedHouseholdId: newHouseholdObj.id
     })
+    return newHouseholdObj
   }
 
   householdHandleChange(e) {
@@ -211,22 +209,66 @@ class App extends React.Component {
   }
 
   async handleNewSubmit() {
-    console.log('creating new household')
-    await this.newHousehold()
-    console.log('updating user')
-    await this.updateUserData()
+    //login
+    const userInfo = await loginUser(this.state.authFormData);
+    const decodedData = decode(userInfo.token)
     this.setState({
-      selectedHouseholdId: ''
+      currentUser: decode(userInfo.token)
     })
+    localStorage.setItem("jwt", userInfo.token)
+
+    //create new household
+    console.log('creating new household')
+    const newHousehold = await this.newHousehold()
+
+    console.log('new household, ', newHousehold)
+
+    //associate user with household
+    const userData = {
+      household_id: newHousehold.id
+    }
+    await updateUser(decodedData.user_id, userData)
+
+    //set current user in household
+    const user = await getUser(decodedData.user_id)
+    console.log('user', user)
+    console.log('user household id', user.household_id)
+    this.setState({
+      householdUser: user
+    })
+
+    //set current household
+    this.setHousehold(user.household_id)
+
+
   }
 
   async updateUserData() {
+    //login
+    const userInfo = await loginUser(this.state.authFormData);
+    const decodedData = decode(userInfo.token)
+    this.setState({
+      currentUser: decode(userInfo.token)
+    })
+    localStorage.setItem("jwt", userInfo.token)
+
+    //updates user in database with household id
     const userData = {
       household_id: this.state.selectedHouseholdId
     }
-    await updateUser(this.state.currentUser.user_id, userData)
+    await updateUser(decodedData.user_id, userData)
 
-    this.setState({ selectedHouseholdId: '' })
+    //Set the current user for the household
+    const user = await getUser(decodedData.user_id)
+    console.log('user', user)
+    console.log('user household id', user.household_id)
+    this.setState({
+      householdUser: user
+    })
+
+    //Set the current household
+    this.setHousehold(user.household_id)
+
   }
 
   async getCategories() {
@@ -242,6 +284,7 @@ class App extends React.Component {
       currentUser: decode(userData.token)
     })
     localStorage.setItem("jwt", userData.token)
+
     const user = await getUser(decodedData.user_id)
     this.setState({
       householdUser: user
@@ -252,10 +295,12 @@ class App extends React.Component {
   }
 
 
-  async handleRegister(e) {
-    e.preventDefault();
-    await registerUser(this.state.authFormData);
-    this.handleLogin();
+  async handleRegister() {
+    const newUser = await registerUser(this.state.authFormData)
+    console.log('new user: ', newUser)
+    this.setState({ registerUserId: newUser.id })
+
+    // this.handleLogin();
   }
 
   authHandleChange(e) {
