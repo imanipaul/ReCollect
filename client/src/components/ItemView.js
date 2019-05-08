@@ -90,6 +90,11 @@ class ItemView extends React.Component {
                             }}>Quantity: {this.props.item.quantity}</h4>
                         }
                         <h4>Added by: {this.props.user.name}</h4>
+                        <button onClick={() => {
+                            this.props.deleteItem(this.props.item)
+                            this.props.history.goBack()
+                        }}>Delete</button>
+
                     </>
                 }
             </div>

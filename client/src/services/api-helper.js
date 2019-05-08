@@ -158,7 +158,12 @@ export const updateItem = (itemId, data) => {
 //destroy item
 export const destroyItem = (id) => {
     const opts = {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+
+        }
     }
     return fetch(`${url}/items/${id}`, opts)
 }

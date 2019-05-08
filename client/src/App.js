@@ -8,7 +8,6 @@ import LandingPage from './components/LandingPage'
 import NewHousehold from './components/NewHousehold';
 import HouseholdView from './components/HouseholdView';
 import ItemView from './components/ItemView';
-import EditItem from './components/EditItem';
 import UserProfile from './components/UserProfile';
 
 import {
@@ -19,7 +18,8 @@ import {
   updateUser,
   getHousehold,
   getCategories,
-  updateItem
+  updateItem,
+  destroyItem
 } from './services/api-helper'
 
 import decode from 'jwt-decode'
@@ -74,6 +74,7 @@ class App extends React.Component {
     this.getUser = this.getUser.bind(this)
     this.getItemCategory = this.getItemCategory.bind(this)
     this.editItem = this.editItem.bind(this)
+    this.deleteItem = this.deleteItem.bind(this)
 
   }
 
@@ -90,18 +91,25 @@ class App extends React.Component {
   }
 
   // ----------------------Data Calls-------------------------
+  async deleteItem(item) {
+    await destroyItem(item.id);
+    this.setState(prevState => ({
+      householdItems: prevState.householdItems.filter(el => el.id != item.id)
+    }))
+    console.log('deleted', item)
+
+  }
+
+
   setItem(id) {
-    // const { id } = this.props.match.params
 
     const selectedItem = this.state.householdItems.find(function (item) {
       return item.id === parseInt(id)
     })
     console.log('selectedItem', selectedItem)
     this.setState({ selectedItem })
-    // this.props.setSelectedItem(selectedItem)
     this.getUser(selectedItem)
     this.getItemCategory(selectedItem)
-    // this.props.setItemFormData(selectedItem)
   }
 
   getUser(item) {
@@ -123,15 +131,6 @@ class App extends React.Component {
     const updatedItem = await updateItem(itemId, this.state.itemData)
     console.log('updatedItem', updatedItem)
   }
-
-
-
-  // async updateFood(foodItem) {
-  //   const updatedFoodItem = await putFood(foodItem.id, this.state.formData);
-  //   this.setState(prevState => ({
-  //     food: prevState.food.map(element => element.id === foodItem.id ? updatedFoodItem : element)
-  //   }))
-  // }
 
 
   setItemFormData(item) {
@@ -340,6 +339,7 @@ class App extends React.Component {
               category={this.state.selectedCategory}
               itemData={this.state.itemData}
               editItem={this.editItem}
+              deleteItem={this.deleteItem}
             />
 
 
