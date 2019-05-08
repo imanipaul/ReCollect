@@ -91,8 +91,11 @@ class App extends React.Component {
     const token = localStorage.getItem("jwt")
     if (token) {
       const userData = decode(token);
+      console.log('userdata', userData)
+      const userHousehold = this.setHousehold(userData.user_id)
       this.setState({
-        currentUser: userData
+        currentUser: userData,
+        household: userHousehold
       })
     }
   }
@@ -274,21 +277,24 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <div className='logout'>
-          {this.state.currentUser
-            ?
-            <>
+        <nav>
+          <div className='logout'>
+            {this.state.currentUser
+              ?
+              <>
+                <p onClick={() => (
+                  this.props.history.push(`/profile`)
+                )}>Hello {this.state.currentUser.name}</p>
+                <button onClick={this.handleLogout}>logout</button>
+                <button onClick={() => (this.props.history.goBack())}>Back</button>
+                <button onClick={() => (this.props.history.push(`/household/${this.state.currentUser.user_id}`))}>{this.state.household.name}</button>
+              </>
+              :
+              <button onClick={this.handleLoginButton}>Login/register</button>
+            }
 
-              <p onClick={() => (
-                this.props.history.push(`/profile`)
-              )}>Hello {this.state.currentUser.name}</p>
-              <button onClick={this.handleLogout}>logout</button>
-              <button onClick={() => (this.props.history.goBack())}>Back</button>
-            </>
-            :
-            <button onClick={this.handleLoginButton}>Login/register</button>
-          }
-        </div>
+          </div>
+        </nav>
         <Route path="/login" render={() => (
           <Login
             handleLogin={this.handleLogin}

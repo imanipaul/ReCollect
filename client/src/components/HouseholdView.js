@@ -1,9 +1,6 @@
 import React from 'react'
-import { Route, Link } from 'react-router-dom'
-import { getHousehold } from '../services/api-helper'
 import { withRouter } from 'react-router'
 import '../stylesheets/HouseholdView.css'
-import ItemView from './ItemView';
 import CreateItem from './CreateItem'
 
 
@@ -18,8 +15,8 @@ class HouseholdView extends React.Component {
 
 
     componentDidMount() {
-        const { id } = this.props.match.params
-        this.props.setHousehold(id)
+        // const { id } = this.props.match.params
+        // this.props.setHousehold(id)
     }
 
 
