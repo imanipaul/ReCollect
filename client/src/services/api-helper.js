@@ -128,9 +128,10 @@ export const destroyHousehold = (id) => {
 export const createItem = (data) => {
     const opts = {
         method: 'POST',
-        body: JSON.stringify({ Item: data }),
+        body: JSON.stringify({ item: data }),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
         }
     }
     return fetch(`${url}/items`, opts)

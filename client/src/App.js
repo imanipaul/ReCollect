@@ -19,7 +19,8 @@ import {
   getHousehold,
   getCategories,
   updateItem,
-  destroyItem
+  destroyItem,
+  createItem
 } from './services/api-helper'
 
 import decode from 'jwt-decode'
@@ -51,7 +52,13 @@ class App extends React.Component {
       itemData: {
         name: '',
         frequency: '',
-        quantity: ''
+        quantity: '',
+        purchase_date: '',
+        category_id: '',
+        user_id: ''
+      },
+      createItemData: {
+
       }
     }
 
@@ -91,6 +98,11 @@ class App extends React.Component {
   }
 
   // ----------------------Data Calls-------------------------
+  async createNewItem(itemData) {
+    const newItem = await createItem(itemData)
+    console.log(newItem)
+  }
+
   async deleteItem(item) {
     await destroyItem(item.id);
     this.setState(prevState => ({
@@ -138,7 +150,10 @@ class App extends React.Component {
       itemData: {
         name: item.name,
         frequency: item.frequency,
-        quantity: item.quantity
+        quantity: item.quantity,
+        purchase_date: item.purchase_date,
+        category_id: item.category_id,
+        user_id: item.user_id
       }
     })
   }
@@ -318,6 +333,9 @@ class App extends React.Component {
               users={this.state.householdUsers}
               items={this.state.householdItems}
               setItemFormData={this.setItemFormData}
+              handleItemFormChange={this.handleItemFormChange}
+              itemData={this.state.itemData}
+              createNewItem={this.createNewItem}
 
             />
           )}

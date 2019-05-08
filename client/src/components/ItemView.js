@@ -96,6 +96,7 @@ class ItemView extends React.Component {
                         }}>Delete</button>
 
                     </>
+
                 }
             </div>
         )
