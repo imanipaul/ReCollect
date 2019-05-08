@@ -17,7 +17,11 @@ import {
   createHousehold,
   updateUser,
   getHousehold,
-  getCategories
+  getCategories,
+  updateItem,
+  destroyItem,
+  createItem,
+  getUser
 } from './services/api-helper'
 
 import decode from 'jwt-decode'
@@ -36,11 +40,27 @@ class App extends React.Component {
       households: [],
       householdData: '',
       selectedHouseholdId: '',
-      //Household View Variables
+      //-----Household View Variables and Item View
       household: null,
       householdUsers: [],
       householdItems: [],
-      categories: []
+      categories: [],
+      //----itemView Selected Item
+      selectedItem: null,
+      selectedUser: null,
+      selectedCategory: null,
+      //-----Edit item form
+      itemData: {
+        name: '',
+        frequency: '',
+        quantity: '',
+        purchase_date: '',
+        category_id: '',
+        user_id: ''
+      },
+      createItemData: {
+
+      }
     }
 
     this.handleLogin = this.handleLogin.bind(this)
@@ -55,6 +75,14 @@ class App extends React.Component {
     this.newHousehold = this.newHousehold.bind(this)
     this.setHousehold = this.setHousehold.bind(this)
     this.getCategories = this.getCategories.bind(this)
+    this.setItemFormData = this.setItemFormData.bind(this)
+    this.handleItemFormChange = this.handleItemFormChange.bind(this)
+    // this.setSelectedItem = this.setSelectedItem.bind(this)
+    this.setItem = this.setItem.bind(this)
+    this.getUser = this.getUser.bind(this)
+    this.getItemCategory = this.getItemCategory.bind(this)
+    this.editItem = this.editItem.bind(this)
+    this.deleteItem = this.deleteItem.bind(this)
 
   }
 
@@ -71,6 +99,79 @@ class App extends React.Component {
   }
 
   // ----------------------Data Calls-------------------------
+  async createNewItem(itemData) {
+    const newItem = await createItem(itemData)
+    console.log(newItem)
+  }
+
+  async deleteItem(item) {
+    await destroyItem(item.id);
+    this.setState(prevState => ({
+      householdItems: prevState.householdItems.filter(el => el.id != item.id)
+    }))
+    console.log('deleted', item)
+
+  }
+
+
+  setItem(id) {
+
+    const selectedItem = this.state.householdItems.find(function (item) {
+      return item.id === parseInt(id)
+    })
+    console.log('selectedItem', selectedItem)
+    this.setState({ selectedItem })
+    this.getUser(selectedItem)
+    this.getItemCategory(selectedItem)
+  }
+
+  getUser(item) {
+    const selectedUser = this.state.householdUsers.find(function (user) {
+      return user.id == item.user_id
+    })
+    this.setState({ selectedUser })
+  }
+
+  getItemCategory(item) {
+    const selectedCategory = this.state.categories.find(function (category) {
+      return category.id == item.category_id
+    })
+    this.setState({ selectedCategory })
+  }
+
+
+  async editItem(itemId) {
+    const updatedItem = await updateItem(itemId, this.state.itemData)
+    console.log('updatedItem', updatedItem)
+  }
+
+
+  setItemFormData(item) {
+    this.setState({
+      itemData: {
+        name: item.name,
+        frequency: item.frequency,
+        quantity: item.quantity,
+        purchase_date: item.purchase_date,
+        category_id: item.category_id,
+        user_id: item.user_id
+      }
+    })
+  }
+
+  handleItemFormChange(e) {
+    const { name, value } = e.target
+    this.setState(prevState => (
+      {
+        itemData: {
+          ...prevState.itemData,
+          [name]: value
+        }
+      }
+    ))
+
+  }
+
   async setHousehold(id) {
 
     const household = await getHousehold(id)
@@ -97,6 +198,7 @@ class App extends React.Component {
     this.setState({
       selectedHouseholdId: newHouseholdObj.id
     })
+    return newHouseholdObj
   }
 
   householdHandleChange(e) {
@@ -107,22 +209,70 @@ class App extends React.Component {
   }
 
   async handleNewSubmit() {
-    console.log('creating new household')
-    await this.newHousehold()
-    console.log('updating user')
-    await this.updateUserData()
+    //login
+    const userInfo = await loginUser(this.state.authFormData);
+    const decodedData = decode(userInfo.token)
     this.setState({
-      selectedHouseholdId: ''
+      currentUser: decode(userInfo.token)
     })
+    localStorage.setItem("jwt", userInfo.token)
+
+    //create new household
+    console.log('creating new household')
+    const newHousehold = await this.newHousehold()
+
+    console.log('new household, ', newHousehold)
+
+    //associate user with household
+    const userData = {
+      household_id: newHousehold.id
+    }
+    await updateUser(decodedData.user_id, userData)
+
+    //set current user in household
+    const user = await getUser(decodedData.user_id)
+    console.log('user', user)
+    console.log('user household id', user.household_id)
+    this.setState({
+      householdUser: user
+    })
+
+    //set current household
+    this.setHousehold(user.household_id)
+    this.props.history.push('/profile')
+
+
+
   }
 
   async updateUserData() {
+    //login
+    const userInfo = await loginUser(this.state.authFormData);
+    const decodedData = decode(userInfo.token)
+    this.setState({
+      currentUser: decode(userInfo.token)
+    })
+    localStorage.setItem("jwt", userInfo.token)
+
+    //updates user in database with household id
     const userData = {
       household_id: this.state.selectedHouseholdId
     }
-    await updateUser(this.state.currentUser.user_id, userData)
+    await updateUser(decodedData.user_id, userData)
 
-    this.setState({ selectedHouseholdId: '' })
+    //Set the current user for the household
+    const user = await getUser(decodedData.user_id)
+    console.log('user', user)
+    console.log('user household id', user.household_id)
+    this.setState({
+      householdUser: user
+    })
+
+    //Set the current household
+    this.setHousehold(user.household_id)
+    this.props.history.push('/profile')
+
+
   }
 
   async getCategories() {
@@ -133,18 +283,28 @@ class App extends React.Component {
   // ----------------------Auth-------------------------
   async handleLogin() {
     const userData = await loginUser(this.state.authFormData);
+    const decodedData = decode(userData.token)
     this.setState({
       currentUser: decode(userData.token)
     })
     localStorage.setItem("jwt", userData.token)
-    this.props.history.push('/add-household')
+
+    const user = await getUser(decodedData.user_id)
+    this.setState({
+      householdUser: user
+    })
+
+    this.setHousehold(user.household_id)
+    this.props.history.push('/profile')
   }
 
 
-  async handleRegister(e) {
-    e.preventDefault();
-    await registerUser(this.state.authFormData);
-    this.handleLogin();
+  async handleRegister() {
+    const newUser = await registerUser(this.state.authFormData)
+    console.log('new user: ', newUser)
+    this.setState({ registerUserId: newUser.id })
+
+    // this.handleLogin();
   }
 
   authHandleChange(e) {
@@ -174,27 +334,34 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <div className='logout'>
-          {this.state.currentUser
-            ?
-            <>
+        <nav>
+          <div className='logout'>
+            {this.state.currentUser
+              ?
+              <>
+                <p onClick={() => (
+                  this.props.history.push(`/profile`)
+                )}>Hello {this.state.currentUser.name}</p>
+                <button onClick={() => {
+                  this.handleLogout()
+                  this.props.history.push('/')
+                }}>logout</button>
+                <button onClick={() => (this.props.history.goBack())}>Back</button>
+                {/* <button onClick={() => (this.props.history.push(`/household/${this.state.currentUser.user_id}`))}>{this.state.household.name}</button> */}
+              </>
+              :
+              <button onClick={this.handleLoginButton}>Login/register</button>
+            }
 
-              <p onClick={() => (
-                this.props.history.push(`/profile`)
-              )}>Hello {this.state.currentUser.name}</p>
-              <button onClick={this.handleLogout}>logout</button>
-              <button onClick={() => (this.props.history.goBack())}>Back</button>
-            </>
-            :
-            <button onClick={this.handleLoginButton}>Login/register</button>
-          }
-        </div>
+          </div>
+        </nav>
         <Route path="/login" render={() => (
           <Login
             handleLogin={this.handleLogin}
             handleChange={this.authHandleChange}
             formData={this.state.authFormData}
             handleSelectChange={this.handleSelectChange}
+            currentUser={this.state.currentUser}
           />)} />
 
         <Route path="/register" render={() => (
@@ -232,6 +399,10 @@ class App extends React.Component {
               household={this.state.household}
               users={this.state.householdUsers}
               items={this.state.householdItems}
+              setItemFormData={this.setItemFormData}
+              handleItemFormChange={this.handleItemFormChange}
+              itemData={this.state.itemData}
+              createNewItem={this.createNewItem}
 
             />
           )}
@@ -241,10 +412,22 @@ class App extends React.Component {
           (props) => (
             <ItemView
               {...props}
-              items={this.state.items}
-              users={this.state.users}
+              items={this.state.householdItems}
+              users={this.state.householdUsers}
               categories={this.state.categories}
+              setItemFormData={this.setItemFormData}
+              handleItemFormChange={this.handleItemFormChange}
+              setSelectedItem={this.setSelectedItem}
+              setItem={this.setItem}
+              item={this.state.selectedItem}
+              user={this.state.selectedUser}
+              category={this.state.selectedCategory}
+              itemData={this.state.itemData}
+              editItem={this.editItem}
+              deleteItem={this.deleteItem}
             />
+
+
           )
         }
         />
@@ -252,7 +435,8 @@ class App extends React.Component {
         <Route path='/profile' render={() => (
           <UserProfile
             currentUser={this.state.currentUser}
-            user={this.state.currentUser}
+            user={this.state.householdUser}
+            household={this.state.household}
             households={this.state.households} />
         )}
         />

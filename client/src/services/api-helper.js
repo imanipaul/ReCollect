@@ -24,14 +24,10 @@ export const registerUser = (registerData) => {
             'Content-Type': 'application/json'
         }
     };
-
-    console.log(opts)
-
     return fetch(`${url}/users/`, opts)
-        .then(resp => {
-            console.log(opts.headers)
-            resp.json()
-        })
+        .then(resp =>
+            resp.json())
+
 }
 
 export const updateUser = (id, userData) => {
@@ -128,9 +124,10 @@ export const destroyHousehold = (id) => {
 export const createItem = (data) => {
     const opts = {
         method: 'POST',
-        body: JSON.stringify({ Item: data }),
+        body: JSON.stringify({ item: data }),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
         }
     }
     return fetch(`${url}/items`, opts)
@@ -140,15 +137,17 @@ export const createItem = (data) => {
 
 
 //update item
-export const updateItem = (id, data) => {
+export const updateItem = (itemId, data) => {
     const opts = {
         method: 'PUT',
-        body: JSON.stringify({ Item: data }),
+        body: JSON.stringify({ item: data }),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+
         }
     }
-    return fetch(`${url}/items/${id}`, opts)
+    return fetch(`${url}/items/${itemId}`, opts)
         .then(resp => resp.json())
 }
 
@@ -156,7 +155,12 @@ export const updateItem = (id, data) => {
 //destroy item
 export const destroyItem = (id) => {
     const opts = {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+
+        }
     }
     return fetch(`${url}/items/${id}`, opts)
 }

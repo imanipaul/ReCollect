@@ -19,7 +19,11 @@ class Register extends React.Component {
             <div className="auth-container">
                 <h2>Register</h2>
                 <hr />
-                <form onSubmit={this.props.handleRegister} >
+                <form onSubmit={(e) => {
+                    e.preventDefault()
+                    this.props.handleRegister()
+                    this.props.history.push('/add-household')
+                }} >
                     <p>Name:</p>
                     <input name="name" type="text" value={this.props.formData.name} onChange={this.props.handleChange} />
                     <p>Password:</p>

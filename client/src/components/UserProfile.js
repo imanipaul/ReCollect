@@ -1,6 +1,7 @@
 import React from 'react'
 import { getUser } from '../services/api-helper'
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 
 
 class UserProfile extends React.Component {
@@ -10,7 +11,6 @@ class UserProfile extends React.Component {
             user: null,
             household: null
         }
-
 
         this.getCurrentUser = this.getCurrentUser.bind(this)
     }
@@ -27,7 +27,7 @@ class UserProfile extends React.Component {
             const household = this.props.households.find(household => (
                 household.id == user.id
             ))
-            this.setState({ household })
+            // this.setState({ household })
         }
         else {
             console.log('user not found')
@@ -35,32 +35,23 @@ class UserProfile extends React.Component {
         }
     }
 
-    getUserHousehold() {
-
-    }
-
-
-
-
     render() {
         return (
             <>
-                {this.state.user &&
+                {this.props.user &&
                     <>
-                        <h1>Hello {this.state.user.name}!</h1>
-                        {this.state.household &&
-                            <h3>Household: {this.state.household.name}</h3>
+                        <h1>Hello {this.props.user.name}!</h1>
+                        {this.props.household &&
+                            <h3 onClick={() => ([
+                                this.props.history.push(`/household/${this.props.household.id}`)
+                            ])}>Household: {this.props.household.name}</h3>
                         }
 
                         <h4>User Items:</h4>
-                        {this.state.user.items.map(item => (
-                            <div key={item.id}>{item.name}</div>
+                        {this.props.user.items.map(item => (
+                            <p key={item.id}> {item.name}</p>
                         ))}
-
-
                     </>
-
-
                 }
             </>
 

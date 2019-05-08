@@ -31,14 +31,17 @@ export default class NewHousehold extends React.Component {
                         ?
                         <>
                             <p>Select the household you would like to join</p>
-                            <select name='selectedHouseholdId' onChange={this.props.handleChange}>
-                                {this.props.households.map(household => (
-                                    <option key={household.id} value={household.id}>{household.name}</option>
-                                ))}
-                            </select>
-                            <button onClick={() => {
+                            <form onSubmit={(e) => {
+                                e.preventDefault()
                                 this.props.handleSubmit()
-                            }}>Join!</button>
+                            }}>
+                                <select name='selectedHouseholdId' onChange={this.props.handleChange}>
+                                    {this.props.households.map(household => (
+                                        <option key={household.id} value={household.id}>{household.name}</option>
+                                    ))}
+                                </select>
+                                <button>Join!</button>
+                            </form>
                         </>
                         :
                         <>
