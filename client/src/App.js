@@ -239,6 +239,8 @@ class App extends React.Component {
 
     //set current household
     this.setHousehold(user.household_id)
+    this.props.history.push('/profile')
+
 
 
   }
@@ -268,6 +270,8 @@ class App extends React.Component {
 
     //Set the current household
     this.setHousehold(user.household_id)
+    this.props.history.push('/profile')
+
 
   }
 
@@ -291,7 +295,7 @@ class App extends React.Component {
     })
 
     this.setHousehold(user.household_id)
-    // this.props.history.push('/add-household')
+    this.props.history.push('/profile')
   }
 
 
@@ -357,6 +361,7 @@ class App extends React.Component {
             handleChange={this.authHandleChange}
             formData={this.state.authFormData}
             handleSelectChange={this.handleSelectChange}
+            currentUser={this.state.currentUser}
           />)} />
 
         <Route path="/register" render={() => (

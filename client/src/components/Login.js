@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router'
 
 const Login = (props) => {
 
@@ -10,6 +11,7 @@ const Login = (props) => {
             <form onSubmit={(e) => {
                 e.preventDefault();
                 props.handleLogin();
+
             }} >
                 <p>Name:</p>
                 <input name="name" type="text" value={props.formData.name} onChange={props.handleChange} />
@@ -23,4 +25,4 @@ const Login = (props) => {
     );
 }
 
-export default Login;
+export default withRouter(Login);
