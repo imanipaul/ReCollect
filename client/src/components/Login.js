@@ -15,8 +15,8 @@ const Login = (props) => {
 
             }} className='login'>
                 <p>Name:</p>
-                <input name="name" type="text" value={props.formData.name} onChange={props.handleChange} />
-                <p>Password  :</p>
+                <input autocomplete='off' name="name" type="text" value={props.formData.name} onChange={props.handleChange} />
+                <p>Password:</p>
                 <input name="password" type="password" value={props.formData.password} onChange={props.handleChange} />
                 <button>Login</button>
                 <div className='register'>
