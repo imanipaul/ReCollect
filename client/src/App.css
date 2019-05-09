@@ -17,11 +17,6 @@
   align-items: center;
 }
 
-.logout button{
-  border: none;
-  background-color: white;
-  border-radius: 5px;
-}
 
 body{
   background-color: #0072B4;
@@ -62,6 +57,45 @@ nav {
   background-color: #0072B4;
   border: 1px solid #F0C331
 
+}
+
+.greeting{
+  font-family: 'Lato', sans-serif;
+
+}
+
+.greeting:hover{
+  color: #F0C331;
+  cursor: pointer
+}
+
+.back-button {
+  height: 40px;
+  background-color: #F0C331;
+  border-radius: 0px;
+  border: none;
+  font-family: 'Lato', sans-serif;
+  color: black;
+  font-weight: '400';
+  font-size: 15px;
+  position: absolute;
+  left: 0px;
+  width: 100px;
+
+}
+
+.logout-button{
+  height: 40px;
+  background-color: #F0C331;
+  border-radius: 0px;
+  border: none;
+  font-family: 'Lato', sans-serif;
+  color: black;
+  font-weight: '400';
+  font-size: 15px;
+  position: absolute;
+  right: 0px;
+  width: 100px;
 }
 
 

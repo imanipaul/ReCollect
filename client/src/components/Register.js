@@ -3,7 +3,6 @@ import { Route, Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 
-// This component handles our register form
 class Register extends React.Component {
 
     constructor(props) {

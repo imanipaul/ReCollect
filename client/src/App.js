@@ -338,19 +338,21 @@ class App extends React.Component {
           {this.state.currentUser
             ?
             <>
-              <p onClick={() => (
+              <button className='back-button' onClick={() => (this.props.history.goBack())}>Back</button>
+
+              <p className='greeting' onClick={() => (
                 this.props.history.push(`/profile`)
               )}>Hello {this.state.currentUser.name}</p>
-              <button onClick={() => {
+
+              <button className='logout-button' onClick={() => {
                 this.handleLogout()
                 this.props.history.push('/')
-              }}>logout</button>
-              <button onClick={() => (this.props.history.goBack())}>Back</button>
+              }}>Logout</button>
               {/* <button onClick={() => (this.props.history.push(`/household/${this.state.currentUser.user_id}`))}>{this.state.household.name}</button> */}
             </>
             :
             <div className='login-button'>
-              <button onClick={this.handleLoginButton}>Login/register</button>
+              <button className='login-register' onClick={this.handleLoginButton}>Login/register</button>
             </div>
           }
 
