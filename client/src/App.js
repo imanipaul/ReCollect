@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
+
 import Login from './components/Login'
 import Register from './components/Register'
 import LandingPage from './components/LandingPage'
@@ -367,7 +368,6 @@ class App extends React.Component {
                 this.handleLogout()
                 this.props.history.push('/')
               }}>Logout</button>
-              {/* <button onClick={() => (this.props.history.push(`/household/${this.state.currentUser.user_id}`))}>{this.state.household.name}</button> */}
             </>
             :
             <div className='login-button'>
