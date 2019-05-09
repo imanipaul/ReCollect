@@ -37,17 +37,47 @@ class HouseholdView extends React.Component {
                 <button className='create' onClick={() => {
                     this.setState({ isCreate: true })
                 }}>Create</button>
-                <div className='items'>
+
+
+
+                {/* <div className='items'>
+
                     {this.props.items.map(item => (
-                        <div>
-                            <button key={item.id} onClick={() => {
+                        <div key={item.id}>
+                            <button onClick={() => {
                                 this.props.setItemFormData(item)
-                                this.setState({ isRead: true })
+                                this.setState({ isRead: item.id })
                             }}>{item.name}</button>
-                            {this.state.isRead && <ItemView />}
+                            {this.state.isRead === item.id ? <ItemView /> : <p>test A</p>}
 
                         </div>
                     ))}
+                </div> */}
+
+                <div className='items'>
+
+                    {this.props.items.map(item => (
+                        <>
+                            {this.state.isRead === item.id
+                                ?
+                                <>
+                                    <button onClick={() => {
+                                        this.props.setItemFormData(item)
+                                        this.setState({ isRead: null })
+                                    }}>{item.name}</button>
+                                    <ItemView />
+                                </>
+                                :
+                                <button onClick={() => {
+                                    this.props.setItemFormData(item)
+                                    this.setState({ isRead: item.id })
+                                }}>{item.name}</button>
+                            }
+                        </>
+                    ))}
+
+
+
                 </div>
 
 
