@@ -18,14 +18,14 @@ class HouseholdView extends React.Component {
 
         return (
             <>
-                <p>Users in this household</p>
+                <p className='users-title'>Users in this household</p>
                 <div className='users'>
                     {this.props.users.map(user => (
                         <div key={user.id}>{user.name}</div>
                     ))}
                 </div>
 
-                <p>Items in this household</p>
+                <p className='item-title'>Items in this household</p>
                 <div className='items'>
                     {this.props.items.map(item => (
                         <button key={item.id} onClick={() => {
@@ -34,7 +34,7 @@ class HouseholdView extends React.Component {
                         }}>{item.name}</button>
                     ))}
                 </div>
-                <button onClick={() => {
+                <button className='create' onClick={() => {
                     this.setState({ isCreate: true })
                 }}>Create</button>
                 {this.state.isCreate && <CreateItem
