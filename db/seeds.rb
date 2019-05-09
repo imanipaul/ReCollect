@@ -21,6 +21,7 @@ electronics = Category.create!(name: 'Electronics')
 bedroom = Category.create!(name: 'Bedroom')
 clean = Category.create!(name: 'Cleaning Supplies')
 food = Category.create!(name: 'Food')
+misc = Category.create!(name: 'Miscellaneous')
 
 date1 = Date.new(2011, 11, 11)
 date2 = Date.new(2015, 2, 10)
