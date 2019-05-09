@@ -450,6 +450,8 @@ class App extends React.Component {
         )}
         />
 
+        <Route path='/charts' component={TestCharts} />
+
 
       </div>
     );
