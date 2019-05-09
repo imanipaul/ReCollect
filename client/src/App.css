@@ -1,9 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400|Oxygen');
+
+
 .App {
   text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .logout {
-  background-color: rgba(128, 128, 128, 0.625);
+  background-color: #34393D;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -15,5 +22,50 @@
   background-color: white;
   border-radius: 5px;
 }
+
+body{
+  background-color: #0072B4;
+  color: #F0C331
+}
+
+h1{
+  font-family: 'Oxygen', sans-serif;
+
+}
+
+h3{
+  font-family: 'Lato', sans-serif;
+
+}
+
+nav {
+  height: 40px;
+}
+
+.login-button {
+  position: absolute;
+  right: 0px;
+  /* margin-left: 90%; */
+}
+
+.login-button button{
+  border: none;
+  background-color: #F0C331;
+  border-radius: 0px;
+  height: 40px;
+  font-family: 'Lato', sans-serif;
+  color: black;
+  font-weight: '400';
+  font-size: 15px;
+}
+
+.login-button button:hover{
+  background-color: #0072B4;
+  border: 1px solid #F0C331
+
+}
+
+
+
 
 

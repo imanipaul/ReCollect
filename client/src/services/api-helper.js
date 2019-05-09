@@ -1,3 +1,4 @@
+// const url = 'https://cors-anywhere.herokuapp.com/https://recollect-ip.herokuapp.com'
 const url = 'http://localhost:3000'
 
 // login user
@@ -6,7 +7,9 @@ export const loginUser = (loginData) => {
         method: 'POST',
         body: JSON.stringify(loginData),
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true
         }
     };
 

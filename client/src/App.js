@@ -334,26 +334,26 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <nav>
-          <div className='logout'>
-            {this.state.currentUser
-              ?
-              <>
-                <p onClick={() => (
-                  this.props.history.push(`/profile`)
-                )}>Hello {this.state.currentUser.name}</p>
-                <button onClick={() => {
-                  this.handleLogout()
-                  this.props.history.push('/')
-                }}>logout</button>
-                <button onClick={() => (this.props.history.goBack())}>Back</button>
-                {/* <button onClick={() => (this.props.history.push(`/household/${this.state.currentUser.user_id}`))}>{this.state.household.name}</button> */}
-              </>
-              :
+        <nav className='logout'>
+          {this.state.currentUser
+            ?
+            <>
+              <p onClick={() => (
+                this.props.history.push(`/profile`)
+              )}>Hello {this.state.currentUser.name}</p>
+              <button onClick={() => {
+                this.handleLogout()
+                this.props.history.push('/')
+              }}>logout</button>
+              <button onClick={() => (this.props.history.goBack())}>Back</button>
+              {/* <button onClick={() => (this.props.history.push(`/household/${this.state.currentUser.user_id}`))}>{this.state.household.name}</button> */}
+            </>
+            :
+            <div className='login-button'>
               <button onClick={this.handleLoginButton}>Login/register</button>
-            }
+            </div>
+          }
 
-          </div>
         </nav>
         <Route path="/login" render={() => (
           <Login
