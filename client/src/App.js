@@ -90,11 +90,13 @@ class App extends React.Component {
     this.getHouseholds()
     this.getCategories()
     const token = localStorage.getItem("jwt")
+    console.log('token', token)
     if (token) {
       const userData = decode(token);
       this.setState({
         currentUser: userData
       })
+      console.log('userData app', userData)
       this.selectUser(userData)
     }
 

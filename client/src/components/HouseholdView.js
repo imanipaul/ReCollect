@@ -28,6 +28,12 @@ class HouseholdView extends React.Component {
                 </div>
 
                 <p className='item-title'>Items in this household</p>
+
+                {this.state.isCreate && <CreateItem
+                    handleItemFormChange={this.props.handleItemFormChange}
+                    itemData={this.props.itemData}
+                    createNewItem={this.props.createNewItem} />}
+
                 <button className='create' onClick={() => {
                     this.setState({ isCreate: true })
                 }}>Create</button>
@@ -37,7 +43,6 @@ class HouseholdView extends React.Component {
                             <button key={item.id} onClick={() => {
                                 this.props.setItemFormData(item)
                                 this.setState({ isRead: true })
-                                // this.props.history.push(`/item/${item.id}`)
                             }}>{item.name}</button>
                             {this.state.isRead && <ItemView />}
 
@@ -45,10 +50,7 @@ class HouseholdView extends React.Component {
                     ))}
                 </div>
 
-                {this.state.isCreate && <CreateItem
-                    handleItemFormChange={this.props.handleItemFormChange}
-                    itemData={this.props.itemData}
-                    createNewItem={this.props.createNewItem} />}
+
 
 
 
