@@ -14,20 +14,19 @@ class ItemView extends React.Component {
     }
 
     componentDidMount() {
-        this.props.setItem(this.props.match.params.id)
+        this.props.setItem(this.props.item_id)
     }
 
     render() {
         return (
             <div>
-
                 {this.props.item &&
                     <>
                         {this.state.isEditName
                             ?
                             <form onSubmit={(e) => {
                                 e.preventDefault()
-                                this.props.editItem(this.props.match.params.id)
+                                this.props.editItem(this.props.item_id)
                             }}>
                                 <input name='name' type='text' value={this.props.itemData.name} onChange={this.props.handleItemFormChange} />
                                 <button>Submit</button>

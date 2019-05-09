@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
+
 import Login from './components/Login'
 import Register from './components/Register'
 import LandingPage from './components/LandingPage'
@@ -84,6 +85,7 @@ class App extends React.Component {
     this.editItem = this.editItem.bind(this)
     this.deleteItem = this.deleteItem.bind(this)
     this.selectUser = this.selectUser.bind(this)
+    this.setUserItemForm = this.setUserItemForm.bind(this)
 
   }
 
@@ -91,6 +93,7 @@ class App extends React.Component {
     this.getHouseholds()
     this.getCategories()
     const token = localStorage.getItem("jwt")
+    console.log('token', token)
     if (token) {
       const userData = decode(token);
       this.setState({
@@ -290,6 +293,14 @@ class App extends React.Component {
     this.setState({ categories })
   }
 
+  setUserItemForm() {
+    this.setState({
+      itemData: {
+        user_id: this.state.currentUser.user_id
+      }
+    })
+  }
+
   // ----------------------Auth-------------------------
   async handleLogin() {
     const userData = await loginUser(this.state.authFormData);
@@ -358,7 +369,6 @@ class App extends React.Component {
                 this.handleLogout()
                 this.props.history.push('/')
               }}>Logout</button>
-              {/* <button onClick={() => (this.props.history.push(`/household/${this.state.currentUser.user_id}`))}>{this.state.household.name}</button> */}
             </>
             :
             <div className='login-button'>
@@ -415,31 +425,18 @@ class App extends React.Component {
               handleItemFormChange={this.handleItemFormChange}
               itemData={this.state.itemData}
               createNewItem={this.createNewItem}
-
+              setItem={this.setItem}
+              editItem={this.editItem}
+              itemData={this.state.itemData}
+              handleItemFormChange={this.handleItemFormChange}
+              item={this.state.selectedItem}
+              category={this.state.selectedCategory}
+              user={this.state.selectedUser}
+              deleteItem={this.deleteItem}
+              categories={this.state.categories}
+              setUserItemForm={this.setUserItemForm}
             />
           )}
-        />
-
-        <Route path='/item/:id' render={
-          (props) => (
-            <ItemView
-              {...props}
-              items={this.state.householdItems}
-              users={this.state.householdUsers}
-              categories={this.state.categories}
-              setItemFormData={this.setItemFormData}
-              handleItemFormChange={this.handleItemFormChange}
-              setSelectedItem={this.setSelectedItem}
-              setItem={this.setItem}
-              item={this.state.selectedItem}
-              user={this.state.selectedUser}
-              category={this.state.selectedCategory}
-              itemData={this.state.itemData}
-              editItem={this.editItem}
-              deleteItem={this.deleteItem}
-            />
-          )
-        }
         />
 
         <Route path='/profile' render={() => (
