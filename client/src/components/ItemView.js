@@ -20,8 +20,6 @@ class ItemView extends React.Component {
     render() {
         return (
             <div>
-                test
-
                 {this.props.item &&
                     <>
                         {this.state.isEditName

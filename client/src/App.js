@@ -423,13 +423,10 @@ class App extends React.Component {
               category={this.state.selectedCategory}
               user={this.state.selectedUser}
               deleteItem={this.deleteItem}
-
-
+              categories={this.state.categories}
             />
           )}
         />
-
-
 
         <Route path='/profile' render={() => (
           <UserProfile

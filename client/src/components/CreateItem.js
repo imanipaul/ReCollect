@@ -47,11 +47,18 @@ class CreateItem extends React.Component {
 
                         <input name='user_id' type='text' value={this.props.itemData.user_id} onChange={this.props.handleItemFormChange} />
                     </div>
-
                     <div className='form-criteria'>
-                        <p>Category Id: </p>
+                        <p>Category: </p>
 
-                        <input name='category_id' type='text' value={this.props.itemData.category_id} onChange={this.props.handleItemFormChange} />
+                        <select name='category_id' onChange={this.props.handleItemFormChange}>
+                            {this.props.categories.map(category => (
+                                <option key={category.id} value={category.id}>{category.name}</option>
+                            ))}
+
+
+
+                        </select>
+
                     </div>
                     <button>Submit</button>
                 </form>

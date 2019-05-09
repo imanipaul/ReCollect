@@ -32,40 +32,27 @@ class HouseholdView extends React.Component {
                 {this.state.isCreate && <CreateItem
                     handleItemFormChange={this.props.handleItemFormChange}
                     itemData={this.props.itemData}
-                    createNewItem={this.props.createNewItem} />}
+                    createNewItem={this.props.createNewItem}
+                    categories={this.props.categories} />}
 
                 <button className='create' onClick={() => {
                     this.setState({ isCreate: true })
                 }}>Create</button>
 
 
-
-                {/* <div className='items'>
-
-                    {this.props.items.map(item => (
-                        <div key={item.id}>
-                            <button onClick={() => {
-                                this.props.setItemFormData(item)
-                                this.setState({ isRead: item.id })
-                            }}>{item.name}</button>
-                            {this.state.isRead === item.id ? <ItemView /> : <p>test A</p>}
-
-                        </div>
-                    ))}
-                </div> */}
-
                 <div className='items'>
 
                     {this.props.items.map(item => (
-                        <>
+                        <React.Fragment key={item.id}>
                             {this.state.isRead === item.id
                                 ?
-                                <>
+                                <div className='item-view'>
                                     <button onClick={() => {
                                         this.props.setItemFormData(item)
                                         this.setState({ isRead: null })
                                     }}>{item.name}</button>
                                     <ItemView
+
                                         item_id={item.id}
                                         setItem={this.props.setItem}
                                         editItem={this.props.editItem}
@@ -76,7 +63,7 @@ class HouseholdView extends React.Component {
                                         user={this.props.user}
                                         deleteItem={this.props.deleteItem}
                                     />
-                                </>
+                                </div>
                                 :
                                 <button onClick={() => {
                                     this.props.setItemFormData(item)
@@ -84,7 +71,7 @@ class HouseholdView extends React.Component {
                                     // this.props.history.push(`/items/${item.id}`)
                                 }}>{item.name}</button>
                             }
-                        </>
+                        </React.Fragment>
                     ))}
 
 
