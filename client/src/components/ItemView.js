@@ -14,12 +14,13 @@ class ItemView extends React.Component {
     }
 
     componentDidMount() {
-        this.props.setItem(this.props.match.params.id)
+        // this.props.setItem(this.props.match.params.id)
     }
 
     render() {
         return (
             <div>
+                test
 
                 {this.props.item &&
                     <>

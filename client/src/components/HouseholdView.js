@@ -2,6 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router'
 import '../stylesheets/HouseholdView.css'
 import CreateItem from './CreateItem'
+import ItemView from './ItemView'
 
 
 class HouseholdView extends React.Component {
@@ -9,7 +10,8 @@ class HouseholdView extends React.Component {
         super(props)
 
         this.state = {
-            isCreate: false
+            isCreate: false,
+            isRead: false
         }
     }
 
@@ -26,21 +28,29 @@ class HouseholdView extends React.Component {
                 </div>
 
                 <p className='item-title'>Items in this household</p>
-                <div className='items'>
-                    {this.props.items.map(item => (
-                        <button key={item.id} onClick={() => {
-                            this.props.setItemFormData(item)
-                            this.props.history.push(`/item/${item.id}`)
-                        }}>{item.name}</button>
-                    ))}
-                </div>
                 <button className='create' onClick={() => {
                     this.setState({ isCreate: true })
                 }}>Create</button>
+                <div className='items'>
+                    {this.props.items.map(item => (
+                        <div>
+                            <button key={item.id} onClick={() => {
+                                this.props.setItemFormData(item)
+                                this.setState({ isRead: true })
+                                // this.props.history.push(`/item/${item.id}`)
+                            }}>{item.name}</button>
+                            {this.state.isRead && <ItemView />}
+
+                        </div>
+                    ))}
+                </div>
+
                 {this.state.isCreate && <CreateItem
                     handleItemFormChange={this.props.handleItemFormChange}
                     itemData={this.props.itemData}
                     createNewItem={this.props.createNewItem} />}
+
+
 
             </>
         )
