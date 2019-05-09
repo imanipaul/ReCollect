@@ -9,6 +9,7 @@ import NewHousehold from './components/NewHousehold';
 import HouseholdView from './components/HouseholdView';
 import ItemView from './components/ItemView';
 import UserProfile from './components/UserProfile';
+import TestCharts from './components/TestCharts';
 
 import {
   registerUser,
@@ -448,6 +449,8 @@ class App extends React.Component {
             households={this.state.households} />
         )}
         />
+
+
       </div>
     );
   }
