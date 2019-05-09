@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400|Oxygen');
+
+.household-header:hover {
+    cursor: pointer;
+    color: #F0C331
+}
+
+.greeting-name{
+    font-family: 'Oxygen', sans-serif;
+    font-size: 40px;
+
+}
+
+.user-items{
+    font-family: 'Lato', sans-serif;
+    font-size: 25px;
+
+}
+
+.item-name{
+    
+    font-family: 'Lato', sans-serif;
+    font-weight: 300
+
+}
