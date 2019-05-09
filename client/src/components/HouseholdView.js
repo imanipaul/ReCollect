@@ -65,12 +65,23 @@ class HouseholdView extends React.Component {
                                         this.props.setItemFormData(item)
                                         this.setState({ isRead: null })
                                     }}>{item.name}</button>
-                                    <ItemView />
+                                    <ItemView
+                                        item_id={item.id}
+                                        setItem={this.props.setItem}
+                                        editItem={this.props.editItem}
+                                        itemData={this.props.itemData}
+                                        handleItemFormChange={this.props.handleItemFormChange}
+                                        item={this.props.item}
+                                        category={this.props.category}
+                                        user={this.props.user}
+                                        deleteItem={this.props.deleteItem}
+                                    />
                                 </>
                                 :
                                 <button onClick={() => {
                                     this.props.setItemFormData(item)
                                     this.setState({ isRead: item.id })
+                                    // this.props.history.push(`/items/${item.id}`)
                                 }}>{item.name}</button>
                             }
                         </>

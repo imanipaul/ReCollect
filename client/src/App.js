@@ -415,32 +415,21 @@ class App extends React.Component {
               handleItemFormChange={this.handleItemFormChange}
               itemData={this.state.itemData}
               createNewItem={this.createNewItem}
+              setItem={this.setItem}
+              editItem={this.editItem}
+              itemData={this.state.itemData}
+              handleItemFormChange={this.handleItemFormChange}
+              item={this.state.selectedItem}
+              category={this.state.selectedCategory}
+              user={this.state.selectedUser}
+              deleteItem={this.deleteItem}
+
 
             />
           )}
         />
 
-        <Route path='/item/:id' render={
-          (props) => (
-            <ItemView
-              {...props}
-              items={this.state.householdItems}
-              users={this.state.householdUsers}
-              categories={this.state.categories}
-              setItemFormData={this.setItemFormData}
-              handleItemFormChange={this.handleItemFormChange}
-              setSelectedItem={this.setSelectedItem}
-              setItem={this.setItem}
-              item={this.state.selectedItem}
-              user={this.state.selectedUser}
-              category={this.state.selectedCategory}
-              itemData={this.state.itemData}
-              editItem={this.editItem}
-              deleteItem={this.deleteItem}
-            />
-          )
-        }
-        />
+
 
         <Route path='/profile' render={() => (
           <UserProfile
