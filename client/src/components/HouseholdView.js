@@ -14,12 +14,6 @@ class HouseholdView extends React.Component {
     }
 
 
-    componentDidMount() {
-        // const { id } = this.props.match.params
-        // this.props.setHousehold(id)
-    }
-
-
     render() {
 
         return (

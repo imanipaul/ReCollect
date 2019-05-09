@@ -9,16 +9,16 @@ const UserProfile = (props) => {
         <>
             {props.user &&
                 <>
-                    <h1>Hello {props.user.name}!</h1>
+                    <h1 className='greeting-name'>Hello {props.user.name}!</h1>
                     {props.household &&
-                        <h3 onClick={() => ([
+                        <h3 className='household-header' onClick={() => ([
                             props.history.push(`/household/${props.household.id}`)
                         ])}>Household: {props.household.name}</h3>
                     }
 
-                    <h4>User Items:</h4>
+                    <h4 className='user-items'>Your Items:</h4>
                     {props.user.items.map(item => (
-                        <p key={item.id}> {item.name}</p>
+                        <p className='item-name' key={item.id}> {item.name}</p>
                     ))}
                 </>
             }

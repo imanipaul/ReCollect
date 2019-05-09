@@ -8,9 +8,10 @@
 .items{
     height: 300px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .items button{
@@ -22,3 +23,4 @@
     height: 50px;
     width: 100px;
 }
+
