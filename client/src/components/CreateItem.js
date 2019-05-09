@@ -23,7 +23,7 @@ class CreateItem extends React.Component {
                     e.preventDefault()
                     this.props.createNewItem(this.props.itemData)
                 }}>
-                    <div>Create a new item</div>
+                    <div className='create-title'>Create a new item</div>
                     <div className='form-criteria'>
                         <p>Name: </p>
                         <input name='name' type='text' value={this.props.itemData.name} onChange={this.props.handleItemFormChange} />
