@@ -58,9 +58,8 @@ class App extends React.Component {
         category_id: '',
         user_id: ''
       },
-      createItemData: {
-
-      }
+      //full user object
+      selectedUser: null
     }
 
     this.handleLogin = this.handleLogin.bind(this)
@@ -83,6 +82,7 @@ class App extends React.Component {
     this.getItemCategory = this.getItemCategory.bind(this)
     this.editItem = this.editItem.bind(this)
     this.deleteItem = this.deleteItem.bind(this)
+    this.selectUser = this.selectUser.bind(this)
 
   }
 
@@ -95,7 +95,10 @@ class App extends React.Component {
       this.setState({
         currentUser: userData
       })
+      this.selectUser(userData)
     }
+
+
   }
 
   // ----------------------Data Calls-------------------------
@@ -240,9 +243,14 @@ class App extends React.Component {
     //set current household
     this.setHousehold(user.household_id)
     this.props.history.push('/profile')
+  }
 
-
-
+  async selectUser(currentUser) {
+    const user = await getUser(currentUser.user_id)
+    this.setState({
+      selectedUser: user
+    })
+    this.setHousehold(user.household_id)
   }
 
   async updateUserData() {
@@ -428,8 +436,6 @@ class App extends React.Component {
               editItem={this.editItem}
               deleteItem={this.deleteItem}
             />
-
-
           )
         }
         />
@@ -437,7 +443,7 @@ class App extends React.Component {
         <Route path='/profile' render={() => (
           <UserProfile
             currentUser={this.state.currentUser}
-            user={this.state.householdUser}
+            user={this.state.selectedUser}
             household={this.state.household}
             households={this.state.households} />
         )}
