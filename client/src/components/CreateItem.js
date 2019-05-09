@@ -11,6 +11,10 @@ class CreateItem extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.props.setUserItemForm()
+    }
+
 
     render() {
         return (
@@ -39,14 +43,9 @@ class CreateItem extends React.Component {
                     <div className='form-criteria'>
                         <p>Purchase Date: </p>
 
-                        <input name='purchase_date' type='text' value={this.props.itemData.purchase_date} onChange={this.props.handleItemFormChange} />
+                        <input name='purchase_date' type='date' value={this.props.itemData.purchase_date} onChange={this.props.handleItemFormChange} />
                     </div>
 
-                    <div className='form-criteria'>
-                        <p>User Id: </p>
-
-                        <input name='user_id' type='text' value={this.props.itemData.user_id} onChange={this.props.handleItemFormChange} />
-                    </div>
                     <div className='form-criteria'>
                         <p>Category: </p>
 
@@ -54,9 +53,6 @@ class CreateItem extends React.Component {
                             {this.props.categories.map(category => (
                                 <option key={category.id} value={category.id}>{category.name}</option>
                             ))}
-
-
-
                         </select>
 
                     </div>

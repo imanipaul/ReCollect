@@ -83,6 +83,7 @@ class App extends React.Component {
     this.editItem = this.editItem.bind(this)
     this.deleteItem = this.deleteItem.bind(this)
     this.selectUser = this.selectUser.bind(this)
+    this.setUserItemForm = this.setUserItemForm.bind(this)
 
   }
 
@@ -290,6 +291,14 @@ class App extends React.Component {
     this.setState({ categories })
   }
 
+  setUserItemForm() {
+    this.setState({
+      itemData: {
+        user_id: this.state.currentUser.user_id
+      }
+    })
+  }
+
   // ----------------------Auth-------------------------
   async handleLogin() {
     const userData = await loginUser(this.state.authFormData);
@@ -424,6 +433,7 @@ class App extends React.Component {
               user={this.state.selectedUser}
               deleteItem={this.deleteItem}
               categories={this.state.categories}
+              setUserItemForm={this.setUserItemForm}
             />
           )}
         />
