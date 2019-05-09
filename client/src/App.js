@@ -9,6 +9,7 @@ import NewHousehold from './components/NewHousehold';
 import HouseholdView from './components/HouseholdView';
 import ItemView from './components/ItemView';
 import UserProfile from './components/UserProfile';
+// import TestCharts from './components/TestCharts';
 
 import {
   registerUser,
@@ -95,6 +96,7 @@ class App extends React.Component {
       this.setState({
         currentUser: userData
       })
+      console.log('userData, ', userData)
       this.selectUser(userData)
     }
 
@@ -448,6 +450,10 @@ class App extends React.Component {
             households={this.state.households} />
         )}
         />
+
+        {/* <Route path='/charts' component={TestCharts} /> */}
+
+
       </div>
     );
   }
