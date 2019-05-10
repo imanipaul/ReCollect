@@ -4,6 +4,7 @@ import '../stylesheets/HouseholdView.css'
 import CreateItem from './CreateItem'
 import ItemView from './ItemView'
 import Charts from './Charts'
+import message from '../images/Asset 197.png'
 
 
 class HouseholdView extends React.Component {
@@ -56,11 +57,16 @@ class HouseholdView extends React.Component {
 
         return (
             <>
-                <p className='users-title'>Users in this household</p>
-                <div className='users'>
-                    {this.props.users.map(user => (
-                        <div key={user.id}>{user.name}</div>
-                    ))}
+                <div className='user-wrapper'>
+                    <img className='message-image' src={message} />
+                    <div className='user-inner'>
+                        <p className='users-title'>Users in this household</p>
+                        <div className='users'>
+                            {this.props.users.map(user => (
+                                <div key={user.id}>{user.name}</div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
                 <p className='item-title'>Items in this household</p>

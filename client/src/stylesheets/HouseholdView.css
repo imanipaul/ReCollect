@@ -60,3 +60,30 @@
     align-self: center;
 }
 
+.message-image{
+    width: 50px;
+}
+
+.user-wrapper:hover .user-inner {
+    display: block;
+    background-color: rgba(52, 57, 61, 0.68);
+    left: 0;
+    width: 100vw;
+}
+
+.user-wrapper .user-inner{
+    display: none;
+    position: absolute;
+    background-color: red;
+    /* right: 10px */
+
+
+    
+}
+
+.user-wrapper {
+    position: absolute;
+    right: 200px;
+    top: 0px;
+    
+}
