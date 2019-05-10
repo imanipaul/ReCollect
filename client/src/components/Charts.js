@@ -14,8 +14,6 @@ class Charts extends PureComponent {
         console.log('allData', this.props.allData)
     }
 
-
-
     render() {
         return (
             <>
@@ -36,8 +34,6 @@ class Charts extends PureComponent {
                                     outerRadius={80}
                                     paddingAngle={3}
                                     dataKey='value'
-                                    onMouseEnter={(e, activeIndex) => this.setState({ activeIndex })}
-                                    onMouseLeave={() => this.setState({ activeIndex: -1 })}
                                 >
                                     {
                                         info.value.map((entry, index) =>

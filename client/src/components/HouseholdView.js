@@ -73,7 +73,8 @@ class HouseholdView extends React.Component {
                     itemData={this.props.itemData}
                     createNewItem={this.props.createNewItem}
                     categories={this.props.categories}
-                    setUserItemForm={this.props.setUserItemForm} />}
+                    setUserItemForm={this.props.setUserItemForm}
+                    household={this.props.household} />}
 
                 <button className='create' onClick={() => {
                     this.setState({ isCreate: true })

@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router'
 import '../stylesheets/CreateItem.css'
 
 
@@ -22,6 +23,7 @@ class CreateItem extends React.Component {
                 <form className='create-form' onSubmit={(e) => {
                     e.preventDefault()
                     this.props.createNewItem(this.props.itemData)
+                    this.props.history.push(`/household/${this.props.household.id}`)
                 }}>
                     <div className='create-title'>Create a new item</div>
                     <div className='form-criteria'>
@@ -63,4 +65,4 @@ class CreateItem extends React.Component {
     }
 }
 
-export default CreateItem
+export default withRouter(CreateItem)
