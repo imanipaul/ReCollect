@@ -85,6 +85,7 @@ class App extends React.Component {
     this.deleteItem = this.deleteItem.bind(this)
     this.selectUser = this.selectUser.bind(this)
     this.setUserItemForm = this.setUserItemForm.bind(this)
+    this.getHouseholdItems = this.getHouseholdItems.bind(this)
 
   }
 
@@ -179,6 +180,14 @@ class App extends React.Component {
 
   }
 
+  async getHouseholdItems(id) {
+    const household = await getHousehold(id)
+    this.setState({
+      householdItems: household.items
+    })
+
+  }
+
   async setHousehold(id) {
 
     const household = await getHousehold(id)
@@ -191,6 +200,8 @@ class App extends React.Component {
       householdUsers: household.users,
       householdItems: household.items
     })
+
+
 
     //Match Items to categories for pie chart
 
@@ -495,6 +506,7 @@ class App extends React.Component {
               categories={this.state.categories}
               setUserItemForm={this.setUserItemForm}
               allData={this.state.categoryItems}
+              getHouseholdItems={this.getHouseholdItems}
             />
           )}
         />

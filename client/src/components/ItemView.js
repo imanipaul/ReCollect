@@ -93,7 +93,7 @@ class ItemView extends React.Component {
                         <h4>Added by: {this.props.user.name}</h4>
                         <button onClick={() => {
                             this.props.deleteItem(this.props.item)
-                            this.props.history.goBack()
+                            // this.props.history.goBack()
                         }}>Delete</button>
 
                     </>

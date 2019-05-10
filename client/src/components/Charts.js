@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react'
+import '../stylesheets/Charts.css'
+
 
 import { PieChart, Pie, Sector, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 
@@ -20,14 +22,14 @@ class Charts extends PureComponent {
                 {
 
                     this.props.allData.map(info => (
-                        <React.Fragment key={Math.random()}>
-                            <div>{info.category}</div>
-                            <PieChart width={800} height={400}>
+                        <div className='individual-chart'>
+                            <h3>{info.category}</h3>
+                            <PieChart width={175} height={200}>
                                 <Tooltip />
                                 <Pie
                                     data={info.value}
-                                    cx={420}
-                                    cy={300}
+                                    cx={80}
+                                    cy={100}
                                     startAngle={180}
                                     endAngle={0}
                                     innerRadius={60}
@@ -41,7 +43,7 @@ class Charts extends PureComponent {
                                     }
                                 </Pie>
                             </PieChart>
-                        </React.Fragment>
+                        </div>
                     ))
 
 

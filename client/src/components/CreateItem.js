@@ -23,7 +23,8 @@ class CreateItem extends React.Component {
                 <form className='create-form' onSubmit={(e) => {
                     e.preventDefault()
                     this.props.createNewItem(this.props.itemData)
-                    this.props.history.push(`/household/${this.props.household.id}`)
+                    this.props.toggleCreate()
+                    this.props.getHouseholdItems(this.props.household.id)
                 }}>
                     <div className='create-title'>Create a new item</div>
                     <div className='form-criteria'>

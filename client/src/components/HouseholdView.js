@@ -17,37 +17,16 @@ class HouseholdView extends React.Component {
             categoryItems: [],
             isCharts: false
         }
-        // this.matchCategoryItems = this.matchCategoryItems.bind(this)
+        this.toggleCreate = this.toggleCreate.bind(this)
     }
 
+    toggleCreate() {
 
+        this.setState(prevState => ({
+            isCreate: !prevState.isCreate
+        }))
+    }
 
-    // matchCategoryItems(categories, items) {
-
-    //     console.log('category, items', categories, items)
-    //     const categoryItems = []
-
-    //     categories.forEach(function (category) {
-    //         const selected = items.filter(item => item.category_id == category.id)
-    //         if (selected.length > 0) {
-    //             const itemsArray = selected.map(item => {
-    //                 const itemObj = {}
-    //                 itemObj['name'] = item.name;
-    //                 itemObj['value'] = item.quantity
-    //                 return itemObj
-    //             })
-
-    //             const categoryStuff = {}
-    //             categoryStuff['category'] = category.name
-    //             categoryStuff['value'] = itemsArray
-    //             categoryItems.push(categoryStuff)
-
-    //         }
-    //     })
-
-    //     this.setState({ categoryItems })
-
-    // }
 
 
     render() {
@@ -66,7 +45,17 @@ class HouseholdView extends React.Component {
                     </div>
                 </div>
 
-                <p className='item-title'>Items in this household</p>
+                <p className='item-title'>Household Pantry</p>
+
+                {this.props.allData &&
+                    <div className='charts'>
+
+                        <Charts
+                            allData={this.props.allData}
+                        />
+
+                    </div>
+                }
 
                 {this.state.isCreate && <CreateItem
                     handleItemFormChange={this.props.handleItemFormChange}
@@ -74,11 +63,11 @@ class HouseholdView extends React.Component {
                     createNewItem={this.props.createNewItem}
                     categories={this.props.categories}
                     setUserItemForm={this.props.setUserItemForm}
-                    household={this.props.household} />}
+                    household={this.props.household}
+                    toggleCreate={this.toggleCreate}
+                    getHouseholdItems={this.props.getHouseholdItems} />}
 
-                <button className='create' onClick={() => {
-                    this.setState({ isCreate: true })
-                }}>Create</button>
+
 
 
                 <div className='items'>
@@ -117,17 +106,11 @@ class HouseholdView extends React.Component {
 
 
                 </div>
+                <button className='create' onClick={() => {
+                    this.setState({ isCreate: true })
+                }}>Create</button>
 
-                {this.props.allData &&
-                    <div>
 
-
-                        <Charts
-                            allData={this.props.allData}
-                        />
-
-                    </div>
-                }
 
 
 
