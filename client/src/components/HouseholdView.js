@@ -3,6 +3,8 @@ import { withRouter } from 'react-router'
 import '../stylesheets/HouseholdView.css'
 import CreateItem from './CreateItem'
 import ItemView from './ItemView'
+import Charts from './Charts'
+import message from '../images/Asset 197.png'
 
 
 class HouseholdView extends React.Component {
@@ -11,34 +13,61 @@ class HouseholdView extends React.Component {
 
         this.state = {
             isCreate: false,
-            isRead: false
+            isRead: false,
+            categoryItems: [],
+            isCharts: false
         }
+        this.toggleCreate = this.toggleCreate.bind(this)
     }
+
+    toggleCreate() {
+
+        this.setState(prevState => ({
+            isCreate: !prevState.isCreate
+        }))
+    }
+
 
 
     render() {
 
         return (
             <>
-                <p className='users-title'>Users in this household</p>
-                <div className='users'>
-                    {this.props.users.map(user => (
-                        <div key={user.id}>{user.name}</div>
-                    ))}
+                <div className='user-wrapper'>
+                    <img className='message-image' src={message} />
+                    <div className='user-inner'>
+                        <p className='users-title'>Users in this household</p>
+                        <div className='users'>
+                            {this.props.users.map(user => (
+                                <div key={user.id}>{user.name}</div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
-                <p className='item-title'>Items in this household</p>
+                <p className='item-title'>Household Pantry</p>
+
+                {this.props.allData &&
+                    <div className='charts'>
+
+                        <Charts
+                            allData={this.props.allData}
+                        />
+
+                    </div>
+                }
 
                 {this.state.isCreate && <CreateItem
                     handleItemFormChange={this.props.handleItemFormChange}
                     itemData={this.props.itemData}
                     createNewItem={this.props.createNewItem}
                     categories={this.props.categories}
-                    setUserItemForm={this.props.setUserItemForm} />}
+                    setUserItemForm={this.props.setUserItemForm}
+                    household={this.props.household}
+                    toggleCreate={this.toggleCreate}
+                    getHouseholdItems={this.props.getHouseholdItems} />}
 
-                <button className='create' onClick={() => {
-                    this.setState({ isCreate: true })
-                }}>Create</button>
+
 
 
                 <div className='items'>
@@ -69,7 +98,6 @@ class HouseholdView extends React.Component {
                                 <button onClick={() => {
                                     this.props.setItemFormData(item)
                                     this.setState({ isRead: item.id })
-                                    // this.props.history.push(`/items/${item.id}`)
                                 }}>{item.name}</button>
                             }
                         </React.Fragment>
@@ -78,6 +106,11 @@ class HouseholdView extends React.Component {
 
 
                 </div>
+                <button className='create' onClick={() => {
+                    this.setState({ isCreate: true })
+                }}>Create</button>
+
+
 
 
 

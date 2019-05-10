@@ -15,12 +15,20 @@
 
 .landing-image img {
     width: 1000px;
+    box-shadow: 0 0 20px 20px #0072B4 inset;
+    /* background-color: #0072B4 */
+    height: 100vh;
+
 }
+
 
 .landing-image {
     position: absolute;
     top: 40px;
-    z-index: -5
+    z-index: -5;
+    box-shadow: 0 0 20px 20px #0072B4 inset;
+
+    background-color: #0072B4
 }
 
 .full-landing-page{

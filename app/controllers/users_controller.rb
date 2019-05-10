@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
+    puts ('show')
     render json: @user, include: :items
   end
 

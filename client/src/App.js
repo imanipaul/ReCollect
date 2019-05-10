@@ -10,7 +10,6 @@ import NewHousehold from './components/NewHousehold';
 import HouseholdView from './components/HouseholdView';
 import ItemView from './components/ItemView';
 import UserProfile from './components/UserProfile';
-// import TestCharts from './components/TestCharts';
 
 import {
   registerUser,
@@ -86,10 +85,11 @@ class App extends React.Component {
     this.deleteItem = this.deleteItem.bind(this)
     this.selectUser = this.selectUser.bind(this)
     this.setUserItemForm = this.setUserItemForm.bind(this)
+    this.getHouseholdItems = this.getHouseholdItems.bind(this)
 
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.getHouseholds()
     this.getCategories()
     const token = localStorage.getItem("jwt")
@@ -99,11 +99,11 @@ class App extends React.Component {
       this.setState({
         currentUser: userData
       })
-      console.log('userData, ', userData)
       this.selectUser(userData)
+      const user = await getUser(userData.user_id)
+      this.setState({ householdUser: user })
+      console.log('sethousehold id', user.household_id)
     }
-
-
   }
 
   // ----------------------Data Calls-------------------------
@@ -180,17 +180,86 @@ class App extends React.Component {
 
   }
 
+  async getHouseholdItems(id) {
+    const household = await getHousehold(id)
+    this.setState({
+      householdItems: household.items
+    })
+
+  }
+
   async setHousehold(id) {
 
     const household = await getHousehold(id)
     console.log('household', household)
+
+
 
     this.setState({
       household: household,
       householdUsers: household.users,
       householdItems: household.items
     })
+
+
+
+    //Match Items to categories for pie chart
+
+    if (this.state.categories) {
+
+      const categoryItems = []
+      this.state.categories.forEach(function (category) {
+        const selected = household.items.filter(item => item.category_id == category.id)
+        if (selected.length > 0) {
+          const itemsArray = selected.map(item => {
+            const itemObj = {}
+            itemObj['name'] = item.name;
+            itemObj['value'] = item.quantity
+            return itemObj
+          })
+          const categoryStuff = {}
+          categoryStuff['category'] = category.name
+          categoryStuff['value'] = itemsArray
+          categoryItems.push(categoryStuff)
+        }
+      })
+      console.log('App categoryItems', categoryItems)
+      this.setState({ categoryItems })
+    }
+
   }
+
+
+  matchCategoryItems(categories, items) {
+    console.log('category, items', categories, items)
+    const categoryItems = []
+    categories.forEach(function (category) {
+      const selected = items.filter(item => item.category_id == category.id)
+      if (selected.length > 0) {
+        const itemsArray = selected.map(item => {
+          const itemObj = {}
+          itemObj['name'] = item.name;
+          itemObj['value'] = item.quantity
+          return itemObj
+        })
+        const categoryStuff = {}
+        categoryStuff['category'] = category.name
+        categoryStuff['value'] = itemsArray
+        categoryItems.push(categoryStuff)
+      }
+    })
+    this.setState({ categoryItems })
+  }
+
+
+
+
+
+
+
+
+
+
 
   async getHouseholds() {
     const households = await getHouseholds();
@@ -252,6 +321,7 @@ class App extends React.Component {
 
   async selectUser(currentUser) {
     const user = await getUser(currentUser.user_id)
+    console.log('user', user)
     this.setState({
       selectedUser: user
     })
@@ -435,6 +505,8 @@ class App extends React.Component {
               deleteItem={this.deleteItem}
               categories={this.state.categories}
               setUserItemForm={this.setUserItemForm}
+              allData={this.state.categoryItems}
+              getHouseholdItems={this.getHouseholdItems}
             />
           )}
         />
@@ -442,13 +514,12 @@ class App extends React.Component {
         <Route path='/profile' render={() => (
           <UserProfile
             currentUser={this.state.currentUser}
-            user={this.state.selectedUser}
+            user={this.state.householdUser}
             household={this.state.household}
             households={this.state.households} />
         )}
         />
 
-        {/* <Route path='/charts' component={TestCharts} /> */}
 
 
       </div>

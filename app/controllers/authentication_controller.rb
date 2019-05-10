@@ -1,4 +1,7 @@
+# require('jwt')
+
 class AuthenticationController < ApplicationController
+
   # POST /auth/login
   def login
     @user = User.find_by_name(params[:name])

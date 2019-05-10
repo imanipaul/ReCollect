@@ -2,21 +2,24 @@
 
 .users {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
     font-family: 'Lato', sans-serif;
-
+    font-size: 20px;
+    height: 200px;
 }
 
 .items{
-    height: 100px;
+    /* height: 100px; */
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    /* align-items: center; */
+    justify-content: space-between;
     flex-wrap: wrap;
+    align-items: center;
     margin-top: 40px;
+    width: 600px;
+    align-self: center;
 }
 
 .items button{
@@ -28,7 +31,8 @@
     height: 50px;
     width: 200px;
     font-family: 'Lato', sans-serif;
-    font-weight: 300
+    font-weight: 300;
+    margin: 10px;
 }
 
 .items button:hover{
@@ -39,10 +43,7 @@
 
 .item-view button {
     border: 1px solid #F0C331;
-    /* z-index: 10;
-    width: 300px;
-    height: 100px;
-    font-size: 40px; */
+ 
 }
 
 .item-title{
@@ -50,13 +51,59 @@
     font-size: 20px;
 }
 
+.item-title:hover + .create{
+    display: block
+}
+
+
 .users-title{
     font-family: 'Lato', sans-serif;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .create{
+    display: inline-block;
     width: 100px;
     align-self: center;
+    margin-bottom: 50px;
 }
+
+.message-image{
+    width: 50px;
+    z-index: 5;
+    position: absolute;
+    top: 0;
+    margin-left: 50px;
+}
+
+.message-image:hover + .user-inner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F0C331;
+    border-radius: 10px;
+    box-shadow: 20px 30px 5px #34393D;
+    z-index: 100;
+
+
+}
+
+.user-inner{
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 40%;
+    height: 300px;
+    width: 30vw;
+    color: #34393D
+}
+
+.charts{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100vw;
+    z-index: 1;
+}
+
 
