@@ -117,14 +117,16 @@ class HouseholdView extends React.Component {
 
                 </div>
 
-                <div>
+                {this.props.allData &&
+                    <div>
 
 
-                    <Charts
-                        allData={this.props.allData}
-                    />
+                        <Charts
+                            allData={this.props.allData}
+                        />
 
-                </div>
+                    </div>
+                }
 
 
 

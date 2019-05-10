@@ -102,9 +102,6 @@ class App extends React.Component {
       const user = await getUser(userData.user_id)
       this.setState({ householdUser: user })
       console.log('sethousehold id', user.household_id)
-      this.setHousehold(user.household_id)
-
-
     }
   }
 
