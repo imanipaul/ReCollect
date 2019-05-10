@@ -17,44 +17,37 @@ class HouseholdView extends React.Component {
             categoryItems: [],
             isCharts: false
         }
-        this.matchCategoryItems = this.matchCategoryItems.bind(this)
+        // this.matchCategoryItems = this.matchCategoryItems.bind(this)
     }
 
-    componentDidMount() {
-        // this.matchCategoryItems()
-        this.setState({ isCharts: true })
-        this.matchCategoryItems(this.props.categories, this.props.items)
-    }
-
-    matchCategoryItems(categories, items) {
 
 
+    // matchCategoryItems(categories, items) {
 
+    //     console.log('category, items', categories, items)
+    //     const categoryItems = []
 
-        console.log('category, items', categories, items)
-        const categoryItems = []
+    //     categories.forEach(function (category) {
+    //         const selected = items.filter(item => item.category_id == category.id)
+    //         if (selected.length > 0) {
+    //             const itemsArray = selected.map(item => {
+    //                 const itemObj = {}
+    //                 itemObj['name'] = item.name;
+    //                 itemObj['value'] = item.quantity
+    //                 return itemObj
+    //             })
 
-        categories.forEach(function (category) {
-            const selected = items.filter(item => item.category_id == category.id)
-            if (selected.length > 0) {
-                const itemsArray = selected.map(item => {
-                    const itemObj = {}
-                    itemObj['name'] = item.name;
-                    itemObj['value'] = item.quantity
-                    return itemObj
-                })
+    //             const categoryStuff = {}
+    //             categoryStuff['category'] = category.name
+    //             categoryStuff['value'] = itemsArray
+    //             categoryItems.push(categoryStuff)
 
-                const categoryStuff = {}
-                categoryStuff['category'] = category.name
-                categoryStuff['value'] = itemsArray
-                categoryItems.push(categoryStuff)
+    //         }
+    //     })
 
-            }
-        })
+    //     this.setState({ categoryItems })
 
-        this.setState({ categoryItems })
-
-    }
+    // }
 
 
     render() {
@@ -128,7 +121,7 @@ class HouseholdView extends React.Component {
 
 
                     <Charts
-                        allData={this.state.categoryItems}
+                        allData={this.props.allData}
                     />
 
                 </div>

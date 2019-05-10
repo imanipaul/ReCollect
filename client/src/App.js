@@ -101,6 +101,8 @@ class App extends React.Component {
       this.selectUser(userData)
       const user = await getUser(userData.user_id)
       this.setState({ householdUser: user })
+      console.log('sethousehold id', user.household_id)
+      this.setHousehold(user.household_id)
 
 
     }
@@ -185,12 +187,71 @@ class App extends React.Component {
     const household = await getHousehold(id)
     console.log('household', household)
 
+
+
     this.setState({
       household: household,
       householdUsers: household.users,
       householdItems: household.items
     })
+
+    //Match Items to categories for pie chart
+
+    if (this.state.categories) {
+
+      const categoryItems = []
+      this.state.categories.forEach(function (category) {
+        const selected = household.items.filter(item => item.category_id == category.id)
+        if (selected.length > 0) {
+          const itemsArray = selected.map(item => {
+            const itemObj = {}
+            itemObj['name'] = item.name;
+            itemObj['value'] = item.quantity
+            return itemObj
+          })
+          const categoryStuff = {}
+          categoryStuff['category'] = category.name
+          categoryStuff['value'] = itemsArray
+          categoryItems.push(categoryStuff)
+        }
+      })
+      console.log('App categoryItems', categoryItems)
+      this.setState({ categoryItems })
+    }
+
   }
+
+
+  matchCategoryItems(categories, items) {
+    console.log('category, items', categories, items)
+    const categoryItems = []
+    categories.forEach(function (category) {
+      const selected = items.filter(item => item.category_id == category.id)
+      if (selected.length > 0) {
+        const itemsArray = selected.map(item => {
+          const itemObj = {}
+          itemObj['name'] = item.name;
+          itemObj['value'] = item.quantity
+          return itemObj
+        })
+        const categoryStuff = {}
+        categoryStuff['category'] = category.name
+        categoryStuff['value'] = itemsArray
+        categoryItems.push(categoryStuff)
+      }
+    })
+    this.setState({ categoryItems })
+  }
+
+
+
+
+
+
+
+
+
+
 
   async getHouseholds() {
     const households = await getHouseholds();
@@ -436,6 +497,7 @@ class App extends React.Component {
               deleteItem={this.deleteItem}
               categories={this.state.categories}
               setUserItemForm={this.setUserItemForm}
+              allData={this.state.categoryItems}
             />
           )}
         />
