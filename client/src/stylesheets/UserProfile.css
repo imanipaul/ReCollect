@@ -5,22 +5,30 @@
     color: #F0C331
 }
 
+.household-header{
+    font-size: 25px;
+    color: rgb(52, 57, 61);
+}
+
 .greeting-name{
     font-family: 'Oxygen', sans-serif;
-    font-size: 40px;
+    font-size: 30px;
+    color: #0072B4;
+
 
 }
 
 .user-items{
     font-family: 'Lato', sans-serif;
     font-size: 25px;
+    color: #0072B4;
 
 }
 
 .item-name{
     
     font-family: 'Lato', sans-serif;
-    font-weight: 300
+    font-size: 18px;
 
 }
 
@@ -38,4 +46,21 @@
     justify-content: space-around;
     margin-top: 50px;
 
+}
+
+.about{
+   width: 100%
+}
+
+.profile-items{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%
+}
+
+.border-line{
+    width: 400px;
+    border-bottom: 1px solid #F0C331;
 }
