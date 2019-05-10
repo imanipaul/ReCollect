@@ -18,7 +18,7 @@ class UserProfile extends React.Component {
     render() {
 
         return (
-            <>
+            <div className='profile'>
                 {this.props.user ?
                     <>
                         <h1 className='greeting-name'>Hello {this.props.user.name}!</h1>
@@ -36,7 +36,7 @@ class UserProfile extends React.Component {
                     :
                     <div>Loading...</div>
                 }
-            </>
+            </div>
 
         )
     }
