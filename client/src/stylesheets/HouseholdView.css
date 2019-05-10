@@ -18,7 +18,6 @@
     flex-wrap: wrap;
     align-items: center;
     margin-top: 40px;
-    width: 600px;
     align-self: center;
 }
 
@@ -48,7 +47,7 @@
 
 .item-title{
     font-family: 'Lato', sans-serif;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 .item-title:hover + .create{
@@ -66,14 +65,15 @@
     width: 100px;
     align-self: center;
     margin-bottom: 50px;
+    margin-top: 50px;
 }
 
 .message-image{
     width: 50px;
     z-index: 5;
     position: absolute;
-    top: 0;
-    margin-left: 50px;
+    top: 12px;
+    margin-left: 100px;
 }
 
 .message-image:hover + .user-inner{
@@ -107,3 +107,14 @@
 }
 
 
+.individual-chart h3 {
+    font-family: 'Lato', sans-serif;
+    color: #F0C331;
+    font-size: 20px;
+}
+
+.separation{
+    width: 95vw;
+    border-bottom: 1px solid #F0C331;
+    align-self: center;
+}

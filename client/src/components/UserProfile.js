@@ -18,25 +18,33 @@ class UserProfile extends React.Component {
     render() {
 
         return (
-            <>
+            <div className='profile'>
                 {this.props.user ?
                     <>
-                        <h1 className='greeting-name'>Hello {this.props.user.name}!</h1>
-                        {this.props.household &&
-                            <h3 className='household-header' onClick={() => ([
-                                this.props.history.push(`/household/${this.props.household.id}`)
-                            ])}>Household: {this.props.household.name}</h3>
-                        }
+                        <div className='about'>
+                            <h1 className='greeting-name'>About {this.props.user.name}:</h1>
+                            {this.props.household &&
+                                <h3 className='household-header' onClick={() => ([
+                                    this.props.history.push(`/household/${this.props.household.id}`)
+                                ])}>Household: {this.props.household.name}</h3>
+                            }
+                        </div>
+                        <div className='border-line'>
 
-                        <h4 className='user-items'>Your Items:</h4>
-                        {this.props.user.items.map(item => (
-                            <p className='item-name' key={item.id}> {item.name}</p>
-                        ))}
+                        </div>
+                        <div className='profile-items'>
+                            <h4 className='user-items'>Your Items:</h4>
+                            <div className='all-profile-items'>
+                                {this.props.user.items.map(item => (
+                                    <h5 className='item-name' key={item.id}> {item.name}</h5>
+                                ))}
+                            </div>
+                        </div>
                     </>
                     :
                     <div>Loading...</div>
                 }
-            </>
+            </div>
 
         )
     }

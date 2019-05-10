@@ -47,6 +47,7 @@ class HouseholdView extends React.Component {
 
                 <p className='item-title'>Household Pantry</p>
 
+
                 {this.props.allData &&
                     <div className='charts'>
 
@@ -56,6 +57,10 @@ class HouseholdView extends React.Component {
 
                     </div>
                 }
+
+                <div className='separation'>
+
+                </div>
 
                 {this.state.isCreate && <CreateItem
                     handleItemFormChange={this.props.handleItemFormChange}
@@ -108,7 +113,7 @@ class HouseholdView extends React.Component {
                 </div>
                 <button className='create' onClick={() => {
                     this.setState({ isCreate: true })
-                }}>Create</button>
+                }}>Create Item</button>
 
 
 
