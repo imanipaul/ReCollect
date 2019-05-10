@@ -13,13 +13,15 @@ class HouseholdView extends React.Component {
         this.state = {
             isCreate: false,
             isRead: false,
-            categoryItems: []
+            categoryItems: [],
+            isCharts: false
         }
         this.matchCategoryItems = this.matchCategoryItems.bind(this)
     }
 
     componentDidMount() {
         this.matchCategoryItems()
+        this.setState({ isCharts: true })
     }
 
     matchCategoryItems() {
@@ -103,7 +105,6 @@ class HouseholdView extends React.Component {
                                 <button onClick={() => {
                                     this.props.setItemFormData(item)
                                     this.setState({ isRead: item.id })
-                                    // this.props.history.push(`/items/${item.id}`)
                                 }}>{item.name}</button>
                             }
                         </React.Fragment>
@@ -114,10 +115,12 @@ class HouseholdView extends React.Component {
                 </div>
 
                 <div>
+                    {this.state.isCharts &&
 
-                    <Charts
-                        allData={this.state.categoryItems}
-                    />
+                        <Charts
+                            allData={this.state.categoryItems}
+                        />
+                    }
                 </div>
 
 

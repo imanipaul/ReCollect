@@ -443,7 +443,7 @@ class App extends React.Component {
         <Route path='/profile' render={() => (
           <UserProfile
             currentUser={this.state.currentUser}
-            user={this.state.selectedUser}
+            user={this.state.householdUser}
             household={this.state.household}
             households={this.state.households} />
         )}
