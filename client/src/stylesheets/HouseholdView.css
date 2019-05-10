@@ -13,12 +13,12 @@
 .items{
     /* height: 100px; */
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: left;
     margin-top: 40px;
-    width: 600px;
+    width: 100vw;
     align-self: center;
 }
 
@@ -43,7 +43,17 @@
 
 .item-view button {
     border: 1px solid #F0C331;
+    width: 100px;
+    height: 20px;
+    font-size: 15px;
  
+}
+
+.item-view{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #F0C331
 }
 
 .item-title{

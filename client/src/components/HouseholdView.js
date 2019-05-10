@@ -15,7 +15,11 @@ class HouseholdView extends React.Component {
             isCreate: false,
             isRead: false,
             categoryItems: [],
-            isCharts: false
+            isCharts: false,
+            isEditName: false,
+            isEditCategory: false,
+            isEditFrequency: false,
+            isEditQuantity: false,
         }
         this.toggleCreate = this.toggleCreate.bind(this)
     }
@@ -70,42 +74,121 @@ class HouseholdView extends React.Component {
 
 
 
+
+
+
+
+
+
+
                 <div className='items'>
 
                     {this.props.items.map(item => (
                         <React.Fragment key={item.id}>
-                            {this.state.isRead === item.id
-                                ?
-                                <div className='item-view'>
-                                    <button onClick={() => {
-                                        this.props.setItemFormData(item)
-                                        this.setState({ isRead: null })
-                                    }}>{item.name}</button>
-                                    <ItemView
+                            <div className='item-view'>
+                                <h3 onClick={() => this.props.setItemFormData(item)}>{item.name}</h3>
 
-                                        item_id={item.id}
-                                        setItem={this.props.setItem}
-                                        editItem={this.props.editItem}
-                                        itemData={this.props.itemData}
-                                        handleItemFormChange={this.props.handleItemFormChange}
-                                        item={this.props.item}
-                                        category={this.props.category}
-                                        user={this.props.user}
-                                        deleteItem={this.props.deleteItem}
-                                    />
-                                </div>
-                                :
+
+                                {/* <div className='item-view'>
                                 <button onClick={() => {
                                     this.props.setItemFormData(item)
-                                    this.setState({ isRead: item.id })
-                                }}>{item.name}</button>
-                            }
+                                    this.setState({ isRead: null })
+                                }}>{item.name}</button> */}
+                                {/* {console.log('props item', item)}
+                                <ItemView
+
+                                    item_id={item.id}
+                                    setItem={this.props.setItem}
+                                    editItem={this.props.editItem}
+                                    itemData={this.props.itemData}
+                                    handleItemFormChange={this.props.handleItemFormChange}
+                                    currentItem={item}
+                                    category={this.props.category}
+                                    user={this.props.user}
+                                    deleteItem={this.props.deleteItem}
+                                /> */}
+
+
+                                <div className='item-view-card'>
+
+                                    {this.state.isEditName
+                                        ?
+                                        <form onSubmit={(e) => {
+                                            e.preventDefault()
+                                            this.props.editItem(item.id)
+                                        }}>
+                                            <input name='name' type='text' value={this.props.itemData.name} onChange={this.props.handleItemFormChange} />
+                                            <button>Submit</button>
+                                        </form>
+                                        :
+                                        <h1 className='item-view-name'
+                                        >{item.name}</h1>
+                                    }
+
+                                    {/* <h4 className='item-view-category'>{this.props.category.name}</h4> */}
+
+
+                                    {this.state.isEditFrequency
+                                        ?
+                                        <form onSubmit={(e) => {
+                                            e.preventDefault()
+                                        }}>
+                                            <input name='frequency' type='text' value={this.props.itemData.frequency} onChange={this.props.handleItemFormChange} />
+                                            <button>Submit</button>
+                                        </form>
+                                        :
+                                        <h4 onClick={() => {
+                                            this.setState({
+                                                isEditName: false,
+                                                isEditCategory: false,
+                                                isEditFrequency: true,
+                                                isEditQuantity: false,
+                                            })
+                                        }}>Frequency of use: {item.frequency}</h4>
+                                    }
+
+
+                                    <h4>Purchased on: {item.purchase_date}</h4>
+
+                                    {this.state.isEditQuantity
+                                        ?
+                                        <form onSubmit={(e) => {
+                                            e.preventDefault()
+                                        }}>
+                                            <input name='quantity' type='text' value={this.props.itemData.quantity} onChange={this.props.handleItemFormChange} />
+                                            <button>Submit</button>
+                                        </form>
+                                        :
+                                        <h4 onClick={() => {
+                                            this.setState({
+                                                isEditName: false,
+                                                isEditCategory: false,
+                                                isEditFrequency: false,
+                                                isEditQuantity: true
+
+                                            })
+
+                                        }}>Quantity: {item.quantity}</h4>
+                                    }
+                                    <h4>Added by: {this.props.user.name}</h4>
+                                    <button className='delete' onClick={() => {
+                                        this.props.deleteItem(this.props.item)
+                                    }}>Delete</button>
+
+
+
+                                    }
+            </div>
+
+                            </div>
                         </React.Fragment>
                     ))}
 
 
 
                 </div>
+
+
                 <button className='create' onClick={() => {
                     this.setState({ isCreate: true })
                 }}>Create</button>

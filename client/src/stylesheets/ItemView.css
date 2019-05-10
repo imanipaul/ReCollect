@@ -1,9 +1,13 @@
 .item-view-card{
-    border: 1px solid black;
-    background-color: #d4e8f5;
-    color: black;
-    border-radius: 5px;
-    width: 200px;
+    /* border: 1px solid black; */
+    background-color: transparent;
+    color: white;
+    /* border-radius: 5px; */
+    /* width: 800px; */
+    display: flex;
+    flex-direction: row;
+  
+
 }
 
 .item-view-category{
@@ -15,4 +19,8 @@
     margin: 0px;
     margin-top: 10px;
     color: #34393D
+}
+
+.delete{
+    width: 50px;
 }

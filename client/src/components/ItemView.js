@@ -22,7 +22,7 @@ class ItemView extends React.Component {
     render() {
         return (
             <div className='item-view-card'>
-                {this.props.item &&
+                {this.props.currentItem &&
                     <>
                         {this.state.isEditName
                             ?
@@ -91,7 +91,7 @@ class ItemView extends React.Component {
                             }}>Quantity: {this.props.item.quantity}</h4>
                         }
                         <h4>Added by: {this.props.user.name}</h4>
-                        <button onClick={() => {
+                        <button className='delete' onClick={() => {
                             this.props.deleteItem(this.props.item)
                             // this.props.history.goBack()
                         }}>Delete</button>
