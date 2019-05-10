@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400|Oxygen');
 
+.test-chart{
+  height: 100vh;
+}
+
 
 .App {
   text-align: center;

@@ -24,7 +24,7 @@ module ReCollect
     
     config.enable_dependency_loading = true
     config.autoload_paths << Rails.root.join('lib')
-   
+    config.eager_load_paths += Dir["#{config.root}/lib/**/"]
     
 
     # Settings in config/environments/* take precedence over those specified here.
