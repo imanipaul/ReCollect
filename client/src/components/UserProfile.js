@@ -3,28 +3,43 @@ import { withRouter } from 'react-router';
 import '../stylesheets/UserProfile.css'
 
 
-const UserProfile = (props) => {
+class UserProfile extends React.Component {
+    constructor(props) {
+        super(props)
+    }
 
-    return (
-        <>
-            {props.user &&
-                <>
-                    <h1 className='greeting-name'>Hello {props.user.name}!</h1>
-                    {props.household &&
-                        <h3 className='household-header' onClick={() => ([
-                            props.history.push(`/household/${props.household.id}`)
-                        ])}>Household: {props.household.name}</h3>
-                    }
+    componentDidUpdate(prevProps) {
+        if (this.props.user == undefined) {
+            console.log('prevprops', prevProps)
+        }
 
-                    <h4 className='user-items'>Your Items:</h4>
-                    {props.user.items.map(item => (
-                        <p className='item-name' key={item.id}> {item.name}</p>
-                    ))}
-                </>
-            }
-        </>
+    }
 
-    )
+    render() {
+
+        return (
+            <>
+                {this.props.user ?
+                    <>
+                        <h1 className='greeting-name'>Hello {this.props.user.name}!</h1>
+                        {this.props.household &&
+                            <h3 className='household-header' onClick={() => ([
+                                this.props.history.push(`/household/${this.props.household.id}`)
+                            ])}>Household: {this.props.household.name}</h3>
+                        }
+
+                        <h4 className='user-items'>Your Items:</h4>
+                        {this.props.user.items.map(item => (
+                            <p className='item-name' key={item.id}> {item.name}</p>
+                        ))}
+                    </>
+                    :
+                    <div>Loading...</div>
+                }
+            </>
+
+        )
+    }
 }
 
 

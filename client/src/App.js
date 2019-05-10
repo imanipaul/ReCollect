@@ -10,7 +10,6 @@ import NewHousehold from './components/NewHousehold';
 import HouseholdView from './components/HouseholdView';
 import ItemView from './components/ItemView';
 import UserProfile from './components/UserProfile';
-import TestCharts from './components/TestCharts';
 
 import {
   registerUser,
@@ -89,7 +88,7 @@ class App extends React.Component {
 
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.getHouseholds()
     this.getCategories()
     const token = localStorage.getItem("jwt")
@@ -99,11 +98,12 @@ class App extends React.Component {
       this.setState({
         currentUser: userData
       })
-      console.log('userData, ', userData)
       this.selectUser(userData)
+      const user = await getUser(userData.user_id)
+      this.setState({ householdUser: user })
+
+
     }
-
-
   }
 
   // ----------------------Data Calls-------------------------
@@ -449,7 +449,6 @@ class App extends React.Component {
         )}
         />
 
-        <Route path='/charts' component={TestCharts} />
 
 
       </div>

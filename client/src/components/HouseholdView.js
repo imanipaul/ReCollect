@@ -21,12 +21,17 @@ class HouseholdView extends React.Component {
     }
 
     componentDidMount() {
-        this.matchCategoryItems()
+        // this.matchCategoryItems()
         this.setState({ isCharts: true })
+        this.matchCategoryItems(this.props.categories, this.props.items)
     }
 
-    matchCategoryItems() {
-        const { categories, items } = this.props
+    matchCategoryItems(categories, items) {
+
+
+
+
+        console.log('category, items', categories, items)
         const categoryItems = []
 
         categories.forEach(function (category) {
@@ -48,7 +53,6 @@ class HouseholdView extends React.Component {
         })
 
         this.setState({ categoryItems })
-
 
     }
 
@@ -121,12 +125,12 @@ class HouseholdView extends React.Component {
                 </div>
 
                 <div>
-                    {this.state.isCharts &&
 
-                        <Charts
-                            allData={this.state.categoryItems}
-                        />
-                    }
+
+                    <Charts
+                        allData={this.state.categoryItems}
+                    />
+
                 </div>
 
 
