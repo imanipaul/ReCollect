@@ -1,4 +1,6 @@
 import React from 'react'
+import '../stylesheets/ItemView.css'
+
 
 class ItemView extends React.Component {
     constructor(props) {
@@ -14,26 +16,25 @@ class ItemView extends React.Component {
     }
 
     componentDidMount() {
-        this.props.setItem(this.props.match.params.id)
+        this.props.setItem(this.props.item_id)
     }
 
     render() {
         return (
-            <div>
-
+            <div className='item-view-card'>
                 {this.props.item &&
                     <>
                         {this.state.isEditName
                             ?
                             <form onSubmit={(e) => {
                                 e.preventDefault()
-                                this.props.editItem(this.props.match.params.id)
+                                this.props.editItem(this.props.item_id)
                             }}>
                                 <input name='name' type='text' value={this.props.itemData.name} onChange={this.props.handleItemFormChange} />
                                 <button>Submit</button>
                             </form>
                             :
-                            <h1 onClick={() => {
+                            <h1 className='item-view-name' onClick={() => {
                                 this.setState({
                                     isEditName: true,
                                     isEditCategory: false,
@@ -44,7 +45,7 @@ class ItemView extends React.Component {
                             }}>{this.props.item.name}</h1>
                         }
 
-                        <h4>{this.props.category.name}</h4>
+                        <h4 className='item-view-category'>{this.props.category.name}</h4>
 
 
                         {this.state.isEditFrequency

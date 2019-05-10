@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
+ 
 
 
 household1 = Household.create!(name: 'The Smiths')
@@ -13,8 +13,14 @@ household2 = Household.create!(name: 'The Carters')
 
 perishables = Category.create!(name: 'Perishables')
 kitchen = Category.create!(name: 'Kitchen')
-bathroom = Category.create!(name: 'Bathroom')
+bathroom = Category.create!(name: 'Bathroom and Toiletries')
 medicine = Category.create!(name: 'Medicine')
+tools = Category.create!(name: 'Tool and Hardware')
+office = Category.create!(name: 'Office Supplies')
+electronics = Category.create!(name: 'Electronics')
+bedroom = Category.create!(name: 'Bedroom')
+clean = Category.create!(name: 'Cleaning Supplies')
+food = Category.create!(name: 'Food')
 misc = Category.create!(name: 'Miscellaneous')
 
 date1 = Date.new(2011, 11, 11)

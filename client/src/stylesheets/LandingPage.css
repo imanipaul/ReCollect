@@ -1,5 +1,5 @@
 .landing-page{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 400px;
     height: 400px;
     display: flex;
@@ -7,6 +7,24 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    right: 50px;
-    top: 25%;
+    right: 100px;
+    top: 200px;
+    background-color: rgb(240, 195, 49);
+    z-index: 10;
+}
+
+.landing-image img {
+    width: 1000px;
+}
+
+.landing-image {
+    position: absolute;
+    top: 40px;
+    z-index: -5
+}
+
+.full-landing-page{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

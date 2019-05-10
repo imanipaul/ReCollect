@@ -1,4 +1,4 @@
-// const url = 'https://cors-anywhere.herokuapp.com/https://recollect-ip.herokuapp.com'
+// const url = 'https://recollect-ip.herokuapp.com'
 const url = 'http://localhost:3000'
 
 // login user
