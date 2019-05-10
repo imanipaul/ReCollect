@@ -3,6 +3,7 @@ import { withRouter } from 'react-router'
 import '../stylesheets/HouseholdView.css'
 import CreateItem from './CreateItem'
 import ItemView from './ItemView'
+import Charts from './Charts'
 
 
 class HouseholdView extends React.Component {
@@ -11,8 +12,41 @@ class HouseholdView extends React.Component {
 
         this.state = {
             isCreate: false,
-            isRead: false
+            isRead: false,
+            categoryItems: []
         }
+        this.matchCategoryItems = this.matchCategoryItems.bind(this)
+    }
+
+    componentDidMount() {
+        this.matchCategoryItems()
+    }
+
+    matchCategoryItems() {
+        const { categories, items } = this.props
+        const categoryItems = []
+
+        categories.forEach(function (category) {
+            const selected = items.filter(item => item.category_id == category.id)
+            if (selected.length > 0) {
+                const itemsArray = selected.map(item => {
+                    const itemObj = {}
+                    itemObj['name'] = item.name;
+                    itemObj['value'] = item.quantity
+                    return itemObj
+                })
+
+                const categoryStuff = {}
+                categoryStuff['category'] = category.name
+                categoryStuff['value'] = itemsArray
+                categoryItems.push(categoryStuff)
+
+            }
+        })
+
+        this.setState({ categoryItems })
+
+
     }
 
 
@@ -77,6 +111,13 @@ class HouseholdView extends React.Component {
 
 
 
+                </div>
+
+                <div>
+
+                    <Charts
+                        allData={this.state.categoryItems}
+                    />
                 </div>
 
 

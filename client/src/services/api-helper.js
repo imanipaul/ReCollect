@@ -49,6 +49,7 @@ export const updateUser = (id, userData) => {
 }
 
 export const getUser = (id) => {
+    console.log(`Bearer ${localStorage.getItem('jwt')}`)
     const opts = {
         method: 'GET',
         headers: {
@@ -56,10 +57,13 @@ export const getUser = (id) => {
             'Authorization': `Bearer ${localStorage.getItem('jwt')}`
         }
     }
+    console.log('before fetch')
 
     return fetch(`${url}/users/${id}`, opts)
         .then(response => response.json())
+        // .then(response => console.log(response))
         .catch(e => e.message)
+
 }
 
 

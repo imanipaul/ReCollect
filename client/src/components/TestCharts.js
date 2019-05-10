@@ -55,7 +55,7 @@
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector, Cell } from 'recharts'
 
-const data = [
+const dataSet = [
     { name: 'Milk', value: 1 },
     { name: 'Butter', value: 2 },
     { name: 'Coffee', value: 2.5 },
@@ -71,7 +71,7 @@ export default class TestCharts extends PureComponent {
         return (
             <PieChart width={800} height={400} >
                 <Pie
-                    data={data}
+                    data={dataSet}
                     cx={420}
                     cy={300}
                     startAngle={180}
@@ -83,7 +83,7 @@ export default class TestCharts extends PureComponent {
                     dataKey='value'
                 >
                     {
-                        data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+                        dataSet.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
                     }
 
 

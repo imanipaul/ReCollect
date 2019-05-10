@@ -252,6 +252,7 @@ class App extends React.Component {
 
   async selectUser(currentUser) {
     const user = await getUser(currentUser.user_id)
+    console.log('user', user)
     this.setState({
       selectedUser: user
     })
