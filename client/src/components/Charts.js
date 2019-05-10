@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 
-import { PieChart, Pie, Sector, Cell } from 'recharts';
+import { PieChart, Pie, Sector, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 
 class Charts extends PureComponent {
     constructor(props) {
@@ -10,12 +10,6 @@ class Charts extends PureComponent {
         }
     }
 
-    // componentDidMount(){
-    //     const {categoryItems} = this.props
-    //     category.Items
-    // }
-
-
     render() {
         return (
             <>
@@ -24,7 +18,10 @@ class Charts extends PureComponent {
 
                         <>
                             <div>{info.category}</div>
+
                             <PieChart width={800} height={400}>
+                                <Tooltip />
+
                                 <Pie
                                     data={info.value}
                                     cx={420}
@@ -35,13 +32,15 @@ class Charts extends PureComponent {
                                     outerRadius={80}
                                     paddingAngle={3}
                                     dataKey='value'
+                                    onMouseEnter={(e, activeIndex) => this.setState({ activeIndex })}
+                                    onMouseLeave={() => this.setState({ activeIndex: -1 })}
                                 >
                                     {
                                         info.value.map((entry, index) =>
-                                            <Cell key={index}
-                                                fill={this.state.colors[index % this.state.colors.length]} />)
-                                    }
+                                            <Cell key={index} fill={this.state.colors[index % this.state.colors.length]} fillOutline={this.state.activeIndex === index ? 1 : 0.25} />)
 
+
+                                    }
 
 
                                 </Pie>
