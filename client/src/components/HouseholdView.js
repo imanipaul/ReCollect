@@ -15,7 +15,13 @@ class HouseholdView extends React.Component {
             isCreate: false,
             isRead: false,
             categoryItems: [],
-            isCharts: false
+            isCharts: false,
+
+            isEditName: false,
+            isEditCategory: false,
+            isEditFrequency: false,
+            isEditQuantity: false,
+            isEditItem: false
         }
         this.toggleCreate = this.toggleCreate.bind(this)
     }
@@ -80,12 +86,40 @@ class HouseholdView extends React.Component {
                         <div className='item-table-cell'>Item User</div>
                     </header>
                     {this.props.items.map(item => (
-                        <div className='item-table-row'>
-                            <div className='item-table-cell'>{item.name}</div>
+                        // <div className='item-table-row'>
+
+                        <form className='table-row-form'>
+
+                            {this.state.isEditName === item.id
+                                ?
+                                <div className='item-table-cell'>
+                                    <form onSubmit={(e) => {
+                                        e.preventDefault()
+                                        this.props.editItem(item.id)
+                                    }}>
+                                        <input name='name' type='text' value={this.props.itemData.name} onChange={this.props.handleItemFormChange} />
+                                        <button>Submit</button>
+
+                                    </form>
+                                </div>
+                                :
+                                <h4 onClick={() => {
+                                    this.props.setItemFormData(item)
+                                    this.setState({
+                                        isEditName: item.id,
+                                        isEditCategory: false,
+                                        isEditFrequency: false,
+                                        isEditQuantity: false,
+
+                                    })
+                                }}>{item.name}</h4>
+                            }
+
                             <div className='item-table-cell'>{item.quantity}</div>
                             <div className='item-table-cell'>{item.purchase_date}</div>
                             <div className='item-table-cell'>{item.user_id}</div>
-                        </div>
+
+                        </form>
 
                     ))}
 
