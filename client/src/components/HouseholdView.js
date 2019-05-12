@@ -14,6 +14,7 @@ import perishable from '../images/perishable.svg'
 import tool from '../images/tool.svg'
 import misc from '../images/misc.svg'
 import cleaning from '../images/cleaning.svg'
+import edit from '../images/edit.svg'
 
 
 class HouseholdView extends React.Component {
@@ -113,12 +114,12 @@ class HouseholdView extends React.Component {
 
                 <section className='item-table' >
                     <header className='table-row-header'>
-                        <div className='item-table-cell'></div>
-                        <div className='item-table-cell'>Item Name</div>
-                        <div className='item-table-cell'>Item Quantity</div>
-                        <div className='item-table-cell'>Item Date Purchased</div>
-                        <div className='item-table-cell'>Item User</div>
-                        <div className='item-table-cell'></div>
+                        <div className='item-table-cell'> .</div>
+                        <div className='item-table-cell'>Name</div>
+                        <div className='item-table-cell'>Quantity</div>
+                        <div className='item-table-cell'>Date Purchased</div>
+                        <div className='item-table-cell'>Purchased By</div>
+                        <div className='item-table-cell'> .</div>
                     </header>
                     {this.props.items.map((item, index) => (
 
@@ -185,7 +186,7 @@ class HouseholdView extends React.Component {
 
                                         })
                                     }}>{this.getItemUser(item.user_id)}</p>
-                                    <div>Edit</div>
+                                    <div><img src={edit} /></div>
                                 </>
                             }
 

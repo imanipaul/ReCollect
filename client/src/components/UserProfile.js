@@ -36,7 +36,7 @@ class UserProfile extends React.Component {
                             <h4 className='user-items'>Your Items:</h4>
                             <div className='all-profile-items'>
                                 {this.props.user.items.map(item => (
-                                    <h5 className='item-name' key={item.id}> {item.name}</h5>
+                                    <li className='item-name' key={item.id}> {item.name}</li>
                                 ))}
                             </div>
                         </div>
