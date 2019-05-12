@@ -16,15 +16,23 @@ class CreateItem extends React.Component {
         this.props.setUserItemForm()
     }
 
+    componentWillMount() {
+        document.addEventListener('mousedown', this.props.handleClick, false)
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.props.handleClick, false)
+    }
+
 
     render() {
         return (
             <>
                 <form className='create-form' onSubmit={(e) => {
                     e.preventDefault()
-                    this.props.createNewItem(this.props.itemData)
+                    this.props.createNewItem(this.props.itemData, this.props.household.id)
                     this.props.toggleCreate()
-                    this.props.getHouseholdItems(this.props.household.id)
+                    // this.props.getHouseholdItems(this.props.household.id)
                 }}>
                     <div className='create-title'>Create a new item</div>
                     <div className='form-criteria'>

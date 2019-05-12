@@ -38,6 +38,16 @@ class HouseholdView extends React.Component {
         return selectedUser.name
     }
 
+    handleClick = (e) => {
+        if (this.node.contains(e.target)) {
+            this.setState({ isCreate: true })
+        }
+        else {
+            this.setState({ isCreate: false })
+        }
+    }
+
+
 
 
     render() {
@@ -73,15 +83,18 @@ class HouseholdView extends React.Component {
 
                 </div>
 
-                {this.state.isCreate && <CreateItem
-                    handleItemFormChange={this.props.handleItemFormChange}
-                    itemData={this.props.itemData}
-                    createNewItem={this.props.createNewItem}
-                    categories={this.props.categories}
-                    setUserItemForm={this.props.setUserItemForm}
-                    household={this.props.household}
-                    toggleCreate={this.toggleCreate}
-                    getHouseholdItems={this.props.getHouseholdItems} />}
+                <div ref={node => this.node = node}>
+                    {this.state.isCreate && <CreateItem
+                        handleItemFormChange={this.props.handleItemFormChange}
+                        itemData={this.props.itemData}
+                        createNewItem={this.props.createNewItem}
+                        categories={this.props.categories}
+                        setUserItemForm={this.props.setUserItemForm}
+                        household={this.props.household}
+                        toggleCreate={this.toggleCreate}
+                        getHouseholdItems={this.props.getHouseholdItems}
+                        handleClick={this.handleClick} />}
+                </div>
 
                 <section className='item-table'>
                     <header className='table-row-header'>
@@ -97,7 +110,6 @@ class HouseholdView extends React.Component {
                             e.preventDefault()
                             this.props.editItem(item.id, this.props.match.params.id)
                             this.setState({ isEditItem: false })
-                            // this.props.getHouseholdItems(this.props.match.params.id)
                         }}>
 
                             {this.state.isEditItem === item.id
@@ -113,8 +125,12 @@ class HouseholdView extends React.Component {
                                     <div className='item-table-cell'>
                                         <input name='purchase_date' type='date' value={this.props.itemData.purchase_date} onChange={this.props.handleItemFormChange} />
                                     </div>
-                                    <div className='item-table-cell'>{item.user_id}</div>
+                                    <div className='item-table-cell'>{this.getItemUser(item.user_id)}</div>
                                     <button>Submit</button>
+                                    <button onClick={() => {
+                                        this.props.deleteItem(item)
+                                        // this.props.history.goBack()
+                                    }}>Delete</button>
 
                                 </>
 
@@ -154,10 +170,6 @@ class HouseholdView extends React.Component {
                                 </>
                             }
 
-                            {/* <div className='item-table-cell'>{item.quantity}</div>
-                            <div className='item-table-cell'>{item.purchase_date}</div>
-                            <div className='item-table-cell'>{item.user_id}</div> */}
-
                         </form>
 
                     ))}
@@ -169,38 +181,6 @@ class HouseholdView extends React.Component {
                 </section>
 
 
-
-                {/* <div className='items'>
-                    {this.props.items.map(item => (
-                        <React.Fragment key={item.id}>
-                            {this.state.isRead === item.id
-                                ?
-                                <div className='item-view'>
-                                    <button onClick={() => {
-                                        this.props.setItemFormData(item)
-                                        this.setState({ isRead: null })
-                                    }}>{item.name}</button>
-                                    <ItemView
-                                        item_id={item.id}
-                                        setItem={this.props.setItem}
-                                        editItem={this.props.editItem}
-                                        itemData={this.props.itemData}
-                                        handleItemFormChange={this.props.handleItemFormChange}
-                                        item={this.props.item}
-                                        category={this.props.category}
-                                        user={this.props.user}
-                                        deleteItem={this.props.deleteItem}
-                                    />
-                                </div>
-                                :
-                                <button onClick={() => {
-                                    this.props.setItemFormData(item)
-                                    this.setState({ isRead: item.id })
-                                }}>{item.name}</button>
-                            }
-                        </React.Fragment>
-                    ))}
-                </div> */}
 
 
                 <button className='create' onClick={() => {

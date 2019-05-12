@@ -107,9 +107,11 @@ class App extends React.Component {
   }
 
   // ----------------------Data Calls-------------------------
-  async createNewItem(itemData) {
+  async createNewItem(itemData, householdId) {
     const newItem = await createItem(itemData)
     console.log(newItem)
+    this.getHouseholdItems(householdId)
+
   }
 
   async deleteItem(item) {
@@ -366,12 +368,19 @@ class App extends React.Component {
   }
 
   setUserItemForm() {
-    this.setState({
-      itemData: {
-        user_id: this.state.currentUser.user_id
+
+    this.setState(prevState => (
+      {
+        itemData: {
+          ...prevState.itemData,
+          user_id: this.state.currentUser.user_id
+        }
       }
-    })
+    ))
+
   }
+
+
 
   formatDate(date) {
     const currentDate = new Date(date)
