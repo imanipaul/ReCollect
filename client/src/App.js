@@ -373,6 +373,14 @@ class App extends React.Component {
     })
   }
 
+  formatDate(date) {
+    const currentDate = new Date(date)
+    const month = currentDate.getMonth()
+    const day = currentDate.getDate()
+    const year = currentDate.getFullYear()
+    return `${month}/${day}/${year}`
+  }
+
   // ----------------------Auth-------------------------
   async handleLogin() {
     const userData = await loginUser(this.state.authFormData);
@@ -509,6 +517,7 @@ class App extends React.Component {
               setUserItemForm={this.setUserItemForm}
               allData={this.state.categoryItems}
               getHouseholdItems={this.getHouseholdItems}
+              formatDate={this.formatDate}
 
             />
           )}

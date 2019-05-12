@@ -33,6 +33,11 @@ class HouseholdView extends React.Component {
         }))
     }
 
+    getItemUser(id) {
+        const selectedUser = this.props.users.find(user => user.id === id)
+        return selectedUser.name
+    }
+
 
 
     render() {
@@ -137,7 +142,7 @@ class HouseholdView extends React.Component {
                                             isEditItem: item.id
 
                                         })
-                                    }}>{item.purchase_date}</h4>
+                                    }}>{this.props.formatDate(item.purchase_date)}</h4>
 
                                     <h4 className='item-table-cell' onClick={() => {
                                         this.props.setItemFormData(item)
@@ -145,7 +150,7 @@ class HouseholdView extends React.Component {
                                             isEditItem: item.id
 
                                         })
-                                    }}>{item.user_id}</h4>
+                                    }}>{this.getItemUser(item.user_id)}</h4>
                                 </>
                             }
 
