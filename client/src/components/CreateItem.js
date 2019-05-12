@@ -38,12 +38,6 @@ class CreateItem extends React.Component {
                     </div>
 
                     <div className='form-criteria'>
-                        <p>Frequency: </p>
-
-                        <input name='frequency' type='text' value={this.props.itemData.frequency} onChange={this.props.handleItemFormChange} />
-                    </div>
-
-                    <div className='form-criteria'>
                         <p>Purchase Date: </p>
 
                         <input name='purchase_date' type='date' value={this.props.itemData.purchase_date} onChange={this.props.handleItemFormChange} />
