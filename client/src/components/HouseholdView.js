@@ -72,11 +72,32 @@ class HouseholdView extends React.Component {
                     toggleCreate={this.toggleCreate}
                     getHouseholdItems={this.props.getHouseholdItems} />}
 
+                <section className='item-table'>
+                    <header className='table-row-header'>
+                        <div className='item-table-cell'>Item Name</div>
+                        <div className='item-table-cell'>Item Quantity</div>
+                        <div className='item-table-cell'>Item Date Purchased</div>
+                        <div className='item-table-cell'>Item User</div>
+                    </header>
+                    {this.props.items.map(item => (
+                        <div className='item-table-row'>
+                            <div className='item-table-cell'>{item.name}</div>
+                            <div className='item-table-cell'>{item.quantity}</div>
+                            <div className='item-table-cell'>{item.purchase_date}</div>
+                            <div className='item-table-cell'>{item.user_id}</div>
+                        </div>
+
+                    ))}
 
 
 
-                <div className='items'>
 
+
+                </section>
+
+
+
+                {/* <div className='items'>
                     {this.props.items.map(item => (
                         <React.Fragment key={item.id}>
                             {this.state.isRead === item.id
@@ -87,7 +108,6 @@ class HouseholdView extends React.Component {
                                         this.setState({ isRead: null })
                                     }}>{item.name}</button>
                                     <ItemView
-
                                         item_id={item.id}
                                         setItem={this.props.setItem}
                                         editItem={this.props.editItem}
@@ -107,10 +127,9 @@ class HouseholdView extends React.Component {
                             }
                         </React.Fragment>
                     ))}
+                </div> */}
 
 
-
-                </div>
                 <button className='create' onClick={() => {
                     this.setState({ isCreate: true })
                 }}>Create Item</button>

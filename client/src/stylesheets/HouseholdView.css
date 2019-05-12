@@ -118,3 +118,22 @@
     border-bottom: 1px solid #F0C331;
     align-self: center;
 }
+
+
+.item-table {
+    display: table
+}
+
+.table-row-header{
+    display: table-row;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.item-table-cell{
+    display: table-cell;
+}
+
+.item-table-row{
+    display: table-row;
+}
