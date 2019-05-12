@@ -21,30 +21,36 @@ class Charts extends PureComponent {
             <>
                 {
 
-                    this.props.allData.map(info => (
-                        <div key={Math.random()} className='individual-chart'>
-                            <h3>{info.category}</h3>
-                            <PieChart width={175} height={200}>
-                                <Tooltip />
-                                <Pie
-                                    data={info.value}
-                                    cx={80}
-                                    cy={100}
-                                    startAngle={180}
-                                    endAngle={0}
-                                    innerRadius={60}
-                                    outerRadius={80}
-                                    paddingAngle={3}
-                                    dataKey='value'
-                                >
-                                    {
-                                        info.value.map((entry, index) =>
-                                            <Cell key={index} fill={this.state.colors[index % this.state.colors.length]} fillOutline={this.state.activeIndex === index ? 1 : 0.25} />)
-                                    }
-                                </Pie>
-                            </PieChart>
-                        </div>
-                    ))
+                    this.props.allData
+
+                        ?
+
+                        this.props.allData.map(info => (
+                            <div key={Math.random()} className='individual-chart'>
+                                <h3>{info.category}</h3>
+                                <PieChart width={175} height={200}>
+                                    <Tooltip />
+                                    <Pie
+                                        data={info.value}
+                                        cx={80}
+                                        cy={100}
+                                        startAngle={180}
+                                        endAngle={0}
+                                        innerRadius={60}
+                                        outerRadius={80}
+                                        paddingAngle={3}
+                                        dataKey='value'
+                                    >
+                                        {
+                                            info.value.map((entry, index) =>
+                                                <Cell key={index} fill={this.state.colors[index % this.state.colors.length]} fillOutline={this.state.activeIndex === index ? 1 : 0.25} />)
+                                        }
+                                    </Pie>
+                                </PieChart>
+                            </div>
+                        ))
+                        :
+                        <p>Loading...</p>
 
 
                 }

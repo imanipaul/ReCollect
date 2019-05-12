@@ -2,7 +2,6 @@ import React from 'react'
 import { withRouter } from 'react-router'
 import '../stylesheets/HouseholdView.css'
 import CreateItem from './CreateItem'
-import ItemView from './ItemView'
 import Charts from './Charts'
 import message from '../images/Asset 197.png'
 
@@ -93,7 +92,9 @@ class HouseholdView extends React.Component {
                         household={this.props.household}
                         toggleCreate={this.toggleCreate}
                         getHouseholdItems={this.props.getHouseholdItems}
-                        handleClick={this.handleClick} />}
+                        handleClick={this.handleClick}
+                        matchCategoryItems={this.props.matchCategoryItems}
+                        items={this.props.items} />}
                 </div>
 
                 <section className='item-table'>
@@ -110,6 +111,8 @@ class HouseholdView extends React.Component {
                             e.preventDefault()
                             this.props.editItem(item.id, this.props.match.params.id)
                             this.setState({ isEditItem: false })
+                            console.log('running match category items')
+                            this.props.matchCategoryItems(this.props.categories, this.props.items)
                         }}>
 
                             {this.state.isEditItem === item.id
@@ -129,7 +132,6 @@ class HouseholdView extends React.Component {
                                     <button>Submit</button>
                                     <button type='button' onClick={() => {
                                         this.props.deleteItem(item)
-                                        // this.props.history.goBack()
                                     }}>Delete</button>
 
                                 </>

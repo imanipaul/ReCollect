@@ -8,7 +8,6 @@ import Register from './components/Register'
 import LandingPage from './components/LandingPage'
 import NewHousehold from './components/NewHousehold';
 import HouseholdView from './components/HouseholdView';
-import ItemView from './components/ItemView';
 import UserProfile from './components/UserProfile';
 
 import {
@@ -77,7 +76,6 @@ class App extends React.Component {
     this.getCategories = this.getCategories.bind(this)
     this.setItemFormData = this.setItemFormData.bind(this)
     this.handleItemFormChange = this.handleItemFormChange.bind(this)
-    // this.setSelectedItem = this.setSelectedItem.bind(this)
     this.setItem = this.setItem.bind(this)
     this.getUser = this.getUser.bind(this)
     this.getItemCategory = this.getItemCategory.bind(this)
@@ -86,6 +84,7 @@ class App extends React.Component {
     this.selectUser = this.selectUser.bind(this)
     this.setUserItemForm = this.setUserItemForm.bind(this)
     this.getHouseholdItems = this.getHouseholdItems.bind(this)
+    this.matchCategoryItems = this.matchCategoryItems.bind(this)
 
   }
 
@@ -110,7 +109,9 @@ class App extends React.Component {
   async createNewItem(itemData, householdId) {
     const newItem = await createItem(itemData)
     console.log(newItem)
-    this.getHouseholdItems(householdId)
+    const newItems = await this.getHouseholdItems(householdId)
+    console.log('newItems', newItems)
+    this.matchCategoryItems(this.state.categories, newItems)
 
   }
 
@@ -120,6 +121,10 @@ class App extends React.Component {
       householdItems: prevState.householdItems.filter(el => el.id != item.id)
     }))
     console.log('deleted', item)
+
+    const newItems = await this.getHouseholdItems(this.state.household.id)
+    console.log('newItems', newItems)
+    this.matchCategoryItems(this.state.categories, newItems)
 
   }
 
@@ -153,7 +158,8 @@ class App extends React.Component {
   async editItem(itemId, householdId) {
     const updatedItem = await updateItem(itemId, this.state.itemData)
     console.log('updatedItem', updatedItem)
-    this.getHouseholdItems(householdId)
+    const newItems = await this.getHouseholdItems(householdId)
+    this.matchCategoryItems(this.state.categories, newItems)
   }
 
 
@@ -190,6 +196,8 @@ class App extends React.Component {
     })
     console.log('updated household items', household.items)
 
+    return household.items
+
   }
 
   async setHousehold(id) {
@@ -210,25 +218,7 @@ class App extends React.Component {
     //Match Items to categories for pie chart
 
     if (this.state.categories) {
-
-      const categoryItems = []
-      this.state.categories.forEach(function (category) {
-        const selected = household.items.filter(item => item.category_id == category.id)
-        if (selected.length > 0) {
-          const itemsArray = selected.map(item => {
-            const itemObj = {}
-            itemObj['name'] = item.name;
-            itemObj['value'] = item.quantity
-            return itemObj
-          })
-          const categoryStuff = {}
-          categoryStuff['category'] = category.name
-          categoryStuff['value'] = itemsArray
-          categoryItems.push(categoryStuff)
-        }
-      })
-      console.log('App categoryItems', categoryItems)
-      this.setState({ categoryItems })
+      this.matchCategoryItems(this.state.categories, household.items)
     }
 
   }
@@ -253,6 +243,7 @@ class App extends React.Component {
       }
     })
     this.setState({ categoryItems })
+    console.log('category items', categoryItems)
   }
 
 
@@ -384,7 +375,7 @@ class App extends React.Component {
 
   formatDate(date) {
     const currentDate = new Date(date)
-    const month = currentDate.getMonth()
+    const month = currentDate.getMonth() + 1
     const day = currentDate.getDate()
     const year = currentDate.getFullYear()
     return `${month}/${day}/${year}`
@@ -527,6 +518,7 @@ class App extends React.Component {
               allData={this.state.categoryItems}
               getHouseholdItems={this.getHouseholdItems}
               formatDate={this.formatDate}
+              matchCategoryItems={this.matchCategoryItems}
 
             />
           )}
