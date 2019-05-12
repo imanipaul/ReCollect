@@ -88,36 +88,70 @@ class HouseholdView extends React.Component {
                     {this.props.items.map(item => (
                         // <div className='item-table-row'>
 
-                        <form className='table-row-form'>
+                        <form className='table-row-form' onSubmit={(e) => {
+                            e.preventDefault()
+                            this.props.editItem(item.id, this.props.match.params.id)
+                            this.setState({ isEditItem: false })
+                            // this.props.getHouseholdItems(this.props.match.params.id)
+                        }}>
 
-                            {this.state.isEditName === item.id
+                            {this.state.isEditItem === item.id
                                 ?
-                                <div className='item-table-cell'>
-                                    <form onSubmit={(e) => {
-                                        e.preventDefault()
-                                        this.props.editItem(item.id)
-                                    }}>
+                                <>
+                                    <div className='item-table-cell'>
                                         <input name='name' type='text' value={this.props.itemData.name} onChange={this.props.handleItemFormChange} />
-                                        <button>Submit</button>
 
-                                    </form>
-                                </div>
+                                    </div>
+                                    <div className='item-table-cell'>
+                                        <input name='quantity' type='text' value={this.props.itemData.quantity} onChange={this.props.handleItemFormChange} />
+                                    </div>
+                                    <div className='item-table-cell'>
+                                        <input name='purchase_date' type='date' value={this.props.itemData.purchase_date} onChange={this.props.handleItemFormChange} />
+                                    </div>
+                                    <div className='item-table-cell'>{item.user_id}</div>
+                                    <button>Submit</button>
+
+                                </>
+
                                 :
-                                <h4 onClick={() => {
-                                    this.props.setItemFormData(item)
-                                    this.setState({
-                                        isEditName: item.id,
-                                        isEditCategory: false,
-                                        isEditFrequency: false,
-                                        isEditQuantity: false,
+                                <>
+                                    <h4 className='item-table-cell' onClick={() => {
+                                        this.props.setItemFormData(item)
+                                        this.setState({
+                                            isEditItem: item.id
 
-                                    })
-                                }}>{item.name}</h4>
+                                        })
+                                    }}>{item.name}</h4>
+
+                                    <h4 className='item-table-cell' onClick={() => {
+                                        this.props.setItemFormData(item)
+                                        this.setState({
+                                            isEditItem: item.id
+
+                                        })
+                                    }}>{item.quantity}</h4>
+
+                                    <h4 className='item-table-cell' onClick={() => {
+                                        this.props.setItemFormData(item)
+                                        this.setState({
+                                            isEditItem: item.id
+
+                                        })
+                                    }}>{item.purchase_date}</h4>
+
+                                    <h4 className='item-table-cell' onClick={() => {
+                                        this.props.setItemFormData(item)
+                                        this.setState({
+                                            isEditItem: item.id
+
+                                        })
+                                    }}>{item.user_id}</h4>
+                                </>
                             }
 
-                            <div className='item-table-cell'>{item.quantity}</div>
+                            {/* <div className='item-table-cell'>{item.quantity}</div>
                             <div className='item-table-cell'>{item.purchase_date}</div>
-                            <div className='item-table-cell'>{item.user_id}</div>
+                            <div className='item-table-cell'>{item.user_id}</div> */}
 
                         </form>
 

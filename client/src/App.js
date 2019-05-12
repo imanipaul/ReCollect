@@ -148,9 +148,10 @@ class App extends React.Component {
   }
 
 
-  async editItem(itemId) {
+  async editItem(itemId, householdId) {
     const updatedItem = await updateItem(itemId, this.state.itemData)
     console.log('updatedItem', updatedItem)
+    this.getHouseholdItems(householdId)
   }
 
 
@@ -185,6 +186,7 @@ class App extends React.Component {
     this.setState({
       householdItems: household.items
     })
+    console.log('updated household items', household.items)
 
   }
 
@@ -507,6 +509,7 @@ class App extends React.Component {
               setUserItemForm={this.setUserItemForm}
               allData={this.state.categoryItems}
               getHouseholdItems={this.getHouseholdItems}
+
             />
           )}
         />
