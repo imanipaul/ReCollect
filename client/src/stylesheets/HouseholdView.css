@@ -115,23 +115,30 @@
 
 .separation{
     width: 95vw;
-    border-bottom: 1px solid #F0C331;
+    border-bottom: 2px dashed #F0C331;
     align-self: center;
 }
 
 
 .item-table {
-    display: table
+    display: table;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-collapse: collapse;
+    width: 1000px;
+    align-self: center;
 }
 
 .table-row-header{
     display: table-row;
     font-size: 20px;
     font-weight: bold;
+    height: 50px;
 }
 
 .item-table-cell{
     display: table-cell;
+    vertical-align: middle;
 }
 
 .item-table-row{
@@ -139,4 +146,18 @@
 }
 .table-row-form{
     display: table-row;
+    height: 40px;
+    border-top: 1px solid #F0C331;
+    /* border-bottom: 1px solid #F0C331; */
 }
+
+.item-table-cell p{
+    font-weight: '300';
+    font-family: 'Lato', sans-serif;
+
+}
+
+/* .category-pic{
+    width: 20px;
+    height: 20px;
+} */

@@ -32,8 +32,6 @@ class CreateItem extends React.Component {
                     e.preventDefault()
                     this.props.createNewItem(this.props.itemData, this.props.household.id)
                     this.props.toggleCreate()
-                    // console.log('running match cateogry items')
-                    // this.props.matchCategoryItems(this.props.categories, this.props.items)
                 }}>
                     <div className='create-title'>Create a new item</div>
                     <div className='form-criteria'>
