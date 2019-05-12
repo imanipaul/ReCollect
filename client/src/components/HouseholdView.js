@@ -106,7 +106,7 @@ class HouseholdView extends React.Component {
                     {this.props.items.map(item => (
                         // <div className='item-table-row'>
 
-                        <form className='table-row-form' onSubmit={(e) => {
+                        <form key={item.id} className='table-row-form' onSubmit={(e) => {
                             e.preventDefault()
                             this.props.editItem(item.id, this.props.match.params.id)
                             this.setState({ isEditItem: false })
@@ -127,7 +127,7 @@ class HouseholdView extends React.Component {
                                     </div>
                                     <div className='item-table-cell'>{this.getItemUser(item.user_id)}</div>
                                     <button>Submit</button>
-                                    <button onClick={() => {
+                                    <button type='button' onClick={() => {
                                         this.props.deleteItem(item)
                                         // this.props.history.goBack()
                                     }}>Delete</button>

@@ -8,7 +8,7 @@ class Charts extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {
-            colors: ['#0088fe', '#00c49f', '#ffbb28', '#ff8042'],
+            colors: ['#0088fe', '#00c49f', '#ffbb28', '#ff8042', '#00539C', '#001F3A', '#00886E', '#004E40', '#ECA101', '#9E6B01', '#F35001', '#B83B00'],
         }
     }
 
@@ -22,7 +22,7 @@ class Charts extends PureComponent {
                 {
 
                     this.props.allData.map(info => (
-                        <div className='individual-chart'>
+                        <div key={Math.random()} className='individual-chart'>
                             <h3>{info.category}</h3>
                             <PieChart width={175} height={200}>
                                 <Tooltip />
