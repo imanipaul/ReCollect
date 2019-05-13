@@ -141,7 +141,7 @@ class HouseholdView extends React.Component {
 
                                     :
                                     <>
-                                        <div className='category-pic' className='item-table-cell'><img src={this.state.iconArray[item.category_id - 1]} /></div>
+                                        <div className='item-table-cell'><img className='category-pic' src={this.state.iconArray[item.category_id - 1]} /></div>
                                         <p className='item-table-cell' onClick={() => {
                                             this.props.setItemFormData(item)
                                             this.setState({
@@ -179,7 +179,7 @@ class HouseholdView extends React.Component {
                                                 isEditItem: item.id
 
                                             })
-                                        }}><img src={edit} /></div>
+                                        }}><img className='edit-icon' src={edit} /></div>
                                     </>
                                 }
 
