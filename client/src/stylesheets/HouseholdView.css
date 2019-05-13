@@ -138,7 +138,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
     border-collapse: collapse;
-    width: 1000px;
+    width: 1200px;
     align-self: center;
 }
 
@@ -201,4 +201,71 @@
 .category-pic{
     width: 20px;
     height: 20px;
+}
+
+.item-table-cell input {
+    border: 0;
+    border-bottom: 1px solid black;
+    /* background-color: #d4e8f5; */
+    background-color: transparent;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    font-size: 18px;
+    color: #F0C331;
+    animation: blink .75s step-end infinite alternate
+}
+
+@keyframes blink {
+    0%{
+        border-color: #F0C331
+    }
+   
+    
+    50% {
+        border-color: rgba(0, 0, 0, 0)
+    }
+}
+
+
+.edit-item-submit{
+    width: 100px;
+    align-self: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    background-color: #F0C331;
+    height: 30px;
+    width: 60px;
+    color: #2B4453;
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    
+}
+
+.edit-item-submit:hover{
+    background-color: #2B4453;
+    color: #F0C331;
+    width: 80px;
+
+}
+.edit-item-delete{
+    width: 100px;
+    align-self: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    background-color: #F0C331;
+    height: 30px;
+    width: 60px;
+    color: #2B4453;
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    
+}
+
+.edit-item-delete:hover{
+    background-color: #2B4453;
+    color: #F0C331;
+    width: 80px;
+
 }

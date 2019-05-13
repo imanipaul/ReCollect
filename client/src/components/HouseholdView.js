@@ -116,7 +116,7 @@ class HouseholdView extends React.Component {
                                     ?
                                     <>
                                         <div className='item-table-cell'>
-                                            <button className='item-table-cell' type='button' onClick={() => {
+                                            <button className='item-table-cell' className='edit-item-delete' type='button' onClick={() => {
                                                 this.props.deleteItem(item)
                                             }}>Delete</button>
                                         </div>
@@ -133,7 +133,7 @@ class HouseholdView extends React.Component {
                                         <div className='item-table-cell'>{this.getItemUser(item.user_id)}</div>
                                         <div className='item-table-cell'>
 
-                                            <button className='item-table-cell'>Submit</button>
+                                            <button className='item-table-cell' className='edit-item-submit'>Submit</button>
                                         </div>
 
 
