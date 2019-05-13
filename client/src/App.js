@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
 
@@ -120,7 +120,7 @@ class App extends React.Component {
   async deleteItem(item) {
     await destroyItem(item.id);
     this.setState(prevState => ({
-      householdItems: prevState.householdItems.filter(el => el.id != item.id)
+      householdItems: prevState.householdItems.filter(el => el.id !== item.id)
     }))
     console.log('deleted', item)
 
@@ -144,14 +144,14 @@ class App extends React.Component {
 
   getUser(item) {
     const selectedUser = this.state.householdUsers.find(function (user) {
-      return user.id == item.user_id
+      return user.id === item.user_id
     })
     this.setState({ selectedUser })
   }
 
   getItemCategory(item) {
     const selectedCategory = this.state.categories.find(function (category) {
-      return category.id == item.category_id
+      return category.id === item.category_id
     })
     this.setState({ selectedCategory })
   }
@@ -230,7 +230,7 @@ class App extends React.Component {
     console.log('category, items', categories, items)
     const categoryItems = []
     categories.forEach(function (category) {
-      const selected = items.filter(item => item.category_id == category.id)
+      const selected = items.filter(item => item.category_id === category.id)
       if (selected.length > 0) {
         const itemsArray = selected.map(item => {
           const itemObj = {}
@@ -442,7 +442,7 @@ class App extends React.Component {
             ?
             <>
               <button className='back-button' onClick={() => (this.props.history.goBack())}>Back</button>
-              <img className='home-button' src={home} onClick={() => (this.props.history.push('/'))} />
+              <img alt='home button' className='home-button' src={home} onClick={() => (this.props.history.push('/'))} />
               <p className='greeting' onClick={() => (
                 this.props.history.push(`/profile`)
               )}>Hello {this.state.currentUser.name}</p>
@@ -509,7 +509,6 @@ class App extends React.Component {
               createNewItem={this.createNewItem}
               setItem={this.setItem}
               editItem={this.editItem}
-              itemData={this.state.itemData}
               handleItemFormChange={this.handleItemFormChange}
               item={this.state.selectedItem}
               category={this.state.selectedCategory}

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import '../stylesheets/Charts.css'
 
 
-import { PieChart, Pie, Sector, Cell, Tooltip, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip } from 'recharts';
 
 class Charts extends PureComponent {
     constructor(props) {

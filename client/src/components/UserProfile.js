@@ -4,12 +4,9 @@ import '../stylesheets/UserProfile.css'
 
 
 class UserProfile extends React.Component {
-    constructor(props) {
-        super(props)
-    }
 
     componentDidUpdate(prevProps) {
-        if (this.props.user == undefined) {
+        if (this.props.user === undefined) {
             console.log('prevprops', prevProps)
         }
 

@@ -62,7 +62,7 @@ class HouseholdView extends React.Component {
             <>
 
                 <div className='user-wrapper' onClick={() => { this.setState({ isEditItem: false }) }}>
-                    <img className='message-image' src={message} />
+                    <img alt='message image' className='message-image' src={message} />
                     <div className='user-inner'>
                         <p className='users-title'>Users in this household</p>
                         <div className='users'>
@@ -141,7 +141,7 @@ class HouseholdView extends React.Component {
 
                                     :
                                     <>
-                                        <div className='item-table-cell'><img className='category-pic' src={this.state.iconArray[item.category_id - 1]} /></div>
+                                        <div className='item-table-cell'><img alt='category icon' className='category-pic' src={this.state.iconArray[item.category_id - 1]} /></div>
                                         <p className='item-table-cell' onClick={() => {
                                             this.props.setItemFormData(item)
                                             this.setState({
@@ -179,7 +179,7 @@ class HouseholdView extends React.Component {
                                                 isEditItem: item.id
 
                                             })
-                                        }}><img className='edit-icon' src={edit} /></div>
+                                        }}><img alt='edit icon' className='edit-icon' src={edit} /></div>
                                     </>
                                 }
 
@@ -209,9 +209,9 @@ class HouseholdView extends React.Component {
                         items={this.props.items} />}
                 </div>
 
-                <button onClick={() => { this.setState({ isEditItem: false }) }} className='create' onClick={() => {
-                    this.setState({ isCreate: true })
-                }}>Create Item</button>
+                <button onClick={() => {
+                    this.setState({ isEditItem: false, isCreate: true })
+                }} className='create'>Create Item</button>
 
             </>
         )
