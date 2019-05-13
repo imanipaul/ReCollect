@@ -7,6 +7,7 @@
 * Clone Repo
 * Run `npm install`
 * Run `bundle`
+---
 
 #### Create Database
 
@@ -14,6 +15,7 @@
 * `rails db:create`
 * `rails db:migrate`
 * `rails db:seed`
+---
 
 ### Technologies
 
@@ -22,9 +24,20 @@
 * Rails
 
 * React Router
+---
+
+### Wireframes
+
+![home](home.png 'Home Page')
+
+![login](Login.png 'Login Page')
+
+![Profile](Profile.png 'Profile Page')
+
+![Create](Create.png 'Create Item Page')
 
 
-
+---
 ### Citations
 * All icons from [The Noun Project](https://thenounproject.com)
 
