@@ -16,15 +16,22 @@ class CreateItem extends React.Component {
         this.props.setUserItemForm()
     }
 
+    componentWillMount() {
+        document.addEventListener('mousedown', this.props.handleClick, false)
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.props.handleClick, false)
+    }
+
 
     render() {
         return (
             <>
                 <form className='create-form' onSubmit={(e) => {
                     e.preventDefault()
-                    this.props.createNewItem(this.props.itemData)
+                    this.props.createNewItem(this.props.itemData, this.props.household.id, this.props.categories)
                     this.props.toggleCreate()
-                    this.props.getHouseholdItems(this.props.household.id)
                 }}>
                     <div className='create-title'>Create a new item</div>
                     <div className='form-criteria'>
@@ -38,12 +45,6 @@ class CreateItem extends React.Component {
                     </div>
 
                     <div className='form-criteria'>
-                        <p>Frequency: </p>
-
-                        <input name='frequency' type='text' value={this.props.itemData.frequency} onChange={this.props.handleItemFormChange} />
-                    </div>
-
-                    <div className='form-criteria'>
                         <p>Purchase Date: </p>
 
                         <input name='purchase_date' type='date' value={this.props.itemData.purchase_date} onChange={this.props.handleItemFormChange} />
@@ -53,6 +54,7 @@ class CreateItem extends React.Component {
                         <p>Category: </p>
 
                         <select name='category_id' onChange={this.props.handleItemFormChange}>
+                            <option selected hidden>Choose Here</option>
                             {this.props.categories.map(category => (
                                 <option key={category.id} value={category.id}>{category.name}</option>
                             ))}

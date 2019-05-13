@@ -1,6 +1,7 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
+import '../stylesheets/Register.css'
+
 
 
 class Register extends React.Component {
@@ -22,7 +23,7 @@ class Register extends React.Component {
                     e.preventDefault()
                     this.props.handleRegister()
                     this.props.history.push('/add-household')
-                }} >
+                }} className='register-form'>
                     <p>Name:</p>
                     <input name="name" type="text" value={this.props.formData.name} onChange={this.props.handleChange} />
                     <p>Password:</p>

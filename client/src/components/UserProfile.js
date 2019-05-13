@@ -4,12 +4,9 @@ import '../stylesheets/UserProfile.css'
 
 
 class UserProfile extends React.Component {
-    constructor(props) {
-        super(props)
-    }
 
     componentDidUpdate(prevProps) {
-        if (this.props.user == undefined) {
+        if (this.props.user === undefined) {
             console.log('prevprops', prevProps)
         }
 
@@ -34,11 +31,19 @@ class UserProfile extends React.Component {
                         </div>
                         <div className='profile-items'>
                             <h4 className='user-items'>Your Items:</h4>
-                            <div className='all-profile-items'>
-                                {this.props.user.items.map(item => (
-                                    <h5 className='item-name' key={item.id}> {item.name}</h5>
-                                ))}
-                            </div>
+                            {this.props.user.items.length > 0
+                                ?
+                                <div className='all-profile-items'>
+                                    {this.props.user.items.map(item => (
+                                        <li className='item-name' key={item.id}> {item.name}</li>
+                                    ))}
+                                </div>
+                                :
+                                <div>You don't have any yet!</div>
+                            }
+
+
+
                         </div>
                     </>
                     :

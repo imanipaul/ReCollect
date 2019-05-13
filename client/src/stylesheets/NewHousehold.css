@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400|Oxygen');
+
+.new-household-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff2e6;
+    color: black;
+    width: 800px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    border-radius: 20px;
+    box-shadow: 20px 30px 5px #34393D;
+}
+
+
+
+.new-household-card p {
+    font-family: 'Oxygen', sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.choose-household-buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+}
+
+.join-button, .create-household-button{
+    background-color: #F0C331;
+    color: #34393D;
+    width: 100px;
+    height: 30px;
+    font-weight: bold;
+    border: none;
+}
+
+.join-button:hover, .create-household-button:hover{
+    background-color: #34393D;
+    color: #F0C331
+}
+
+.household-choice-name{
+    font-weight: normal;
+    font-size: 20px;
+}
+
+.new-household-card input{
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: #fff2e6;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.household-submit-button{
+    margin-top: 20px;
+    height: 30px;
+    width: 100px;
+    color: #2B4453;
+    font-size: 18px;
+    border: none;
+    background-color: #F0C331;
+    font-size: 15px;
+    border: none;
+    border: 1px solid #2B4453;
+}
+
+.household-submit-button:hover{
+    color: #F0C331;
+    background-color: #2B4453;
+    font-weight: bold;
+    width: 120px;
+
+
+}
+
+

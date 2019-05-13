@@ -29,20 +29,6 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 background-attachment: fixed;
 background-size: cover;
 
-/* background-color: #2b4252;
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%232b4252' cx='50' cy='0' r='50'/%3E%3Cg fill='%232a4457' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%232a475b' cx='50' cy='100' r='50'/%3E%3Cg fill='%23294960' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%23284c64' cx='50' cy='200' r='50'/%3E%3Cg fill='%23274e69' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%2325516e' cx='50' cy='300' r='50'/%3E%3Cg fill='%23245373' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%23225577' cx='50' cy='400' r='50'/%3E%3Cg fill='%2321587c' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%231f5a81' cx='50' cy='500' r='50'/%3E%3Cg fill='%231d5d86' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%231b5f8b' cx='50' cy='600' r='50'/%3E%3Cg fill='%23186190' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%23166495' cx='50' cy='700' r='50'/%3E%3Cg fill='%2313669a' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%2310699f' cx='50' cy='800' r='50'/%3E%3Cg fill='%230c6ba4' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%23086daa' cx='50' cy='900' r='50'/%3E%3Cg fill='%230470af' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%230072b4' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
-background-attachment: fixed;
-background-size: contain; */
-
-/* background-color: #355266;
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%23355266' cx='50' cy='0' r='50'/%3E%3Cg fill='%2335556b' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%23355771' cx='50' cy='100' r='50'/%3E%3Cg fill='%23355a76' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%23355c7b' cx='50' cy='200' r='50'/%3E%3Cg fill='%23355f81' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%23346286' cx='50' cy='300' r='50'/%3E%3Cg fill='%2333648c' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%23326791' cx='50' cy='400' r='50'/%3E%3Cg fill='%23316a97' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%23306c9c' cx='50' cy='500' r='50'/%3E%3Cg fill='%232e6fa2' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%232d72a8' cx='50' cy='600' r='50'/%3E%3Cg fill='%232a74ad' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%232877b3' cx='50' cy='700' r='50'/%3E%3Cg fill='%23257ab9' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%23217dbf' cx='50' cy='800' r='50'/%3E%3Cg fill='%231c80c4' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%231682ca' cx='50' cy='900' r='50'/%3E%3Cg fill='%230e85d0' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%230088d6' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
-background-attachment: fixed;
-background-size: contain; */
-
-/* background-color: #0088d6;
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%230088d6' cx='50' cy='0' r='50'/%3E%3Cg fill='%231384ce' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%231e80c5' cx='50' cy='100' r='50'/%3E%3Cg fill='%23247bbd' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%232a77b5' cx='50' cy='200' r='50'/%3E%3Cg fill='%232e73ad' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%23316fa5' cx='50' cy='300' r='50'/%3E%3Cg fill='%23336b9d' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%23356795' cx='50' cy='400' r='50'/%3E%3Cg fill='%2337638d' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%23385f86' cx='50' cy='500' r='50'/%3E%3Cg fill='%23395b7e' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%23395776' cx='50' cy='600' r='50'/%3E%3Cg fill='%2339536f' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%23394f68' cx='50' cy='700' r='50'/%3E%3Cg fill='%23394b60' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%23384859' cx='50' cy='800' r='50'/%3E%3Cg fill='%23374452' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%2336404b' cx='50' cy='900' r='50'/%3E%3Cg fill='%23353d44' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%2334393d' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
-background-attachment: fixed;
-background-size: contain; */
 
   color: #F0C331
 }
@@ -76,11 +62,35 @@ nav {
   font-weight: 400;
   font-size: 15px;
 }
-
+/* 
 .login-button button:hover{
   background-color: #0072B4;
   border: 1px solid #F0C331
+} */
 
+.login-register:hover{
+  background-color: #2B4453;
+  color: #F0C331;
+}
+
+.login-register{
+  width: 200px;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: 'Lato', sans-serif;
+
+
+
+}
+
+.back-button:hover{
+  background-color: #2B4453;
+  color: #F0C331;
+}
+
+.logout-button:hover{
+background-color: #2B4453;
+color: #F0C331
 }
 
 .greeting{
@@ -127,6 +137,11 @@ button {
   outline: none;
 }
 
-
+.home-button{
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 30%;
+}
 
 

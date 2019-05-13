@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400|Oxygen');
+
+
+.auth-container h2{
+    font-family: 'Oxygen', sans-serif;
+}
+
+.register-form input {
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: #fff2e6;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+}
+
+.register-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+
+}
+
+.register-form button {
+    margin-top: 20px;
+    background-color: transparent;
+    /* border: 1px solid #34393D; */
+    height: 30px;
+    width: 100px;
+    color: #2B4453;
+    font-size: 18px;
+    border: none;
+    background-color: #F0C331;
+    font-size: 15px;
+    border: none;
+    border: 1px solid #2B4453;
+}
+
+
+.register-form button:hover{
+    background-color: #2B4453;
+    color: #F0C331;
+    font-weight: bold;
+    height: 35px;
+    width: 120px;
+}
+

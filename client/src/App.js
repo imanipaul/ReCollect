@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
 
@@ -8,8 +8,9 @@ import Register from './components/Register'
 import LandingPage from './components/LandingPage'
 import NewHousehold from './components/NewHousehold';
 import HouseholdView from './components/HouseholdView';
-import ItemView from './components/ItemView';
 import UserProfile from './components/UserProfile';
+
+import home from './images/home.png'
 
 import {
   registerUser,
@@ -77,7 +78,6 @@ class App extends React.Component {
     this.getCategories = this.getCategories.bind(this)
     this.setItemFormData = this.setItemFormData.bind(this)
     this.handleItemFormChange = this.handleItemFormChange.bind(this)
-    // this.setSelectedItem = this.setSelectedItem.bind(this)
     this.setItem = this.setItem.bind(this)
     this.getUser = this.getUser.bind(this)
     this.getItemCategory = this.getItemCategory.bind(this)
@@ -86,6 +86,7 @@ class App extends React.Component {
     this.selectUser = this.selectUser.bind(this)
     this.setUserItemForm = this.setUserItemForm.bind(this)
     this.getHouseholdItems = this.getHouseholdItems.bind(this)
+    this.matchCategoryItems = this.matchCategoryItems.bind(this)
 
   }
 
@@ -107,17 +108,25 @@ class App extends React.Component {
   }
 
   // ----------------------Data Calls-------------------------
-  async createNewItem(itemData) {
+  async createNewItem(itemData, householdId, categories) {
     const newItem = await createItem(itemData)
     console.log(newItem)
+    const newItems = await this.getHouseholdItems(householdId)
+    console.log('newItems', newItems)
+    this.matchCategoryItems(categories, newItems)
+
   }
 
   async deleteItem(item) {
     await destroyItem(item.id);
     this.setState(prevState => ({
-      householdItems: prevState.householdItems.filter(el => el.id != item.id)
+      householdItems: prevState.householdItems.filter(el => el.id !== item.id)
     }))
     console.log('deleted', item)
+
+    const newItems = await this.getHouseholdItems(this.state.household.id)
+    console.log('newItems', newItems)
+    this.matchCategoryItems(this.state.categories, newItems)
 
   }
 
@@ -135,22 +144,24 @@ class App extends React.Component {
 
   getUser(item) {
     const selectedUser = this.state.householdUsers.find(function (user) {
-      return user.id == item.user_id
+      return user.id === item.user_id
     })
     this.setState({ selectedUser })
   }
 
   getItemCategory(item) {
     const selectedCategory = this.state.categories.find(function (category) {
-      return category.id == item.category_id
+      return category.id === item.category_id
     })
     this.setState({ selectedCategory })
   }
 
 
-  async editItem(itemId) {
+  async editItem(itemId, householdId) {
     const updatedItem = await updateItem(itemId, this.state.itemData)
     console.log('updatedItem', updatedItem)
+    const newItems = await this.getHouseholdItems(householdId)
+    this.matchCategoryItems(this.state.categories, newItems)
   }
 
 
@@ -185,6 +196,9 @@ class App extends React.Component {
     this.setState({
       householdItems: household.items
     })
+    console.log('updated household items', household.items)
+
+    return household.items
 
   }
 
@@ -206,25 +220,7 @@ class App extends React.Component {
     //Match Items to categories for pie chart
 
     if (this.state.categories) {
-
-      const categoryItems = []
-      this.state.categories.forEach(function (category) {
-        const selected = household.items.filter(item => item.category_id == category.id)
-        if (selected.length > 0) {
-          const itemsArray = selected.map(item => {
-            const itemObj = {}
-            itemObj['name'] = item.name;
-            itemObj['value'] = item.quantity
-            return itemObj
-          })
-          const categoryStuff = {}
-          categoryStuff['category'] = category.name
-          categoryStuff['value'] = itemsArray
-          categoryItems.push(categoryStuff)
-        }
-      })
-      console.log('App categoryItems', categoryItems)
-      this.setState({ categoryItems })
+      this.matchCategoryItems(this.state.categories, household.items)
     }
 
   }
@@ -234,7 +230,7 @@ class App extends React.Component {
     console.log('category, items', categories, items)
     const categoryItems = []
     categories.forEach(function (category) {
-      const selected = items.filter(item => item.category_id == category.id)
+      const selected = items.filter(item => item.category_id === category.id)
       if (selected.length > 0) {
         const itemsArray = selected.map(item => {
           const itemObj = {}
@@ -249,6 +245,7 @@ class App extends React.Component {
       }
     })
     this.setState({ categoryItems })
+    console.log('category items', categoryItems)
   }
 
 
@@ -364,11 +361,26 @@ class App extends React.Component {
   }
 
   setUserItemForm() {
-    this.setState({
-      itemData: {
-        user_id: this.state.currentUser.user_id
+
+    this.setState(prevState => (
+      {
+        itemData: {
+          ...prevState.itemData,
+          user_id: this.state.currentUser.user_id
+        }
       }
-    })
+    ))
+
+  }
+
+
+
+  formatDate(date) {
+    const currentDate = new Date(date)
+    const month = currentDate.getMonth() + 1
+    const day = currentDate.getDate() + 1
+    const year = currentDate.getFullYear()
+    return `${month}/${day}/${year}`
   }
 
   // ----------------------Auth-------------------------
@@ -430,7 +442,7 @@ class App extends React.Component {
             ?
             <>
               <button className='back-button' onClick={() => (this.props.history.goBack())}>Back</button>
-
+              <img alt='home button' className='home-button' src={home} onClick={() => (this.props.history.push('/'))} />
               <p className='greeting' onClick={() => (
                 this.props.history.push(`/profile`)
               )}>Hello {this.state.currentUser.name}</p>
@@ -497,7 +509,6 @@ class App extends React.Component {
               createNewItem={this.createNewItem}
               setItem={this.setItem}
               editItem={this.editItem}
-              itemData={this.state.itemData}
               handleItemFormChange={this.handleItemFormChange}
               item={this.state.selectedItem}
               category={this.state.selectedCategory}
@@ -507,6 +518,9 @@ class App extends React.Component {
               setUserItemForm={this.setUserItemForm}
               allData={this.state.categoryItems}
               getHouseholdItems={this.getHouseholdItems}
+              formatDate={this.formatDate}
+              matchCategoryItems={this.matchCategoryItems}
+
             />
           )}
         />
