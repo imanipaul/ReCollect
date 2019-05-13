@@ -1,24 +1,29 @@
-# README
+# ReCollect
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## An inventory app for your household essentials
 
-Things you may want to cover:
+### Setup
 
-* Ruby version
+* Clone Repo
+* Run `npm install`
+* Run `bundle`
 
-* System dependencies
+#### Create Database
 
-* Configuration
+* `rails db:drop`
+* `rails db:create`
+* `rails db:migrate`
+* `rails db:seed`
 
-* Database creation
+### Technologies
 
-* Database initialization
+* Ruby Version: 2.6.1
 
-* How to run the test suite
+* Rails
 
-* Services (job queues, cache servers, search engines, etc.)
+* React Router
 
-* Deployment instructions
 
-* ...
+
+### Citations
+* All icons from The Noun Project
