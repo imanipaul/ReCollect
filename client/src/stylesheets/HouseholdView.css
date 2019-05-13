@@ -86,7 +86,7 @@
     z-index: 5;
     position: absolute;
     top: 12px;
-    margin-left: 100px;
+    margin-left: 200px;
 }
 
 .message-image:hover + .user-inner{
@@ -105,7 +105,7 @@
     display: none;
     position: absolute;
     top: 40px;
-    left: 40%;
+    left: 52%;
     height: 300px;
     width: 30vw;
     color: #34393D
@@ -179,9 +179,9 @@
     /* margin: 0 auto; */
 }
 
-.item-table-cell img{
+/* .item-table-cell img{
     width: 50px;
-}
+} */
 
 .create-button{
     background-color: transparent
