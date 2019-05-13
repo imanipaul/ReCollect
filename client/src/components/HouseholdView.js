@@ -27,14 +27,13 @@ class HouseholdView extends React.Component {
             isRead: false,
             categoryItems: [],
             isCharts: false,
-            isEditItem: false
+            isEditItem: false,
+            iconArray: [perishable, kitchen, bathroom, kitchen, tool, office, electronics, bedroom, cleaning, food, misc]
         }
         this.toggleCreate = this.toggleCreate.bind(this)
     }
 
-    componentDidMount() {
-        this.createIconArray(perishable, kitchen, bathroom, kitchen, tool, office, electronics, bedroom, cleaning, food, misc)
-    }
+
 
     toggleCreate() {
         this.setState(prevState => ({
@@ -55,13 +54,6 @@ class HouseholdView extends React.Component {
             this.setState({ isCreate: false })
         }
     }
-
-    createIconArray(icon1, icon2, icon3, icon4, icon5, icon6, icon7, icon8, icon9, icon10, icon11) {
-        const iconArray = []
-        iconArray.push(icon1, icon2, icon3, icon4, icon5, icon6, icon7, icon8, icon9, icon10, icon11)
-        this.setState({ iconArray })
-    }
-
 
 
     render() {
@@ -97,7 +89,7 @@ class HouseholdView extends React.Component {
 
                 </div>
 
-                <div >
+                < div className='create-item-wrapper' ref={(node => this.node = node)}>
                     {this.state.isCreate && <CreateItem
                         handleItemFormChange={this.props.handleItemFormChange}
                         itemData={this.props.itemData}
@@ -133,9 +125,11 @@ class HouseholdView extends React.Component {
                             {this.state.isEditItem === item.id
                                 ?
                                 <>
-                                    <button type='button' onClick={() => {
-                                        this.props.deleteItem(item)
-                                    }}>Delete</button>
+                                    <div className='item-table-cell'>
+                                        <button className='item-table-cell' type='button' onClick={() => {
+                                            this.props.deleteItem(item)
+                                        }}>Delete</button>
+                                    </div>
                                     <div className='item-table-cell'>
                                         <input name='name' type='text' value={this.props.itemData.name} onChange={this.props.handleItemFormChange} />
 
@@ -147,14 +141,17 @@ class HouseholdView extends React.Component {
                                         <input name='purchase_date' type='date' value={this.props.itemData.purchase_date} onChange={this.props.handleItemFormChange} />
                                     </div>
                                     <div className='item-table-cell'>{this.getItemUser(item.user_id)}</div>
-                                    <button>Submit</button>
+                                    <div className='item-table-cell'>
+
+                                        <button className='item-table-cell'>Submit</button>
+                                    </div>
 
 
                                 </>
 
                                 :
                                 <>
-                                    <div className='category-pic'><img src={this.state.iconArray[item.category_id - 1]} /></div>
+                                    <div className='category-pic' className='item-table-cell'><img src={this.state.iconArray[item.category_id - 1]} /></div>
                                     <p className='item-table-cell' onClick={() => {
                                         this.props.setItemFormData(item)
                                         this.setState({
@@ -186,7 +183,13 @@ class HouseholdView extends React.Component {
 
                                         })
                                     }}>{this.getItemUser(item.user_id)}</p>
-                                    <div><img src={edit} /></div>
+                                    <div className='item-table-cell' onClick={() => {
+                                        this.props.setItemFormData(item)
+                                        this.setState({
+                                            isEditItem: item.id
+
+                                        })
+                                    }}><img src={edit} /></div>
                                 </>
                             }
 

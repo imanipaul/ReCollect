@@ -30,7 +30,7 @@ class CreateItem extends React.Component {
             <>
                 <form className='create-form' onSubmit={(e) => {
                     e.preventDefault()
-                    this.props.createNewItem(this.props.itemData, this.props.household.id)
+                    this.props.createNewItem(this.props.itemData, this.props.household.id, this.props.categories)
                     this.props.toggleCreate()
                 }}>
                     <div className='create-title'>Create a new item</div>
@@ -54,6 +54,7 @@ class CreateItem extends React.Component {
                         <p>Category: </p>
 
                         <select name='category_id' onChange={this.props.handleItemFormChange}>
+                            <option selected hidden>Choose Here</option>
                             {this.props.categories.map(category => (
                                 <option key={category.id} value={category.id}>{category.name}</option>
                             ))}

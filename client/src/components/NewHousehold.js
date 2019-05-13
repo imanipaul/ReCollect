@@ -36,6 +36,7 @@ export default class NewHousehold extends React.Component {
                                 this.props.handleSubmit()
                             }}>
                                 <select name='selectedHouseholdId' onChange={this.props.handleChange}>
+                                    <option selected hidden>Choose a household</option>
                                     {this.props.households.map(household => (
                                         <option key={household.id} value={household.id}>{household.name}</option>
                                     ))}

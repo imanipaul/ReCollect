@@ -2,7 +2,8 @@
 
 .create-form{
     border: 1px solid black;
-    width: 500px;
+    width: 1000px;
+    height: 500px;
     align-self: center;
     z-index: 5;
     top: 10%;
@@ -10,7 +11,11 @@
     background-color: #d4e8f5;
     color: black;
     border-radius: 15px;
-    box-shadow: 20px 30px 5px #34393D
+    box-shadow: 20px 30px 5px #34393D;
+    display: flex;
+flex-direction: column;
+justify-content: space-around;
+align-items: center;
 }
 
 .create-form input {
@@ -31,12 +36,6 @@
     font-size: 20px;
 }
 
-.create-form {
-display: flex;
-flex-direction: column;
-justify-content: space-around;
-align-items: center;
-}
 
 .form-criteria {
     display: flex;

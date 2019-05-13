@@ -106,12 +106,12 @@ class App extends React.Component {
   }
 
   // ----------------------Data Calls-------------------------
-  async createNewItem(itemData, householdId) {
+  async createNewItem(itemData, householdId, categories) {
     const newItem = await createItem(itemData)
     console.log(newItem)
     const newItems = await this.getHouseholdItems(householdId)
     console.log('newItems', newItems)
-    this.matchCategoryItems(this.state.categories, newItems)
+    this.matchCategoryItems(categories, newItems)
 
   }
 
@@ -376,7 +376,7 @@ class App extends React.Component {
   formatDate(date) {
     const currentDate = new Date(date)
     const month = currentDate.getMonth() + 1
-    const day = currentDate.getDate()
+    const day = currentDate.getDate() + 1
     const year = currentDate.getFullYear()
     return `${month}/${day}/${year}`
   }

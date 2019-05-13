@@ -146,9 +146,8 @@
 }
 .table-row-form{
     display: table-row;
-    height: 40px;
+    height: 100px;
     border-top: 1px solid #F0C331;
-    /* border-bottom: 1px solid #F0C331; */
 }
 
 .item-table-cell p{
@@ -157,7 +156,16 @@
 
 }
 
-/* .category-pic{
-    width: 20px;
-    height: 20px;
-} */
+.create-item-wrapper{
+    width: 1200px;
+    align-self: center;
+    z-index: 5;
+    top: 20%;
+    left: 10%;
+    position: absolute;
+    /* margin: 0 auto; */
+}
+
+.item-table-cell img{
+    width: 50px;
+}
