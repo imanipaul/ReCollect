@@ -60,6 +60,7 @@ class HouseholdView extends React.Component {
 
         return (
             <>
+
                 <div className='user-wrapper' onClick={() => { this.setState({ isEditItem: false }) }}>
                     <img className='message-image' src={message} />
                     <div className='user-inner'>
@@ -73,6 +74,8 @@ class HouseholdView extends React.Component {
                 </div>
 
                 <p className='item-title'>Household Pantry</p>
+
+
 
 
                 {this.props.allData &&
@@ -89,6 +92,108 @@ class HouseholdView extends React.Component {
 
                 </div>
 
+                {this.props.items.length > 0
+                    ?
+                    <section className='item-table' >
+                        <header className='table-row-header'>
+                            <div className='item-table-cell'> .</div>
+                            <div className='item-table-cell'>Name</div>
+                            <div className='item-table-cell'>Quantity</div>
+                            <div className='item-table-cell'>Date Purchased</div>
+                            <div className='item-table-cell'>Purchased By</div>
+                            <div className='item-table-cell'> .</div>
+                        </header>
+                        {this.props.items.map((item, index) => (
+
+                            <form key={item.id} className='table-row-form' onSubmit={(e) => {
+                                e.preventDefault()
+                                this.props.editItem(item.id, this.props.match.params.id)
+                                this.setState({ isEditItem: false })
+                                this.props.matchCategoryItems(this.props.categories, this.props.items)
+                            }} >
+
+                                {this.state.isEditItem === item.id
+                                    ?
+                                    <>
+                                        <div className='item-table-cell'>
+                                            <button className='item-table-cell' type='button' onClick={() => {
+                                                this.props.deleteItem(item)
+                                            }}>Delete</button>
+                                        </div>
+                                        <div className='item-table-cell'>
+                                            <input name='name' type='text' value={this.props.itemData.name} onChange={this.props.handleItemFormChange} />
+
+                                        </div>
+                                        <div className='item-table-cell'>
+                                            <input name='quantity' type='text' value={this.props.itemData.quantity} onChange={this.props.handleItemFormChange} />
+                                        </div>
+                                        <div className='item-table-cell'>
+                                            <input name='purchase_date' type='date' value={this.props.itemData.purchase_date} onChange={this.props.handleItemFormChange} />
+                                        </div>
+                                        <div className='item-table-cell'>{this.getItemUser(item.user_id)}</div>
+                                        <div className='item-table-cell'>
+
+                                            <button className='item-table-cell'>Submit</button>
+                                        </div>
+
+
+                                    </>
+
+                                    :
+                                    <>
+                                        <div className='category-pic' className='item-table-cell'><img src={this.state.iconArray[item.category_id - 1]} /></div>
+                                        <p className='item-table-cell' onClick={() => {
+                                            this.props.setItemFormData(item)
+                                            this.setState({
+                                                isEditItem: item.id
+
+                                            })
+                                        }}>{item.name}</p>
+
+                                        <p className='item-table-cell' onClick={() => {
+                                            this.props.setItemFormData(item)
+                                            this.setState({
+                                                isEditItem: item.id
+
+                                            })
+                                        }}>{item.quantity}</p>
+
+                                        <p className='item-table-cell' onClick={() => {
+                                            this.props.setItemFormData(item)
+                                            this.setState({
+                                                isEditItem: item.id
+
+                                            })
+                                        }}>{this.props.formatDate(item.purchase_date)}</p>
+
+                                        <p className='item-table-cell' onClick={() => {
+                                            this.props.setItemFormData(item)
+                                            this.setState({
+                                                isEditItem: item.id
+
+                                            })
+                                        }}>{this.getItemUser(item.user_id)}</p>
+                                        <div className='item-table-cell' onClick={() => {
+                                            this.props.setItemFormData(item)
+                                            this.setState({
+                                                isEditItem: item.id
+
+                                            })
+                                        }}><img src={edit} /></div>
+                                    </>
+                                }
+
+                            </form>
+
+                        ))}
+                    </section>
+                    :
+                    <div className='no-items'>No Items Yet!</div>
+                }
+
+
+
+
                 < div className='create-item-wrapper' ref={(node => this.node = node)}>
                     {this.state.isCreate && <CreateItem
                         handleItemFormChange={this.props.handleItemFormChange}
@@ -103,100 +208,6 @@ class HouseholdView extends React.Component {
                         matchCategoryItems={this.props.matchCategoryItems}
                         items={this.props.items} />}
                 </div>
-
-                <section className='item-table' >
-                    <header className='table-row-header'>
-                        <div className='item-table-cell'> .</div>
-                        <div className='item-table-cell'>Name</div>
-                        <div className='item-table-cell'>Quantity</div>
-                        <div className='item-table-cell'>Date Purchased</div>
-                        <div className='item-table-cell'>Purchased By</div>
-                        <div className='item-table-cell'> .</div>
-                    </header>
-                    {this.props.items.map((item, index) => (
-
-                        <form key={item.id} className='table-row-form' onSubmit={(e) => {
-                            e.preventDefault()
-                            this.props.editItem(item.id, this.props.match.params.id)
-                            this.setState({ isEditItem: false })
-                            this.props.matchCategoryItems(this.props.categories, this.props.items)
-                        }} >
-
-                            {this.state.isEditItem === item.id
-                                ?
-                                <>
-                                    <div className='item-table-cell'>
-                                        <button className='item-table-cell' type='button' onClick={() => {
-                                            this.props.deleteItem(item)
-                                        }}>Delete</button>
-                                    </div>
-                                    <div className='item-table-cell'>
-                                        <input name='name' type='text' value={this.props.itemData.name} onChange={this.props.handleItemFormChange} />
-
-                                    </div>
-                                    <div className='item-table-cell'>
-                                        <input name='quantity' type='text' value={this.props.itemData.quantity} onChange={this.props.handleItemFormChange} />
-                                    </div>
-                                    <div className='item-table-cell'>
-                                        <input name='purchase_date' type='date' value={this.props.itemData.purchase_date} onChange={this.props.handleItemFormChange} />
-                                    </div>
-                                    <div className='item-table-cell'>{this.getItemUser(item.user_id)}</div>
-                                    <div className='item-table-cell'>
-
-                                        <button className='item-table-cell'>Submit</button>
-                                    </div>
-
-
-                                </>
-
-                                :
-                                <>
-                                    <div className='category-pic' className='item-table-cell'><img src={this.state.iconArray[item.category_id - 1]} /></div>
-                                    <p className='item-table-cell' onClick={() => {
-                                        this.props.setItemFormData(item)
-                                        this.setState({
-                                            isEditItem: item.id
-
-                                        })
-                                    }}>{item.name}</p>
-
-                                    <p className='item-table-cell' onClick={() => {
-                                        this.props.setItemFormData(item)
-                                        this.setState({
-                                            isEditItem: item.id
-
-                                        })
-                                    }}>{item.quantity}</p>
-
-                                    <p className='item-table-cell' onClick={() => {
-                                        this.props.setItemFormData(item)
-                                        this.setState({
-                                            isEditItem: item.id
-
-                                        })
-                                    }}>{this.props.formatDate(item.purchase_date)}</p>
-
-                                    <p className='item-table-cell' onClick={() => {
-                                        this.props.setItemFormData(item)
-                                        this.setState({
-                                            isEditItem: item.id
-
-                                        })
-                                    }}>{this.getItemUser(item.user_id)}</p>
-                                    <div className='item-table-cell' onClick={() => {
-                                        this.props.setItemFormData(item)
-                                        this.setState({
-                                            isEditItem: item.id
-
-                                        })
-                                    }}><img src={edit} /></div>
-                                </>
-                            }
-
-                        </form>
-
-                    ))}
-                </section>
 
                 <button onClick={() => { this.setState({ isEditItem: false }) }} className='create' onClick={() => {
                     this.setState({ isCreate: true })
