@@ -10,6 +10,8 @@ import NewHousehold from './components/NewHousehold';
 import HouseholdView from './components/HouseholdView';
 import UserProfile from './components/UserProfile';
 
+import home from './images/home.png'
+
 import {
   registerUser,
   loginUser,
@@ -440,7 +442,7 @@ class App extends React.Component {
             ?
             <>
               <button className='back-button' onClick={() => (this.props.history.goBack())}>Back</button>
-
+              <img className='home-button' src={home} onClick={() => (this.props.history.push('/'))} />
               <p className='greeting' onClick={() => (
                 this.props.history.push(`/profile`)
               )}>Hello {this.state.currentUser.name}</p>

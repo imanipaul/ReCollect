@@ -46,7 +46,7 @@ export default class NewHousehold extends React.Component {
                         </>
                         :
                         <>
-                            <p>Create a new household</p>
+                            <p >Create a new household</p>
                             <form onSubmit={(e) => {
                                 e.preventDefault();
                                 this.props.handleNewSubmit()

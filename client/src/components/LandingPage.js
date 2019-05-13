@@ -15,7 +15,7 @@ const LandingPage = (props) => {
             <div className='landing-page'>
                 <h1>Welcome to ReCollect</h1>
                 <h3>Never run out of household essentials again</h3>
-                <button onClick={() => (props.history.push("/login"))}>Enter</button>
+                <button className='enter-button' onClick={() => (props.history.push("/login"))}>Enter</button>
             </div>
         </div>
     )

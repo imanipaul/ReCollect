@@ -66,6 +66,19 @@
     align-self: center;
     margin-bottom: 50px;
     margin-top: 50px;
+    background-color: #F0C331;
+    height: 50px;
+    width: 200px;
+    color: #2B4453;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+
+}
+
+.create:hover{
+    background-color: #2B4453;
+    color: #F0C331
 }
 
 .message-image{
@@ -168,4 +181,8 @@
 
 .item-table-cell img{
     width: 50px;
+}
+
+.create-button{
+    background-color: transparent
 }
