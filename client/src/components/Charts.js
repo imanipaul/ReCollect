@@ -12,9 +12,7 @@ class Charts extends PureComponent {
         }
     }
 
-    componentDidMount() {
-        console.log('allData', this.props.allData)
-    }
+
 
     render() {
         return (

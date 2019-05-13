@@ -4,17 +4,24 @@ import '../stylesheets/HouseholdView.css'
 import CreateItem from './CreateItem'
 import Charts from './Charts'
 import message from '../images/Asset 197.png'
-import kitchen from '../images/chef.png'
-import food from '../images/food.svg'
-import bathroom from '../images/bathroom.svg'
-import bedroom from '../images/bedroom.svg'
-import electronics from '../images/electronics.svg'
-import office from '../images/office.svg'
-import perishable from '../images/perishable.svg'
-import tool from '../images/tool.svg'
-import misc from '../images/misc.svg'
-import cleaning from '../images/cleaning.svg'
+
+import bedroom from '../images/bedroom.png'
+import expired from '../images/expired.png'
+import family from '../images/family.png'
+import friends from '../images/friends.png'
+import medicine from '../images/medicine.png'
+import medicinepills from '../images/medicinepills.png'
+import paperclip from '../images/paperclip.png'
+import plug from '../images/plug.png'
+import question from '../images/question.png'
+import sink from '../images/sink.png'
+import spraybottle from '../images/spraybottle.png'
+import toiletpaper from '../images/toiletpaper.png'
+import tools from '../images/tools.png'
+import chef from '../images/chef copy.png'
 import edit from '../images/edit.svg'
+import food from '../images/food.png'
+// import question from '../images/question.png'
 
 
 class HouseholdView extends React.Component {
@@ -28,7 +35,7 @@ class HouseholdView extends React.Component {
             categoryItems: [],
             isCharts: false,
             isEditItem: false,
-            iconArray: [perishable, kitchen, bathroom, kitchen, tool, office, electronics, bedroom, cleaning, food, misc]
+            iconArray: [expired, chef, toiletpaper, medicine, tools, paperclip, plug, bedroom, spraybottle, food, question]
         }
         this.toggleCreate = this.toggleCreate.bind(this)
     }
@@ -62,7 +69,7 @@ class HouseholdView extends React.Component {
             <>
 
                 <div className='user-wrapper' onClick={() => { this.setState({ isEditItem: false }) }}>
-                    <img alt='message image' className='message-image' src={message} />
+                    <img alt='message image' className='message-image' src={friends} />
                     <div className='user-inner'>
                         <p className='users-title'>Users in this household</p>
                         <div className='users'>

@@ -61,7 +61,7 @@ class CreateItem extends React.Component {
                         </select>
 
                     </div>
-                    <button>Submit</button>
+                    <button className='new-item-submit'>Submit</button>
                 </form>
             </>
         )
