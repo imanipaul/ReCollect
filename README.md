@@ -26,4 +26,5 @@
 
 
 ### Citations
-* All icons from The Noun Project
+* All icons from [The Noun Project](https://thenounproject.com)
+
