@@ -94,7 +94,6 @@ class App extends React.Component {
     this.getHouseholds()
     this.getCategories()
     const token = localStorage.getItem("jwt")
-    console.log('token', token)
     if (token) {
       const userData = decode(token);
       this.setState({
@@ -103,16 +102,13 @@ class App extends React.Component {
       this.selectUser(userData)
       const user = await getUser(userData.user_id)
       this.setState({ householdUser: user })
-      console.log('sethousehold id', user.household_id)
     }
   }
 
   // ----------------------Data Calls-------------------------
   async createNewItem(itemData, householdId, categories) {
     const newItem = await createItem(itemData)
-    console.log(newItem)
     const newItems = await this.getHouseholdItems(householdId)
-    console.log('newItems', newItems)
     this.matchCategoryItems(categories, newItems)
 
   }
@@ -122,10 +118,8 @@ class App extends React.Component {
     this.setState(prevState => ({
       householdItems: prevState.householdItems.filter(el => el.id !== item.id)
     }))
-    console.log('deleted', item)
 
     const newItems = await this.getHouseholdItems(this.state.household.id)
-    console.log('newItems', newItems)
     this.matchCategoryItems(this.state.categories, newItems)
 
   }
@@ -136,7 +130,6 @@ class App extends React.Component {
     const selectedItem = this.state.householdItems.find(function (item) {
       return item.id === parseInt(id)
     })
-    console.log('selectedItem', selectedItem)
     this.setState({ selectedItem })
     this.getUser(selectedItem)
     this.getItemCategory(selectedItem)
@@ -159,7 +152,6 @@ class App extends React.Component {
 
   async editItem(itemId, householdId) {
     const updatedItem = await updateItem(itemId, this.state.itemData)
-    console.log('updatedItem', updatedItem)
     const newItems = await this.getHouseholdItems(householdId)
     this.matchCategoryItems(this.state.categories, newItems)
   }
@@ -196,7 +188,6 @@ class App extends React.Component {
     this.setState({
       householdItems: household.items
     })
-    console.log('updated household items', household.items)
 
     return household.items
 
@@ -205,7 +196,6 @@ class App extends React.Component {
   async setHousehold(id) {
 
     const household = await getHousehold(id)
-    console.log('household', household)
 
 
 
@@ -227,7 +217,6 @@ class App extends React.Component {
 
 
   matchCategoryItems(categories, items) {
-    console.log('category, items', categories, items)
     const categoryItems = []
     categories.forEach(function (category) {
       const selected = items.filter(item => item.category_id === category.id)
@@ -245,18 +234,7 @@ class App extends React.Component {
       }
     })
     this.setState({ categoryItems })
-    console.log('category items', categoryItems)
   }
-
-
-
-
-
-
-
-
-
-
 
   async getHouseholds() {
     const households = await getHouseholds();
@@ -268,7 +246,6 @@ class App extends React.Component {
       name: this.state.householdData
     }
     const newHouseholdObj = await createHousehold(data)
-    console.log('newHousehold: ', newHouseholdObj)
     this.setState({
       selectedHouseholdId: newHouseholdObj.id
     })
@@ -292,10 +269,8 @@ class App extends React.Component {
     localStorage.setItem("jwt", userInfo.token)
 
     //create new household
-    console.log('creating new household')
     const newHousehold = await this.newHousehold()
 
-    console.log('new household, ', newHousehold)
 
     //associate user with household
     const userData = {
@@ -305,8 +280,6 @@ class App extends React.Component {
 
     //set current user in household
     const user = await getUser(decodedData.user_id)
-    console.log('user', user)
-    console.log('user household id', user.household_id)
     this.setState({
       householdUser: user
     })
@@ -318,7 +291,6 @@ class App extends React.Component {
 
   async selectUser(currentUser) {
     const user = await getUser(currentUser.user_id)
-    console.log('user', user)
     this.setState({
       selectedUser: user
     })
@@ -342,8 +314,6 @@ class App extends React.Component {
 
     //Set the current user for the household
     const user = await getUser(decodedData.user_id)
-    console.log('user', user)
-    console.log('user household id', user.household_id)
     this.setState({
       householdUser: user
     })
@@ -404,10 +374,8 @@ class App extends React.Component {
 
   async handleRegister() {
     const newUser = await registerUser(this.state.authFormData)
-    console.log('new user: ', newUser)
     this.setState({ registerUserId: newUser.id })
 
-    // this.handleLogin();
   }
 
   authHandleChange(e) {

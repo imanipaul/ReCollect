@@ -5,12 +5,7 @@ import '../stylesheets/UserProfile.css'
 
 class UserProfile extends React.Component {
 
-    componentDidUpdate(prevProps) {
-        if (this.props.user === undefined) {
-            console.log('prevprops', prevProps)
-        }
 
-    }
 
     render() {
 
